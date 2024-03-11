@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -19,7 +20,13 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
+        HttpSession session = req.getSession(false);
+        if(session == null){
+            req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
+        } else {
+            // TODO redirect to update
+            System.out.println("Session is set");
+        }
     }
 
 
@@ -34,7 +41,8 @@ public class LoginController extends HttpServlet {
             resp.sendRedirect("/home");
         }
         else {
-            resp.sendRedirect("/login");
+            req.setAttribute("invalid", "Invalid E-mail or password");
+            req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
         }
     }
 }

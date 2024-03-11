@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  session="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,6 +67,9 @@
 		<div class="section">
 			<!-- container -->
 			<div class="container">
+				<c:if test="${not empty requestScope.invalid}">
+					<label class="error center">${requestScope.invalid}</label>
+				</c:if>
 				<!-- row -->
 				<div class="row">
 					<form action="/login" method="post" class="row" id="sc-edprofile">
@@ -80,9 +83,9 @@
 							<input type="submit" value="Login" />
 						</div>
 					</form>
-					<a href="/signup">SignUp</a>
 				</div>
 				<!-- /row -->
+				<a class="center" id="signup-link" href="/signup">Don't Have an account ? Signup</a>
 			</div>
 			<!-- /container -->
 		</div>

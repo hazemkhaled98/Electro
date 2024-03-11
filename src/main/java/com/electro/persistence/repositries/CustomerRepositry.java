@@ -22,8 +22,8 @@ public class CustomerRepositry extends Repositry<Customer> {
             TypedQuery<Customer> query = entityManager.createQuery( "SELECT c FROM Customer c WHERE c.email = :email", Customer.class );
             query.setParameter( "email", email );
             Customer = query.getSingleResult();
-        } catch ( NoResultException nre ) {
-            nre.printStackTrace();
+        } catch (NoResultException e) {
+            System.err.printf("Customer with email %s was not found%n", email);
         }
         return Optional.ofNullable( Customer );
     }
