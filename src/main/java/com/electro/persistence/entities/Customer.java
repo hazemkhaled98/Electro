@@ -45,9 +45,6 @@ public class Customer {
     @Column(name = "street_name", nullable = false)
     private String streetName;
 
-    @Column(name = "interests", nullable = false)
-    private String interests;
-
     @OneToOne(mappedBy = "customer")
     private Cart cart;
 
@@ -140,14 +137,6 @@ public class Customer {
 
     public void setStreetName(String streetName) {
         this.streetName = streetName;
-    }
-
-    public String getInterests() {
-        return interests;
-    }
-
-    public void setInterests(String interests) {
-        this.interests = interests;
     }
 
     public Cart getCart() {

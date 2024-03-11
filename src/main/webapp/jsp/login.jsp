@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -12,20 +14,22 @@
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
  		<!-- Bootstrap -->
- 		<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
 
  		<!-- Slick -->
- 		<link type="text/css" rel="stylesheet" href="../css/slick.css"/>
- 		<link type="text/css" rel="stylesheet" href="../css/slick-theme.css"/>
+ 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/slick-theme.css"/>
 
  		<!-- nouislider -->
- 		<link type="text/css" rel="stylesheet" href="../css/nouislider.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/nouislider.min.css"/>
 
  		<!-- Font Awesome Icon -->
- 		<link rel="stylesheet" href="../css/font-awesome.min.css">
+ 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
 
  		<!-- Custom stlylesheet -->
- 		<link type="text/css" rel="stylesheet" href="../css/style.css"/>
+ 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"/>
 
  		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
  		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +41,7 @@
     </head>
 	<body>
 
+	<jsp:include page="header.jsp"/>
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -64,18 +69,18 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<form>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label>
-							<input type="email" class="form-control" style="width: 50%;" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+					<form action="/login" method="post" class="row" id="sc-edprofile">
+						<h1>Login</h1>
+						<div class="sc-container">
+							<label for="email">E-mail:</label><br>
+							<input type="email" placeholder="Email Address" name="email" required
+								   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+							<label for="password">Password:</label>
+							<input type="password" placeholder="min length is 8 and only alphanumeric characters" name="password" required pattern="[a-zA-Z0-9]{8,}" minlength="8">
+							<input type="submit" value="Login" />
 						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Password</label>
-							<input type="password" class="form-control" style="width: 50%;" id="exampleInputPassword1" placeholder="Password">
-						</div>
-
-						<button type="submit" class="btn btn-primary" style="background-color: #d10024; border-radius: 20px;">Login</button>
 					</form>
+					<a href="/signup">SignUp</a>
 				</div>
 				<!-- /row -->
 			</div>
@@ -84,6 +89,7 @@
 		<!-- /SECTION -->
 
 
+	<jsp:include page="footer.jsp"/>
 		<!-- jQuery Plugins -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
