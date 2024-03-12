@@ -32,9 +32,10 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setEmail(req.getParameter("email"));
-        loginDTO.setPassword(req.getParameter("password"));
+        LoginDTO loginDTO = LoginDTO.builder()
+                .email(req.getParameter("email"))
+                .password(req.getParameter("password"))
+                .build();
         Optional<Customer> customer = CustomerService.login(loginDTO);
         if(customer.isPresent()){
             req.getSession(true).setAttribute(SessionAttributes.LOGGED_IN_CUSTOMER.toString(), customer.get());
