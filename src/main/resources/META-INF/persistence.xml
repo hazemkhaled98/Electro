@@ -20,6 +20,7 @@
             <property name="c3p0.min_size" value="20"/>
             <property name="c3p0.max_size" value="40"/>
             <property name="c3p0.timeout" value="10"/>
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
         </properties>
     </persistence-unit>
 </persistence>

@@ -73,14 +73,20 @@
 						<h1>Login</h1>
 						<div class="sc-container">
 							<label for="email">E-mail:</label><br>
-							<input type="email" placeholder="Email Address" name="email" required
+							<input type="email" id="email" placeholder="Email Address" name="email" required
 								   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
 							<label for="password">Password:</label>
-							<input type="password" placeholder="min length is 8 and only alphanumeric characters" name="password" required pattern="[a-zA-Z0-9]{8,}" minlength="8">
+							<input type="password" id="password" placeholder="min length is 8 and only alphanumeric characters" name="password" required pattern="[a-zA-Z0-9]{8,}" minlength="8">
 							<input type="submit" value="Login" />
+							<a href="${pageContext.request.contextPath}/signup" style="color: white">
+								<div id="signup">
+									SignUp
+								</div>
+							</a>
 						</div>
+
 					</form>
-					<a href="/signup">SignUp</a>
+
 				</div>
 				<!-- /row -->
 			</div>

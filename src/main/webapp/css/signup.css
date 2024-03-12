@@ -55,6 +55,7 @@
 #sc-edprofile input[type="text"],
 #sc-edprofile input[type="password"],
 #sc-edprofile input[type="date"],
+#sc-edprofile input[type="date"],
 #sc-edprofile select,
 #sc-edprofile textarea {
     width: 100%;
@@ -88,24 +89,20 @@
 #sc-edprofile input[type="submit"]:hover {
     background: #333;
 }
-
-#sc-edprofile #signup{
-    margin-top: 20px;
-    width: 100%;
-    background: #7E1633;
-    border: 0;
-    padding: 4%;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
-    text-align: center;
-    cursor: pointer;
-    transition: background .3s;
-    -webkit-transition: background .3s;
+#passwordMismatchMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background-color: #f2dede; /* Light red background */
+    border: 1px solid #ebccd1; /* Red border */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    display: none;
+    z-index: 9999; /* Ensure it appears above other elements */
 }
 
-
-/*a.signup-link {*/
-/*    color: #fff !important;*/
-/*    text-decoration: none;*/
-/*}*/
-
+#passwordMismatchMessage p {
+    margin: 0; /* Remove default margin */
+}
