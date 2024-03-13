@@ -2,8 +2,8 @@ package com.electro.presentation.controllers;
 
 import com.electro.persistence.entities.Customer;
 import com.electro.presentation.dto.UpdateProfileDTO;
-import com.electro.presentation.enums.RequestAttributes;
-import com.electro.presentation.enums.SessionAttributes;
+import com.electro.presentation.enums.RequestAttribute;
+import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.CustomerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,13 +33,13 @@ public class UpdateProfileController extends HttpServlet {
                 .streetName(req.getParameter("streetName"))
                 .creditLimit(parseCreditLimit(req.getParameter("creditLimit")))
                 .build();
-        Customer sessionCustomer = (Customer) req.getSession().getAttribute(SessionAttributes.LOGGED_IN_CUSTOMER.toString());
+        Customer sessionCustomer = (Customer) req.getSession().getAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString());
         Optional<Customer> customer = CustomerService.updateProfile(profileDTO, sessionCustomer);
         if(customer.isPresent()){
-            req.getSession(false).setAttribute(SessionAttributes.LOGGED_IN_CUSTOMER.toString(), customer.get());
+            req.getSession(false).setAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString(), customer.get());
             resp.sendRedirect("/home");
         } else {
-            req.setAttribute(RequestAttributes.ERROR.toString(), "Error updating information");
+            req.setAttribute(RequestAttribute.ERROR.toString(), "Error updating information");
             req.getRequestDispatcher("/jsp/profile.jsp").forward(req, resp);
         }
     }

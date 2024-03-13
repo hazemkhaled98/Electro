@@ -1,6 +1,6 @@
 package com.electro.presentation.enums;
 
-public enum RequestAttributes {
+public enum RequestAttribute {
 
     ENTERED_USER, ERROR
 }
