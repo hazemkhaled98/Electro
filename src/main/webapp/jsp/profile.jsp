@@ -68,7 +68,7 @@
 		<!-- container -->
 		<div class="container">
 
-			<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.errorMessage ? 'block' : 'none'}; font-size: 16px;">
+			<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.ERROR ? 'block' : 'none'}; font-size: 16px;">
 				<p class="center">${requestScope.ERROR}</p>
 			</div>
 			<!-- row -->

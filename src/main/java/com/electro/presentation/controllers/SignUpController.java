@@ -44,7 +44,7 @@ public class SignUpController extends HttpServlet {
             resp.sendRedirect("/home");
         }
         else {
-            req.setAttribute(RequestAttributes.ERROR.toString(), "Email is already registered!");
+            req.setAttribute(RequestAttributes.ERROR.toString(), "E-mail is already registered!");
             req.setAttribute(String.valueOf(RequestAttributes.ENTERED_USER), signUpDTO);
             req.getRequestDispatcher("/jsp/signup.jsp").forward(req, resp);
         }
