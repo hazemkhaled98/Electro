@@ -74,7 +74,7 @@
         height: 100px;
 }
 
-#sc-edprofile input[type="submit"] {
+#sc-edprofile input[type="submit"]{
         width: 100%;
         background: #2B2D42;
         border: 0;
@@ -91,3 +91,9 @@
         background: #333;
 }
 
+
+.center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}

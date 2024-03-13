@@ -67,9 +67,9 @@
 		<div class="section">
 			<!-- container -->
 			<div class="container">
-				<c:if test="${not empty requestScope.invalid}">
-					<label class="error center">${requestScope.invalid}</label>
-				</c:if>
+				<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.errorMessage ? 'block' : 'none'}; font-size: 16px;">
+					<p class="center">${requestScope.ERROR}</p>
+				</div>
 				<!-- row -->
 				<div class="row">
 					<form action="/login" method="post" class="row" id="sc-edprofile">
@@ -91,8 +91,6 @@
 					</form>
 
 				</div>
-				<!-- /row -->
-				<a class="center" id="signup-link" href="/signup">Don't Have an account ? Signup</a>
 			</div>
 			<!-- /container -->
 		</div>

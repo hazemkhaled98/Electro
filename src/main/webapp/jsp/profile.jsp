@@ -67,29 +67,33 @@
 	<div class="section">
 		<!-- container -->
 		<div class="container">
+
+			<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.errorMessage ? 'block' : 'none'}; font-size: 16px;">
+				<p class="center">${requestScope.ERROR}</p>
+			</div>
 			<!-- row -->
 			<form action="/update" method="post" class="row" id="sc-edprofile">
 				<h1>Edit Profile</h1>
 				<div class="sc-container">
 					<label for="name">Name:</label><br>
 					<input type="text" placeholder="Name should contain letters and digits only"
-						name="name"  pattern="[A-Za-z][A-Za-z0-9]*" />
+						name="name"  pattern="[A-Za-z][A-Za-z0-9]*" id="name"/>
 					<label for="job">Job:</label><br>
-					<input type="text" placeholder="Job" name="job"  pattern="[A-Za-z]+" />
+					<input type="text" placeholder="Job" name="job"  pattern="[A-Za-z]+" id="job"/>
 					<label for="country">Country:</label><br>
 					<input type="text" placeholder="Country" name="country"
-						pattern="[A-Za-z]+" />
+						pattern="[A-Za-z]+" id="country"/>
 					<label for="city">City:</label><br>
 					<input type="text" placeholder="City" name="city"
-						pattern="[A-Za-z]+" />
-					<label for="street no">Street No:</label><br>
+						pattern="[A-Za-z]+" id="city"/>
+					<label for="streetNo">Street No:</label><br>
 					<input type="text" placeholder="Street No." name="streetNo"
-						pattern="[0-9]+[A-Za-z]?" />
-					<label for="street name">Street Name:</label><br>
+						pattern="[0-9]+[A-Za-z]?" id="streetNo"/>
+					<label for="streetName">Street Name:</label><br>
 					<input type="text" placeholder="Street Name" name="streetName"
-						pattern="[A-Za-z]+" />
+						pattern="[A-Za-z]+" id="streetName"/>
 					<label for="creditLimit">Credit Limit:</label><br>
-					<input type="number" placeholder="Credit limit" name="creditLimit"/>
+					<input type="number" placeholder="Credit limit" name="creditLimit" id="creditLimit"/>
 					<input type="submit" value="Update Profile" />
 				</div>
 			</form>

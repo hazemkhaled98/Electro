@@ -106,3 +106,9 @@
 #passwordMismatchMessage p {
     margin: 0; /* Remove default margin */
 }
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

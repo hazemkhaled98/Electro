@@ -25,6 +25,6 @@ public class CustomerRepositry extends Repositry<Customer> {
         } catch (NoResultException e) {
             System.err.printf("Customer with email %s was not found%n", email);
         }
-        return Optional.ofNullable( Customer );
+        return Optional.ofNullable(Customer);
     }
 }

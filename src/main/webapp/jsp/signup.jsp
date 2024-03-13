@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"  session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,10 +71,10 @@
 	<div class="section">
 		<!-- container -->
 		<div id="passwordMatch" class="alert alert-danger" style="display: none; font-size: 16px;">
-			<p>Passwords do not match.</p>
+			<p class="center">Passwords do not match.</p>
 		</div>
 		<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.errorMessage ? 'block' : 'none'}; font-size: 16px;">
-			<p>${requestScope.errorMessage}</p>
+			<p class="center">${requestScope.ERROR}</p>
 		</div>
 			<!-- row -->
 		<form action="" method="post" class="row" id="sc-edprofile">

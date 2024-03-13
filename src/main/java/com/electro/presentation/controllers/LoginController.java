@@ -2,6 +2,7 @@ package com.electro.presentation.controllers;
 
 import com.electro.persistence.entities.Customer;
 import com.electro.presentation.dto.LoginDTO;
+import com.electro.presentation.enums.RequestAttributes;
 import com.electro.presentation.enums.SessionAttributes;
 import com.electro.services.CustomerService;
 import jakarta.servlet.ServletException;
@@ -24,8 +25,7 @@ public class LoginController extends HttpServlet {
         if(session == null){
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
         } else {
-            // TODO redirect to update
-            System.out.println("Session is set");
+            resp.sendRedirect("/update");
         }
     }
 
@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
             resp.sendRedirect("/jsp/profile.jsp");
         }
         else {
-            req.setAttribute("invalid", "Invalid E-mail or password");
+            req.setAttribute(RequestAttributes.ERROR.toString(), "Invalid E-mail or password");
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
         }
     }

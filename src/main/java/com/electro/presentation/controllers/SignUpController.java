@@ -1,5 +1,6 @@
 package com.electro.presentation.controllers;
 
+import com.electro.persistence.entities.Customer;
 import com.electro.presentation.dto.SignUpDTO;
 import com.electro.presentation.enums.RequestAttributes;
 import com.electro.presentation.enums.SessionAttributes;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Optional;
 
 import static com.electro.presentation.enums.RequestAttributes.ENTERED_USER;
 
@@ -24,25 +26,25 @@ public class SignUpController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SignUpDTO signUpDTO = new SignUpDTO();
+        SignUpDTO signUpDTO = SignUpDTO.builder()
+                .name(req.getParameter("name"))
+                .email(req.getParameter("email"))
+                .birthdate(Date.valueOf(req.getParameter("birthdate")).toLocalDate())
+                .job(req.getParameter("job"))
+                .country(req.getParameter("country"))
+                .city(req.getParameter("city"))
+                .streetNo(req.getParameter("street_no"))
+                .streetName(req.getParameter("street_name"))
+                .password(req.getParameter("password"))
+                .build();
 
-        signUpDTO.setName(req.getParameter("name"));
-        signUpDTO.setEmail(req.getParameter("email"));
-        signUpDTO.setBirthdate(Date.valueOf(req.getParameter("birthdate")).toLocalDate());
-        signUpDTO.setJob(req.getParameter("job"));
-        signUpDTO.setCountry(req.getParameter("country"));
-        signUpDTO.setCity(req.getParameter("city"));
-        signUpDTO.setStreetNo(req.getParameter("street_no"));
-        signUpDTO.setStreetName(req.getParameter("street_name"));
-        signUpDTO.setPassword(req.getParameter("password"));
-
-        if(CustomerService.signup(signUpDTO)){
-
-            req.getSession(true).setAttribute(SessionAttributes.LOGGED_IN_CUSTOMER.toString(), signUpDTO);
+        Optional<Customer> customer = CustomerService.signup(signUpDTO);
+        if(customer.isPresent()){
+            req.getSession(true).setAttribute(SessionAttributes.LOGGED_IN_CUSTOMER.toString(), customer.get());
             resp.sendRedirect("/home");
         }
         else {
-            req.setAttribute("errorMessage", "Email is already exist");
+            req.setAttribute(RequestAttributes.ERROR.toString(), "Email is already registered!");
             req.setAttribute(String.valueOf(RequestAttributes.ENTERED_USER), signUpDTO);
             req.getRequestDispatcher("/jsp/signup.jsp").forward(req, resp);
         }

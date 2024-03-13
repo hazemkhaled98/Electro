@@ -6,6 +6,7 @@ import com.electro.persistence.repositries.CustomerRepositry;
 import com.electro.presentation.dto.LoginDTO;
 import com.electro.presentation.dto.SignUpDTO;
 import com.electro.presentation.dto.UpdateProfileDTO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -13,52 +14,62 @@ import java.util.Optional;
 
 public class CustomerService {
 
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     private CustomerService(){
     }
 
     public static Optional<Customer> login(LoginDTO loginDTO){
         return Database.doInTransaction(em -> {
-            CustomerRepositry customerRepositry = new CustomerRepositry(em);
-            Optional<Customer> customer = customerRepositry.getCustomerByEmail(loginDTO.getEmail());
-            if(customer.isPresent()){
-                if(customer.get().getPassword().equals(loginDTO.getPassword())){
-                    return customer;
+            try{
+                CustomerRepositry customerRepositry = new CustomerRepositry(em);
+                Optional<Customer> customer = customerRepositry.getCustomerByEmail(loginDTO.getEmail());
+                if(customer.isPresent()){
+                    if(passwordEncoder.matches(loginDTO.getPassword(), customer.get().getPassword())){
+                        return customer;
+                    }
                 }
+                return Optional.empty();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                return Optional.empty();
             }
-            return Optional.empty();
         });
 
     }
 
-    public  static boolean signup(SignUpDTO signUpDTO){
+    public static Optional<Customer> signup(SignUpDTO signUpDTO){
         return Database.doInTransaction(em -> {
-            CustomerRepositry customerRepositry = new CustomerRepositry(em);
-            Optional<Customer> customer = customerRepositry.getCustomerByEmail(signUpDTO.getEmail());
-            if (customer.isPresent()) {
-                return false;
-            } else {
-                Customer customerEntity = new Customer();
-                customerEntity.setCustomerName(signUpDTO.getName());
-                customerEntity.setEmail(signUpDTO.getEmail());
-                customerEntity.setPassword(signUpDTO.getPassword());
-                customerEntity.setJob(signUpDTO.getJob());
-                customerEntity.setCountry(signUpDTO.getCountry());
-                customerEntity.setCity(signUpDTO.getCity());
-                customerEntity.setStreetNo(signUpDTO.getStreetNo());
-                customerEntity.setStreetName(signUpDTO.getStreetName());
-                customerEntity.setBirthday(signUpDTO.getBirthdate());
-                customerRepositry.create(customerEntity);
-
-                return true;
+            try {
+                CustomerRepositry customerRepositry = new CustomerRepositry(em);
+                Customer newCustomer = new Customer();
+                newCustomer.setCustomerName(signUpDTO.getName());
+                newCustomer.setEmail(signUpDTO.getEmail());
+                newCustomer.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
+                newCustomer.setJob(signUpDTO.getJob());
+                newCustomer.setCountry(signUpDTO.getCountry());
+                newCustomer.setCity(signUpDTO.getCity());
+                newCustomer.setStreetNo(signUpDTO.getStreetNo());
+                newCustomer.setStreetName(signUpDTO.getStreetName());
+                newCustomer.setBirthday(signUpDTO.getBirthdate());
+                customerRepositry.create(newCustomer);
+                return Optional.of(newCustomer);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                return Optional.empty();
             }
         });
     }
-    public static Customer updateProfile(UpdateProfileDTO updateProfileDTO,Customer sessionCustomer){
+    public static Optional<Customer> updateProfile(UpdateProfileDTO updateProfileDTO,Customer sessionCustomer){
         return Database.doInTransaction(em -> {
-            CustomerRepositry customerRepositry = new CustomerRepositry(em);
-            mapUpdateProfileDTOToCustomer(updateProfileDTO,sessionCustomer);
-            customerRepositry.update(sessionCustomer);
-            return sessionCustomer;
+                try{
+                    CustomerRepositry customerRepositry = new CustomerRepositry(em);
+                    mapUpdateProfileDTOToCustomer(updateProfileDTO,sessionCustomer);
+                    return Optional.of(customerRepositry.update(sessionCustomer));
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                    return Optional.empty();
+                }
         });
     }
     public static void mapUpdateProfileDTOToCustomer(UpdateProfileDTO updateProfileDTO,Customer customer) {
