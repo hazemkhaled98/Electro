@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
         Optional<Customer> customer = CustomerService.login(loginDTO);
         if(customer.isPresent()){
             req.getSession(true).setAttribute(SessionAttributes.LOGGED_IN_CUSTOMER.toString(), customer.get());
-            resp.sendRedirect("/home");
+            resp.sendRedirect("/jsp/profile.jsp");
         }
         else {
             resp.sendRedirect("/login");

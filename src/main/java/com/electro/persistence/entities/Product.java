@@ -17,7 +17,7 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @Column(name = "product_image", nullable = false)
+    @Column(name = "product_image")
     private byte[] productImage;
 
     @Column(name = "stock_quantity", nullable = false)
