@@ -44,7 +44,7 @@ public class CustomerService {
                 CustomerRepositry customerRepositry = new CustomerRepositry(em);
                 Customer newCustomer = new Customer();
                 newCustomer.setCustomerName(signUpDTO.getName());
-                newCustomer.setEmail(signUpDTO.getEmail());
+                newCustomer.setEmail(signUpDTO.getEmail().toLowerCase());
                 newCustomer.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
                 newCustomer.setJob(signUpDTO.getJob());
                 newCustomer.setCountry(signUpDTO.getCountry());
