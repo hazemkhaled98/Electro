@@ -49,6 +49,7 @@
                             <select id="category" name="category" class="form-select">
                                 <option selected>Laptop</option>
                                 <option>Smartphone</option>
+                                <option>Camera</option>
                             </select>
                         </div>
 

@@ -17,9 +17,6 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @Column(name = "product_image", nullable = false)
-    private byte[] productImage;
-
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
 
@@ -52,14 +49,6 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public byte[] getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(byte[] productImage) {
-        this.productImage = productImage;
     }
 
     public Integer getStockQuantity() {
