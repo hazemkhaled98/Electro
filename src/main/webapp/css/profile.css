@@ -57,7 +57,9 @@
 #sc-edprofile input[type="password"],
 #sc-edprofile input[type="date"],
 #sc-edprofile select,
-#sc-edprofile textarea {
+#sc-edprofile textarea,
+#sc-edprofile input[type="number"]
+{
         width: 100%;
         background: #fff;
         margin-bottom: 4%;
@@ -67,7 +69,6 @@
         font-size: 95%;
         color: #555;
 }
-
 
 #sc-edprofile textarea {
         height: 100px;
