@@ -40,9 +40,9 @@ public abstract class Repositry<T> {
         entityManager.remove( entity );
     }
 
-    public void deleteById( int entityId ) {
+    public void deleteById(int entityId) {
         T entity = entityManager.find(type, entityId );
-        delete( entity );
+        delete(entity);
     }
 
 }

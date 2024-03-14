@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="<c:url value="/js/components/cookie.js"/>"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -24,14 +23,14 @@
             </div>
             <div class="row mt-5">
                 <div class="col">
-                    <form id="productEditForm" action="<c:url value="/admin/products/edit"/>" enctype="multipart/form-data" method="POST">
-                        <input type="hidden" value="${productHelper.product.id}" id="idEdit" name="idEdit">
+                    <form id="productEditForm" action="${pageContext.request.contextPath}/admin/products/edit" enctype="multipart/form-data" method="POST">
+                        <input type="hidden" value="${requestScope.product.id}" id="idEdit" name="idEdit">
                         <div class="row g-3">
 
                             <div class="col-12">
                                 <label class="form-label">Photo</label>
                                 <div class="mb-3">
-                                    <img id="imageOfProductEdit" src="${productHelper.product.imageName}" alt="customer" class="img-fluid">
+                                    <img id="imageOfProductEdit" src="${pageContext.request.contextPath}/img/${requestScope.product.name}.png" alt="productImage" class="img-fluid">
                                 </div>
                                 <div class="col-12">
                                     <label id="uploadImageButtonEdit" class="btn btn-light">
@@ -43,38 +42,39 @@
 
                             <div class="col-12">
                                 <label for="nameEdit" class="form-label">Name</label>
-                                <input type="text" name="nameEdit" id="nameEdit" autocomplete="given-name" required value="${productHelper.product.name}" class="form-control">
+                                <input type="text" name="nameEdit" id="nameEdit" autocomplete="given-name" required value="${requsetScope.product.name}" class="form-control">
                                 <span class="form-text text-danger" id="nameValidationEdit">This field is invalid</span>
                             </div>
 
                             <div class="col-12">
                                 <label for="descriptionEdit" class="form-label">Description</label>
-                                <textarea id="descriptionEdit" name="descriptionEdit" rows="3" class="form-control">${productHelper.product.description}</textarea>
+                                <textarea id="descriptionEdit" name="descriptionEdit" rows="3" class="form-control">${requsetScope.product.description}</textarea>
                                 <span class="form-text text-danger" id="descriptionValidationEdit">This field is invalid</span>
                             </div>
 
                             <div class="col-12">
                                 <label for="quantityEdit" class="form-label">Quantity</label>
-                                <input value="${productHelper.product.quantity}" type="number" min="1" name="quantityEdit" id="quantityEdit" required class="form-control">
+                                <input value="${requsetScope.product.quantity}" type="number" min="1" name="quantityEdit" id="quantityEdit" required class="form-control">
                             </div>
 
                             <div class="col-12">
                                 <label for="priceEdit" class="form-label">Price</label>
-                                <input value="${productHelper.product.price}" name="priceEdit" id="priceEdit" type="number" min="1" required class="form-control">
+                                <input value="${requsetScope.product.price}" name="priceEdit" id="priceEdit" type="number" min="1" required class="form-control">
                             </div>
 
                             <div class="col-12">
-                                <input type="hidden" value="${productHelper.product.category.name()}" id="valueOfCategory">
+                                <input type="hidden" value="${requsetScope.product.category}" id="valueOfCategory">
                                 <label for="categoryEdit" class="form-label">Category</label>
                                 <select id="categoryEdit" name="categoryEdit" class="form-select">
-                                    <option selected>CHOCOLATE</option>
-                                    <option>DRINKS</option>
+                                    <option selected>Laptop</option>
+                                    <option>Smartphones</option>
+                                    <option>Camera</option>
                                 </select>
                             </div>
 
                         </div>
                         <div class="d-flex justify-content-end mt-3">
-                            <button id="cancelButtonEdit" type="button" onclick="location.href='<c:url value="/admin/products"/>';" class="btn btn-light">Cancel</button>
+                            <button id="cancelButtonEdit" type="button" onclick= location.href="/admin/products" class="btn btn-light">Cancel</button>
                             <button id="submitButtonEdit" type="submit" class="btn btn-primary ms-3">Edit</button>
                             <div id="spinner" class="spinner-border text-primary d-none" role="status">
                                 <span class="visually-hidden">Loading...</span>
@@ -90,24 +90,24 @@
 </section>
 
 <section id="feedback" class="mt-3">
-    <c:if test="${productHelper.failedToEditProduct}">
+    <c:if test="${requestScope.failedToEditProduct}">
         <div id="failDivEdit" class="rounded-md bg-danger text-white p-4 mt-3">
             <div class="d-flex">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 5a1 1 0 112 0v5a1 1 0 11-2 0V5zm1 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 5a1 1 0 112 0v5a1 1 0 11-2 0V5zm1 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
                     </svg>
                 </div>
                 <div class="ml-3">
                     <h3 class="text-sm font-medium">Failed to Edit Product</h3>
                     <div class="mt-2 text-sm">
-                        <p>${productHelper.editProductErrorMessage}</p>
+                        <p>${requestScope.editProductErrorMessage}</p>
                     </div>
                 </div>
             </div>
         </div>
     </c:if>
-    <c:if test="${productHelper.successfullyEditedProduct}">
+    <c:if test="${requestScope.successfullyEditedProduct}">
         <div id="successDivEdit" class="rounded-md bg-success text-white p-4 mt-3">
             <div class="d-flex">
                 <div class="flex-shrink-0">
@@ -118,7 +118,7 @@
                 <div class="ml-3">
                     <h3 class="text-sm font-medium">Successfully Edited Product</h3>
                     <div class="mt-2 text-sm">
-                        <p>${productHelper.editProductSuccessMessage}</p>
+                        <p>${requestScope.editProductSuccessMessage}</p>
                     </div>
                 </div>
             </div>

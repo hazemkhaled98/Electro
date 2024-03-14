@@ -43,22 +43,7 @@ public class PopulateProduct {
         product.setStockQuantity(200);
         product.setCategory("smartphone");
         entityManager.persist(product);
-
-        product = new Product();
-        product.setProductName("kindle");
-        product.setProductDescription("A tablet with 4GB RAM, 64GB storage, and 10-inch display");
-        product.setProductPrice(BigDecimal.valueOf(300.00));
-        product.setStockQuantity(150);
-        product.setCategory("tablet");
-        entityManager.persist(product);
-
-        product = new Product();
-        product.setProductName("Ipad");
-        product.setProductDescription("A tablet with 4GB RAM, 64GB storage, and 10-inch display");
-        product.setProductPrice(BigDecimal.valueOf(300.00));
-        product.setStockQuantity(150);
-        product.setCategory("tablet");
-        entityManager.persist(product);
+        
 
         entityManager.getTransaction().commit();
         entityManager.close();

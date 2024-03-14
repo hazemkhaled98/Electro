@@ -1,7 +1,6 @@
 package com.electro.presentation.controllers;
 
 import com.electro.services.ProductService;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,12 +10,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "AdminProductsController", urlPatterns = "/admin/products")
-public class AdminProductsController extends HttpServlet {
+@WebServlet(name = "AdminDeleteProductController", value = "/admin/products/delete")
+public class AdminDeleteProductController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/listOfProducts.jsp");
-        req.setAttribute("pagesCount", ProductService.getPagesCount());
-        dispatcher.forward(req, resp);
+        String productId = req.getParameter("productId");
+        ProductService.deleteProduct(productId);
+        resp.sendRedirect("/admin/products");
     }
 }

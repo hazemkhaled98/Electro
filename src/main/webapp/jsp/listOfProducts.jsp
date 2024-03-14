@@ -38,7 +38,7 @@
                         </tr>
                         </thead>
                         <tbody id="tbody">
-                        <!-- More transactions... -->
+                        <!-- products -->
                         </tbody>
                     </table>
                 </div>
@@ -49,7 +49,7 @@
 </section>
 
 <section id="pagination">
-    <input type="hidden" value="${pageNumber}" id="pageNumber">
+    <input type="hidden" value="${requestScope.pagesCount}" id="pagesCount">
     <input type="hidden" value="1" id="currentPageNumber">
 
     <nav class="border-top mx-10 border-gray-200 px-4 d-flex justify-content-center">
@@ -81,7 +81,10 @@
 </section>
 
 <!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/adminProducts.js"></script>
 
 
 </body>
