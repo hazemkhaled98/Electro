@@ -6,6 +6,7 @@ import com.electro.persistence.repositries.ProductRepositry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductService {
 
@@ -40,6 +41,19 @@ public class ProductService {
             });
         } catch (Exception e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    public static Optional<Product> getProductById(String productId) {
+        try {
+            int id = Integer.parseInt(productId);
+            return Database.doInTransaction(em -> {
+                ProductRepositry productRepositry = new ProductRepositry(em);
+                return productRepositry.get(id);
+            });
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return Optional.empty();
         }
     }
 }

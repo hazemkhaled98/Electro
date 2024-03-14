@@ -49,7 +49,7 @@
 </section>
 
 <section id="pagination">
-    <input type="hidden" value="${requestScope.pagesCount}" id="pagesCount">
+    <input type="hidden" value="${requestScope.PAGES_COUNT}" id="pagesCount">
     <input type="hidden" value="1" id="currentPageNumber">
 
     <nav class="border-top mx-10 border-gray-200 px-4 d-flex justify-content-center">
