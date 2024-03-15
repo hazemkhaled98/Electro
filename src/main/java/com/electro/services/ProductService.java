@@ -15,8 +15,8 @@ public class ProductService {
 
     public static long getPagesCount(){
         return Database.doInTransaction(em -> {
-            ProductRepository productRepositry = new ProductRepository(em);
-            return productRepositry.getPagesCount();
+            ProductRepository productRepository = new ProductRepository(em);
+            return productRepository.getPagesCount();
         });
     }
 
@@ -24,8 +24,8 @@ public class ProductService {
         try {
             int pageNumber = Integer.parseInt(page);
             return Database.doInTransaction(em -> {
-                ProductRepository productRepositry = new ProductRepository(em);
-                return productRepositry.getPageOfProduct(pageNumber);
+                ProductRepository productRepository = new ProductRepository(em);
+                return productRepository.getPageOfProduct(pageNumber);
             });
         } catch (Exception e) {
            return new ArrayList<>();
@@ -36,8 +36,8 @@ public class ProductService {
         try {
             int id = Integer.parseInt(productId);
             Database.doInTransactionWithoutResult(em -> {
-                ProductRepository productRepositry = new ProductRepository(em);
-                productRepositry.deleteById(id);
+                ProductRepository productRepository = new ProductRepository(em);
+                productRepository.deleteById(id);
             });
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -48,12 +48,24 @@ public class ProductService {
         try {
             int id = Integer.parseInt(productId);
             return Database.doInTransaction(em -> {
-                ProductRepository productRepositry = new ProductRepository(em);
-                return productRepositry.get(id);
+                ProductRepository productRepository = new ProductRepository(em);
+                return productRepository.get(id);
             });
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return Optional.empty();
         }
+    }
+
+    public static Optional<Product> updateProduct(Product product) {
+            try {
+                return Database.doInTransaction(em -> {
+                    ProductRepository productRepository = new ProductRepository(em);
+                    return Optional.of(productRepository.update(product));
+                });
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                return Optional.empty();
+            }
     }
 }

@@ -26,11 +26,11 @@
                     <input type="hidden" value="${requestScope.PRODUCT.id}" id="idEdit" name="idEdit">
                     <div class="form-group">
                         <div style="text-align: center">
-                            <img id="imageOfProductEdit" src="${pageContext.request.contextPath}/img/${requestScope.PRODUCT.productName}.png" alt="productImage" class="img-fluid">
+                            <img id="imageOfProductEdit" src="${pageContext.request.contextPath}/img/products/${requestScope.PRODUCT.productName}.png" alt="productImage" class="img-fluid">
                         </div>
                         <div style="text-align: center">
                             <label id="uploadImageButtonEdit" class="btn btn-light">
-                                <input class="d-none" type="file" name="productPhotoEdit" accept="image/jpg, image/png, image/jpeg" id="productPhotoEdit">
+                                <input class="d-none" type="file" name="productPhotoEdit" accept="image/png" id="productPhotoEdit">
                                 Edit Photo
                             </label>
                         </div>
@@ -82,38 +82,6 @@
 
 </section>
 
-<section id="feedback" class="mt-3">
-    <div id="failDivEdit" class="rounded-md bg-danger text-white p-4" style="display: ${not empty requestScope.ERROR ? 'block' : 'none'}">
-        <div class="d-flex">
-            <div class="flex-shrink-0">
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 5a1 1 0 112 0v5a1 1 0 11-2 0V5zm1 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                </svg>
-            </div>
-            <div class="ml-3">
-                <h3 class="text-sm font-medium">Failed to Edit Product</h3>
-                <div class="mt-2 text-sm">
-                    <p>${requestScope.ERROR}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="successDivEdit" class="rounded-md bg-success text-white p-4" style="display: ${not empty requestScope.SUCCESS ? 'block' : 'none'}">
-        <div class="d-flex">
-            <div class="flex-shrink-0">
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 5a1 1 0 112 0v5a1 1 0 11-2 0V5zm1 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                </svg>
-            </div>
-            <div class="ml-3">
-                <h3 class="text-sm font-medium">Successfully Edited Product</h3>
-                <div class="mt-2 text-sm">
-                    <p>${requestScope.SUCCESS}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
