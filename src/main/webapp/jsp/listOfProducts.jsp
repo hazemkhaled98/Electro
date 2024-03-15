@@ -38,7 +38,7 @@
                         </tr>
                         </thead>
                         <tbody id="tbody">
-                        <!-- More transactions... -->
+                        <!-- products -->
                         </tbody>
                     </table>
                 </div>
@@ -49,7 +49,7 @@
 </section>
 
 <section id="pagination">
-    <input type="hidden" value="${pageNumber}" id="pageNumber">
+    <input type="hidden" value="${requestScope.PAGES_COUNT}" id="pagesCount">
     <input type="hidden" value="1" id="currentPageNumber">
 
     <nav class="border-top mx-10 border-gray-200 px-4 d-flex justify-content-center">
@@ -68,8 +68,37 @@
     </nav>
 </section>
 
-<section id="deleteAlert">
-    <!-- Delete alert modal content -->
+<section id="feedback" class="mt-3">
+    <div id="failDivEdit" class="rounded-md bg-danger text-white p-4" style="display: ${not empty requestScope.ERROR ? 'block' : 'none'}">
+        <div class="d-flex justify-content-center">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 5a1 1 0 112 0v5a1 1 0 11-2 0V5zm1 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <h3 class="text-sm font-medium">Failed</h3>
+                <div class="mt-2 text-sm">
+                    <p>${requestScope.ERROR}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="successDivEdit" class="rounded-md bg-success text-white p-4" style="display: ${not empty requestScope.SUCCESS ? 'block' : 'none'}">
+        <div class="d-flex justify-content-center">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 5a1 1 0 112 0v5a1 1 0 11-2 0V5zm1 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="ml-3">
+                <h3 class="text-sm font-medium">Success</h3>
+                <div class="mt-2 text-sm">
+                    <p>${requestScope.SUCCESS}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="mt-auto" id="footer">
@@ -81,7 +110,10 @@
 </section>
 
 <!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/adminProducts.js"></script>
 
 
 </body>
