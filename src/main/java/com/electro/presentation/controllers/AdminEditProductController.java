@@ -52,28 +52,32 @@ public class AdminEditProductController extends HttpServlet {
 
         saveProductImage(filePart, productName);
 
-        int productId = Integer.parseInt(req.getParameter("idEdit"));
+        String productId = req.getParameter("idEdit");
 
         String description = req.getParameter("descriptionEdit");
         int quantity = Integer.parseInt(req.getParameter("quantityEdit"));
         double price = Double.parseDouble(req.getParameter("priceEdit"));
         String category = req.getParameter("categoryEdit");
 
-        Product product = new Product();
+        Optional<Product> oldProduct = ProductService.getProductById(productId);
 
-        product.setId(productId);
-        product.setProductName(productName);
-        product.setProductDescription(description);
-        product.setStockQuantity(quantity);
-        product.setProductPrice(BigDecimal.valueOf(price));
-        product.setCategory(category);
-
-        Optional<Product> updatedProduct = ProductService.updateProduct(product);
-
-        if(updatedProduct.isPresent()){
-            req.setAttribute(RequestAttribute.SUCCESS.toString(), "Product Updated Successfully");
-        } else {
-            req.setAttribute(RequestAttribute.ERROR.toString(), "Failed Updating The Product");
+        if(oldProduct.isEmpty()){
+            req.setAttribute(RequestAttribute.ERROR.toString(), "Product is not present");
+        }
+        else {
+            Product newProduct = oldProduct.get();
+            newProduct.setId(Integer.parseInt(productId));
+            newProduct.setProductName(productName);
+            newProduct.setProductDescription(description);
+            newProduct.setStockQuantity(quantity);
+            newProduct.setProductPrice(BigDecimal.valueOf(price));
+            newProduct.setCategory(category);
+            Optional<Product> updatedProduct = ProductService.updateProduct(newProduct);
+            if(updatedProduct.isPresent()){
+                req.setAttribute(RequestAttribute.SUCCESS.toString(), "Product Updated Successfully");
+            } else {
+                req.setAttribute(RequestAttribute.ERROR.toString(), "Failed Updating The Product");
+            }
         }
             req.getRequestDispatcher("/admin/products").forward(req, resp);
 
