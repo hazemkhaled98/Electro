@@ -2,7 +2,7 @@ package com.electro.services;
 
 import com.electro.persistence.Database;
 import com.electro.persistence.entities.Customer;
-import com.electro.persistence.repositries.CustomerRepositry;
+import com.electro.persistence.repositries.CustomerRepository;
 import com.electro.presentation.dto.LoginDTO;
 import com.electro.presentation.dto.SignUpDTO;
 import com.electro.presentation.dto.UpdateProfileDTO;
@@ -22,7 +22,7 @@ public class CustomerService {
     public static Optional<Customer> login(LoginDTO loginDTO){
         return Database.doInTransaction(em -> {
             try{
-                CustomerRepositry customerRepositry = new CustomerRepositry(em);
+                CustomerRepository customerRepositry = new CustomerRepository(em);
                 Optional<Customer> customer = customerRepositry.getCustomerByEmail(loginDTO.getEmail());
                 if(customer.isPresent()){
                     if(passwordEncoder.matches(loginDTO.getPassword(), customer.get().getPassword())){
@@ -41,7 +41,7 @@ public class CustomerService {
     public static Optional<Customer> signup(SignUpDTO signUpDTO){
         return Database.doInTransaction(em -> {
             try {
-                CustomerRepositry customerRepositry = new CustomerRepositry(em);
+                CustomerRepository customerRepositry = new CustomerRepository(em);
                 Customer newCustomer = new Customer();
                 newCustomer.setCustomerName(signUpDTO.getName());
                 newCustomer.setEmail(signUpDTO.getEmail().toLowerCase());
@@ -63,7 +63,7 @@ public class CustomerService {
     public static Optional<Customer> updateProfile(UpdateProfileDTO updateProfileDTO,Customer sessionCustomer){
         return Database.doInTransaction(em -> {
                 try{
-                    CustomerRepositry customerRepositry = new CustomerRepositry(em);
+                    CustomerRepository customerRepositry = new CustomerRepository(em);
                     mapUpdateProfileDTOToCustomer(updateProfileDTO,sessionCustomer);
                     return Optional.of(customerRepositry.update(sessionCustomer));
                 } catch (Exception e) {

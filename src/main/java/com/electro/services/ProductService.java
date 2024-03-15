@@ -2,7 +2,7 @@ package com.electro.services;
 
 import com.electro.persistence.Database;
 import com.electro.persistence.entities.Product;
-import com.electro.persistence.repositries.ProductRepositry;
+import com.electro.persistence.repositries.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class ProductService {
 
     public static long getPagesCount(){
         return Database.doInTransaction(em -> {
-            ProductRepositry productRepositry = new ProductRepositry(em);
+            ProductRepository productRepositry = new ProductRepository(em);
             return productRepositry.getPagesCount();
         });
     }
@@ -24,7 +24,7 @@ public class ProductService {
         try {
             int pageNumber = Integer.parseInt(page);
             return Database.doInTransaction(em -> {
-                ProductRepositry productRepositry = new ProductRepositry(em);
+                ProductRepository productRepositry = new ProductRepository(em);
                 return productRepositry.getPageOfProduct(pageNumber);
             });
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class ProductService {
         try {
             int id = Integer.parseInt(productId);
             Database.doInTransactionWithoutResult(em -> {
-                ProductRepositry productRepositry = new ProductRepositry(em);
+                ProductRepository productRepositry = new ProductRepository(em);
                 productRepositry.deleteById(id);
             });
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class ProductService {
         try {
             int id = Integer.parseInt(productId);
             return Database.doInTransaction(em -> {
-                ProductRepositry productRepositry = new ProductRepositry(em);
+                ProductRepository productRepositry = new ProductRepository(em);
                 return productRepositry.get(id);
             });
         } catch (Exception e) {

@@ -7,10 +7,10 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class ProductRepositry extends Repositry<Product> {
+public class ProductRepository extends Repository<Product> {
 
     private final static int MAX_RESULTS = 5;
-    public ProductRepositry(EntityManager entityManager) {
+    public ProductRepository(EntityManager entityManager) {
         super(entityManager);
         super.setType(Product.class);
     }

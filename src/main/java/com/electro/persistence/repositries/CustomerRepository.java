@@ -7,10 +7,10 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.Optional;
 
-public class CustomerRepositry extends Repositry<Customer> {
+public class CustomerRepository extends Repository<Customer> {
 
 
-    public CustomerRepositry(EntityManager entityManager) {
+    public CustomerRepository(EntityManager entityManager) {
         super(entityManager);
         super.setType(Customer.class);
     }
