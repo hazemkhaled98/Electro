@@ -23,6 +23,9 @@ public class Product {
     @Column(name = "product_description")
     private String productDescription;
 
+    @Column(name = "product_pic")
+    private String productPic;
+
     @Column(name = "product_price", nullable = false, precision = 15, scale = 2)
     private BigDecimal productPrice;
 
@@ -99,4 +102,11 @@ public class Product {
         this.orderItems = orderItems;
     }
 
+    public String getProductPic() {
+        return productPic;
+    }
+
+    public void setProductPic(String productPic) {
+        this.productPic = productPic;
+    }
 }

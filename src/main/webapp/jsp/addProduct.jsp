@@ -16,10 +16,21 @@
 <section id="product">
 
     <div class="container mt-3">
+
+        <div id="errorMessage" class="alert alert-danger" role="alert" style="display: ${not empty requestScope.ERROR ? 'block' : 'none'}; font-size: 16px;">
+            <p class="center">${requestScope.ERROR}</p>
+        </div>
+
+
+        <div id="successMessage" class="alert alert-success" style="display: ${not empty requestScope.SUCCESS ? 'block' : 'none'}; font-size: 16px;">
+            <p class="center">${requestScope.SUCCESS}</p>
+        </div>
+
+
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Product Information</h3>
-                <form id="productAddForm" action="" enctype="multipart/form-data" method="POST">
+                <form id="productAddForm" action="${pageContext.request.contextPath}/admin/add-product" enctype="multipart/form-data" method="POST">
                     <div class="row g-3">
 
                         <div class="col-12">
@@ -28,34 +39,40 @@
                             <span class="form-text text-danger d-none" id="nameValidation">This field is invalid</span>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" style="margin-top: 10px">
                             <label for="description" class="form-label">Description</label>
                             <textarea id="description" name="description" rows="3" class="form-control"></textarea>
                             <span class="form-text text-danger d-none" id="descriptionValidation">This field is invalid</span>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" style="margin-top: 10px">
                             <label for="quantity" class="form-label">Quantity</label>
                             <input value="1" type="number" min="1" name="quantity" id="quantity" class="form-control" required>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" style="margin-top: 10px">
                             <label for="price" class="form-label">Price</label>
-                            <input value="1" name="price" id="price" type="number" min="1" class="form-control" required>
+                            <input value="1" name="price" id="price" type="number" min="0.1" step="0.1" class="form-control" required>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" style="margin-top: 10px">
+                            <label for="productImg" class="form-label">Product Image</label>
+                            <input class="form-control" name="productImg" type="file" id="productImg" required>
+                        </div>
+
+
+                        <div class="col-12" style="margin-top: 10px">
                             <label for="category" class="form-label">Category</label>
                             <select id="category" name="category" class="form-select">
-                                <option selected>Laptop</option>
-                                <option>Smartphone</option>
-                                <option>Camera</option>
+                                <option value="laptop" selected>Laptop</option>
+                                <option value="smartphone">Smartphone</option>
+                                <option value="camera">Camera</option>
                             </select>
                         </div>
 
                     </div>
                     <div class="d-flex justify-content-end mt-3">
-                        <button id="cancelButton" type="button" onclick="" class="btn btn-secondary me-2">Cancel</button>
+                        <button id="cancelButton" type="button" onclick="" class="btn btn-secondary me-2" style="margin-right: 5px">Cancel</button>
                         <button id="submitButton" type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
@@ -80,6 +97,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/addProduct.js"></script>
 
 </body>
 
