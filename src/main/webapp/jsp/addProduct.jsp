@@ -82,10 +82,6 @@
 
 </section>
 
-<section id="feedback" class="mt-3">
-<%--TODO render the feedback message from server --> success or failed--%>
-</section>
-
 <section class="mt-auto" id="footer">
     <footer class="bg-white">
         <div class="container py-4">
@@ -98,7 +94,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/js/addProduct.js"></script>
+<script src="${pageContext.request.contextPath}/js/productsMessages.js"></script>
 
 </body>
 

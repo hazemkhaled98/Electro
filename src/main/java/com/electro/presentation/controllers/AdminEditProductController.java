@@ -1,8 +1,11 @@
 package com.electro.presentation.controllers;
 
 import com.electro.persistence.entities.Product;
+import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.services.ProductService;
+import com.electro.services.enums.FileType;
+import com.electro.services.util.ImagesPathUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,14 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 
@@ -28,15 +25,22 @@ import java.util.Optional;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class AdminEditProductController extends HttpServlet {
 
-    private String productName;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productId = req.getParameter("productId");
         Optional<Product> product = ProductService.getProductById(productId);
         if(product.isPresent()){
-            productName = product.get().getProductName();
-            req.setAttribute(RequestAttribute.PRODUCT.toString(), product.get());
+            DisplayedProductDTO displayedProductDTO = DisplayedProductDTO.builder()
+                    .name(product.get().getProductName())
+                    .description(product.get().getProductDescription())
+                    .price(product.get().getProductPrice())
+                    .quantity(product.get().getStockQuantity())
+                    .category(product.get().getCategory())
+                    .mimeType(ImagesPathUtil.getMimeType(product.get().getProductPic()))
+                    .productPic(ImagesPathUtil.encodeFileToBase64(product.get().getProductPic()))
+                    .build();
+            req.setAttribute(RequestAttribute.PRODUCT.toString(), displayedProductDTO);
+            req.setAttribute("productId", productId);
             req.getRequestDispatcher("/jsp/editProduct.jsp").forward(req, resp);
         } else {
             resp.sendRedirect("/admin/products");
@@ -46,61 +50,40 @@ public class AdminEditProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Part filePart = req.getPart("productPhotoEdit");
-
-        String productName = req.getParameter("nameEdit");
-
-        saveProductImage(filePart, productName);
-
         String productId = req.getParameter("idEdit");
-
-        String description = req.getParameter("descriptionEdit");
-        int quantity = Integer.parseInt(req.getParameter("quantityEdit"));
-        double price = Double.parseDouble(req.getParameter("priceEdit"));
-        String category = req.getParameter("categoryEdit");
-
         Optional<Product> oldProduct = ProductService.getProductById(productId);
 
-        if(oldProduct.isEmpty()){
+        if (oldProduct.isEmpty()) {
             req.setAttribute(RequestAttribute.ERROR.toString(), "Product is not present");
-        }
-        else {
-            Product newProduct = oldProduct.get();
-            newProduct.setId(Integer.parseInt(productId));
-            newProduct.setProductName(productName);
-            newProduct.setProductDescription(description);
-            newProduct.setStockQuantity(quantity);
-            newProduct.setProductPrice(BigDecimal.valueOf(price));
-            newProduct.setCategory(category);
-            Optional<Product> updatedProduct = ProductService.updateProduct(newProduct);
-            if(updatedProduct.isPresent()){
-                req.setAttribute(RequestAttribute.SUCCESS.toString(), "Product Updated Successfully");
+        } else {
+            Part filePart = req.getPart("productPhotoEdit");
+            String productName = req.getParameter("nameEdit");
+            String description = req.getParameter("descriptionEdit");
+            String category = req.getParameter("categoryEdit");
+
+            int quantity = Integer.parseInt(req.getParameter("quantityEdit"));
+            double price = Double.parseDouble(req.getParameter("priceEdit"));
+
+            Product product = oldProduct.get();
+            product.setId(Integer.parseInt(productId));
+            product.setProductName(productName);
+            product.setProductDescription(description);
+            product.setStockQuantity(quantity);
+            product.setProductPrice(BigDecimal.valueOf(price));
+            product.setCategory(category);
+            if(filePart != null && filePart.getSize() > 0){
+                String productPicPath = ImagesPathUtil.storeFileFromPart(filePart,
+                        productId, FileType.PRODUCT_PIC);
+                product.setProductPic(productPicPath);
+            }
+            Optional<Product> updatedProduct = ProductService.updateProduct(product);
+
+            if (updatedProduct.isPresent()) {
+                req.setAttribute(RequestAttribute.SUCCESS.toString(), "The Product is updated successfully");
             } else {
-                req.setAttribute(RequestAttribute.ERROR.toString(), "Failed Updating The Product");
+                req.setAttribute(RequestAttribute.ERROR.toString(), "Failed to update the product");
             }
-        }
             req.getRequestDispatcher("/admin/products").forward(req, resp);
-
-    }
-
-    private void saveProductImage(Part filePart, String newProductName) {
-        Path oldPath = Paths.get(getServletContext().getRealPath("/img/products") + File.separator + productName + ".png");
-        Path uploadPath = Paths.get(getServletContext().getRealPath("/img/products") + File.separator + newProductName + ".png");
-        if(filePart != null && filePart.getSize() > 0) {
-            try (InputStream input = filePart.getInputStream()) {
-                Files.delete(oldPath);
-                Files.copy(input, uploadPath, StandardCopyOption.REPLACE_EXISTING);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-        else {
-            try {
-                Files.move(oldPath, uploadPath, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 }

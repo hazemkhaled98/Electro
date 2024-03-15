@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import com.electro.services.enums.FileType;
-import jakarta.servlet.http.Part;
 import java.util.Base64;
 
-public class FileSystemUtil {
+import com.electro.services.enums.FileType;
+import jakarta.servlet.http.Part;
 
-    private static final String PROFILEPIC_DIRECTORY = System.getProperty("user.home") + "/electroPics/profilePic";
-    private static final String PRODUCTPIC_DIRECTORY = System.getProperty("user.home") + "/electroPics/productPic";
+public class ImagesPathUtil {
+
+    private static final String PROFILE_PIC_DIRECTORY = System.getProperty("user.home") + "/electroPics/profilePic";
+    private static final String PRODUCT_PIC_DIRECTORY = System.getProperty("user.home") + "/electroPics/productPic";
 
     /**
      * Store a file obtained from a Part object in the specified directory.
@@ -28,10 +29,10 @@ public class FileSystemUtil {
         String baseDirectory;
         switch (fileType) {
             case PROFILE_PIC:
-                baseDirectory = PROFILEPIC_DIRECTORY;
+                baseDirectory = PROFILE_PIC_DIRECTORY;
                 break;
             case PRODUCT_PIC:
-                baseDirectory = PRODUCTPIC_DIRECTORY;
+                baseDirectory = PRODUCT_PIC_DIRECTORY;
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported file type");

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function hideMessage(messageId) {
         setTimeout(function() {
             document.getElementById(messageId).style.display = 'none';
-        }, 3000); // 3 seconds delay
+        }, 5000); // 3 seconds delay
     }
 
     // Check if error message is initially displayed

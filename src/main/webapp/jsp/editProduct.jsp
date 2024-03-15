@@ -15,6 +15,8 @@
 <section>
 
     <div class="container mt-5">
+
+
         <div class="row">
             <div class="col">
                 <h2 class="text-lg font-medium" style="text-align: center">Product Information</h2>
@@ -23,14 +25,14 @@
         <div class="row mt-3">
             <div class="col">
                 <form id="productEditForm" action="${pageContext.request.contextPath}/admin/products/edit" enctype="multipart/form-data" method="POST">
-                    <input type="hidden" value="${requestScope.PRODUCT.id}" id="idEdit" name="idEdit">
+                    <input type="hidden" value="${requestScope.productId}" id="idEdit" name="idEdit">
                     <div class="form-group">
                         <div style="text-align: center">
-                            <img id="imageOfProductEdit" src="${pageContext.request.contextPath}/img/products/${requestScope.PRODUCT.productName}.png" alt="productImage" class="img-fluid">
+                            <img id="imageOfProductEdit" src="data:${requestScope.PRODUCT.mimeType};base64,${requestScope.PRODUCT.productPic}" alt="productImage">
                         </div>
                         <div style="text-align: center">
                             <label id="uploadImageButtonEdit" class="btn btn-light">
-                                <input class="d-none" type="file" name="productPhotoEdit" accept="image/png" id="productPhotoEdit">
+                                <input class="d-none" type="file" name="productPhotoEdit" accept="image/png image/jpg image/jpeg" id="productPhotoEdit">
                                 Edit Photo
                             </label>
                         </div>
@@ -38,22 +40,22 @@
 
                     <div class="form-group">
                         <label for="nameEdit">Name</label>
-                        <input type="text" name="nameEdit" id="nameEdit" autocomplete="given-name" required value="${requestScope.PRODUCT.productName}" class="form-control">
+                        <input type="text" name="nameEdit" id="nameEdit" autocomplete="given-name" required value="${requestScope.PRODUCT.name}" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="descriptionEdit">Description</label>
-                        <textarea id="descriptionEdit" name="descriptionEdit" rows="3" class="form-control">${requestScope.PRODUCT.productDescription}</textarea>
+                        <textarea id="descriptionEdit" name="descriptionEdit" rows="3" class="form-control">${requestScope.PRODUCT.description}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="quantityEdit">Quantity</label>
-                        <input value="${requestScope.PRODUCT.stockQuantity}" type="number" min="1" name="quantityEdit" id="quantityEdit" required class="form-control">
+                        <input value="${requestScope.PRODUCT.quantity}" type="number" min="1" name="quantityEdit" id="quantityEdit" required class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="priceEdit">Price</label>
-                        <input value="${requestScope.PRODUCT.productPrice}" name="priceEdit" id="priceEdit" type="number" min="1" required class="form-control">
+                        <input value="${requestScope.PRODUCT.price}" name="priceEdit" id="priceEdit" type="number" min="1" required class="form-control">
                     </div>
 
                     <div class="form-group">
