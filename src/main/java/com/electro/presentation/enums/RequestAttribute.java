@@ -2,5 +2,8 @@ package com.electro.presentation.enums;
 
 public enum RequestAttribute {
 
-    ENTERED_USER, ERROR,SUCCESS
+    ENTERED_USER,
+    ERROR,
+    SUCCESS,
+    PRODUCT
 }

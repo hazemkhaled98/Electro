@@ -1,7 +1,9 @@
 package com.electro.services;
 
 import com.electro.persistence.Database;
+import com.electro.persistence.entities.Customer;
 import com.electro.persistence.entities.Product;
+import com.electro.persistence.repositries.CustomerRepositry;
 import com.electro.persistence.repositries.ProductRepositry;
 import com.electro.presentation.dto.CreatedProductDTO;
 import com.electro.services.enums.FileType;
@@ -41,7 +43,19 @@ public class ProductService {
             }
         });
 
+    }
 
+    public static Optional<Product> getProduct(int productId){
+        return Database.doInTransaction(em -> {
+            try {
+                ProductRepositry productRepositry = new ProductRepositry(em);
 
+                return productRepositry.get(productId);
+
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                return Optional.empty();
+            }
+        });
     }
 }

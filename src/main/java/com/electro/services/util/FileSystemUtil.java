@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.electro.services.enums.FileType;
 import jakarta.servlet.http.Part;
+import java.util.Base64;
 
 public class FileSystemUtil {
 
@@ -76,6 +77,30 @@ public class FileSystemUtil {
         } catch (IOException e) {
             System.out.println("Error getting bytes from file" + e.getMessage());
             return null;
+        }
+    }
+
+    public static String encodeFileToBase64(String filePath) throws IOException {
+
+        Path path = Paths.get(filePath);
+        byte[] fileBytes = Files.readAllBytes(path);
+
+        return Base64.getEncoder().encodeToString(fileBytes);
+    }
+
+    public static String getMimeType(String fileName) {
+
+        String extension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        switch (extension.toLowerCase()) {
+            case "jpg":
+            case "jpeg":
+                return "image/jpeg";
+            case "png":
+                return "image/png";
+            case "gif":
+                return "image/gif";
+            default:
+                return null;
         }
     }
 }
