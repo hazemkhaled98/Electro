@@ -773,6 +773,12 @@ textarea.input {
 
 .shop .shop-body h3 {
   color: #FFF;
+  font-size: x-large;
+}
+
+.shop .shop-body a {
+  color: #FFF;
+  font-size: large;
 }
 
 .shop .shop-body .cta-btn {

@@ -53,10 +53,10 @@
             <div class="col-md-4 col-xs-6">
                 <div class="shop">
                     <div class="shop-img">
-                        <img src="${pageContext.request.contextPath}/img/shop01.png" alt="">
+                        <img src="${pageContext.request.contextPath}/img/laptop.jpg" alt="">
                     </div>
                     <div class="shop-body">
-                        <h3>Laptop<br>Collection</h3>
+                        <h3>Laptops<br>Collection</h3>
                         <a href="/home?category=laptop" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <div class="col-md-4 col-xs-6">
                 <div class="shop">
                     <div class="shop-img">
-                        <img src="${pageContext.request.contextPath}/img/shop03.jpg" alt="">
+                        <img src="${pageContext.request.contextPath}/img/smartphone.jpg" alt="">
                     </div>
                     <div class="shop-body">
                         <h3>Smartphones<br>Collection</h3>
@@ -81,7 +81,7 @@
             <div class="col-md-4 col-xs-6">
                 <div class="shop">
                     <div class="shop-img">
-                        <img src="${pageContext.request.contextPath}/img/shop02.png" alt="">
+                        <img src="${pageContext.request.contextPath}/img/camera.jpg" alt="">
                     </div>
                     <div class="shop-body">
                         <h3>Cameras<br>Collection</h3>
