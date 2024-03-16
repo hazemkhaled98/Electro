@@ -36,7 +36,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="/home" class="logo">
 									<img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 								</a>
 							</div>
@@ -49,8 +49,9 @@
 								<form>
 									<select class="input-select">
 										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										<option value="1">Laptops</option>
+										<option value="1">Smartphones</option>
+										<option value="1">Cameras</option>
 									</select>
 									<input class="input" placeholder="Search here">
 									<button class="search-btn">Search</button>
@@ -62,15 +63,6 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
 
 								<!-- Cart -->
 								<div class="dropdown">
@@ -108,7 +100,7 @@
 											<h5>SUBTOTAL: $2940.00</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
+<%--											<a href="#">View Cart</a>--%>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
@@ -135,21 +127,16 @@
 		</header>
 		<!-- /HEADER -->
 
-		<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
 			<div class="container">
 				<!-- responsive-nav -->
-				<div id="responsive-nav">
+				<div id="responsive-nav" class="">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<li><a href="/home">Home</a></li>
+						<li><a href="/login">Account</a></li>
+						<li><a href="/checkout">Checkout</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -157,7 +144,6 @@
 			</div>
 			<!-- /container -->
 		</nav>
-		<!-- /NAVIGATION -->
 
 	</body>
 </html>
