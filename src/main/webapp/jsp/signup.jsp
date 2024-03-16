@@ -83,37 +83,28 @@
 				<!-- Populate all input fields with SignUpDTO data -->
 				<label for="name">Name:</label><br>
 				<input type="text" placeholder="Name should contain letters and digits only"
-					   name="name" id="name" required pattern="[A-Za-z][A-Za-z0-9]*"
-					   value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.name : ''}"/><br>
+					   name="name" id="name" required pattern="[A-Za-z][A-Za-z0-9]*" /><br>
 				<label for="email">E-mail:</label><br>
 				<input type="email" placeholder="Email Address" name="email" id="email" required
-					   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-					   value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.email : ''}"
-					   onblur="checkEmail();"/><br>
+					   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" onblur="checkEmail();"/><br>
 				<label for="password">Password:</label><br>
 				<input type="password" id="password" placeholder="min length is 8 and only alphanumeric characters" name="password" required pattern="[a-zA-Z0-9]{8,}" minlength="8"><br>
 				<label for="confirmPassword">Confirm Password:</label><br>
 				<input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required onblur="checkPasswordMatch()" /><br>
 				<!-- Similarly populate other input fields -->
 				<label for="birthdate">Birthdate:</label><br>
-				<input type="date" placeholder="Birthdate" name="birthdate" id="birthdate" required
-					value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.birthdate : ''}"/> <br>
+				<input type="date" placeholder="Birthdate" name="birthdate" id="birthdate" required/> <br>
 				<label for="job">Job:</label><br>
-				<input type="text" placeholder="Job" name="job" id="job" required pattern="[A-Za-z\s]+"
-					   value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.job : ''}"/> <br>
+				<input type="text" placeholder="Job" name="job" id="job" required pattern="[A-Za-z\s]+"/> <br>
 
 				<label for="country">Country:</label><br>
-				<input type="text" placeholder="Country" name="country" id="country" required
-					value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.country : ''}"/><br>
+				<input type="text" placeholder="Country" name="country" id="country" required /><br>
 				<label for="city">City:</label><br>
-				<input type="text" placeholder="City" name="city" id="city" required
-					value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.city : ''}"/><br>
+				<input type="text" placeholder="City" name="city" id="city" required /><br>
 				<label for="street_no">Street No:</label><br>
-				<input type="text" placeholder="Street No." name="street_no"  id="street_no" required
-					value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.streetNo : ''}"/><br>
+				<input type="text" placeholder="Street No." name="street_no"  id="street_no" required /><br>
 				<label for="street_name">Street Name:</label><br>
-				<input type="text" placeholder="Street Name" name="street_name" id="street_name" required
-					value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.streetName : ''}"/><br>
+				<input type="text" placeholder="Street Name" name="street_name" id="street_name" required /><br>
 				<input type="submit" value="SignUp" />
 
 				<script>
