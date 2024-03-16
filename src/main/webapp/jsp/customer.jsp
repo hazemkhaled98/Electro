@@ -1,4 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@ page import="com.electro.presentation.dto.CustomerDTO" %>
+<%@ page import="com.electro.presentation.dto.OrderDTO" %>
+<jsp:useBean id="customer" class="com.electro.presentation.dto.CustomerDTO" scope="request"/>
+<jsp:useBean id="orderDTOS" scope="request" type="java.util.List"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="en">
 
@@ -8,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Viewing ${customer.fullName}'s account | Admin Dashboard</title>
+    <title>Viewing ${customer.customerName}'s account | Admin Dashboard</title>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -23,7 +29,7 @@
                 <div class="bg-white shadow sm:rounded-lg">
                     <div class="px-4 py-5 sm:px-6">
                         <h2 id="applicant-information-title" class="text-lg font-medium leading-6 text-gray-900">
-                            ${customer.fullName}</h2>
+                            ${customer.customerName}</h2>
                     </div>
                     <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
                         <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -37,11 +43,11 @@
                             </div>
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">Address</dt>
-                                <dd class="mt-1 text-sm text-gray-900">${customer.addressFormatted}</dd>
+                                <dd class="mt-1 text-sm text-gray-900">${customer.city}</dd>
                             </div>
                             <div class="sm:col-span-1">
-                                <dt class="text-sm font-medium text-gray-500">Phone</dt>
-                                <dd class="mt-1 text-sm text-gray-900">${customer.phoneNumber}</dd>
+                                <dt class="text-sm font-medium text-gray-500">streetNo</dt>
+                                <dd class="mt-1 text-sm text-gray-900">${customer.streetNo}</dd>
                             </div>
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">Job</dt>
@@ -53,7 +59,7 @@
                             </div>
                             <div class="sm:col-span-2">
                                 <dt class="text-sm font-medium text-gray-500">Credit Limit</dt>
-                                <dd class="mt-1 text-sm text-gray-900">EGP ${customer.creditLimitFormatted}.00</dd>
+                                <dd class="mt-1 text-sm text-gray-900">EGP ${customer.creditLimit}.00</dd>
                             </div>
 
                         </dl>
@@ -78,23 +84,30 @@
                                         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                             <div
                                                     class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                                                <c:if test="${orderList.size() !=0}">
+                                                <c:if test="${orderDTOS.size() !=0}">
                                                     <table class="table table-striped">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">ID</th>
-                                                            <th scope="col">Time Stamp</th>
-                                                            <th scope="col">Total Cost</th>
-                                                            <th scope="col">Order</th>
+                                                            <th scope="col">Customer</th>
+                                                            <th scope="col">Ordered at</th>
+                                                            <th scope="col">Items</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <c:forEach items="${orderList}" var="order">
+                                                        <c:forEach items="${orderDTOS}" var="order">
                                                             <tr>
                                                                 <td>${order.id}</td>
-                                                                <td>${order.timestamp}</td>
-                                                                <td>EGP ${order.totalFormatted}.00</td>
-                                                                <td><a href="/admin/customers/customer/order?orderId=${order.id}&userId=${customer.id}" class="text-indigo-600">Order</a></td>
+                                                                <td>${order.customer.customerName}</td>
+                                                                <td>${order.orderedAt}</td>
+                                                                <c:set var="productNames" value="" scope="page" />
+                                                                <c:forEach items="${order.orderItems}" var="orderItem">
+                                                                    <c:set var="productNames" value="${productNames}${orderItem.product.productName}, " scope="page" />
+                                                                </c:forEach>
+                                                                <td>${fn:substring(productNames, 0, fn:length(productNames)-2)}</td>
+<%--                                                                <td>${order.orderItems.product}</td>--%>
+
+<%--                                                                <td><a href="/admin/customers/customer/order?orderId=${order.id}&userId=${customer.id}" class="text-indigo-600">Order</a></td>--%>
                                                             </tr>
                                                         </c:forEach>
 
@@ -103,7 +116,7 @@
                                                         </tbody>
                                                     </table>
                                                 </c:if>
-                                                <c:if test="${orderList.size() ==0}">
+                                                <c:if test="${orderDTOS.size() ==0}">
                                                     <h4 class="text-center">No Orders</h4>
                                                 </c:if>
                                             </div>

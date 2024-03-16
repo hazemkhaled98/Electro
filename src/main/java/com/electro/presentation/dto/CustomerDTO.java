@@ -1,56 +1,31 @@
-package com.electro.persistence.entities;
-
-import jakarta.persistence.*;
-import org.hibernate.annotations.BatchSize;
+package com.electro.presentation.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-@Entity
-@Table(name = "customers")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id", nullable = false)
+public class CustomerDTO {
+
     private Integer id;
 
-    @Column(name = "customer_name", nullable = false)
     private String customerName;
 
-    @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "job", nullable = false)
     private String job;
 
-    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "credit_limit", precision = 15, scale = 2)
     private BigDecimal creditLimit;
 
-    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "street_no", nullable = false)
     private String streetNo;
 
-    @Column(name = "street_name", nullable = false)
     private String streetName;
-
-    @OneToOne(mappedBy = "customer")
-    private Cart cart;
-
-    @OneToMany(mappedBy = "customer")
-    private Set<Order> orders = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -139,21 +114,4 @@ public class Customer {
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
 }

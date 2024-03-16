@@ -2,6 +2,13 @@ package com.electro.services;
 
 import com.electro.persistence.Database;
 import com.electro.persistence.entities.Customer;
+import com.electro.persistence.entities.Order;
+import com.electro.persistence.entities.OrderItem;
+import com.electro.persistence.entities.Product;
+import com.electro.persistence.repositries.OrderItemRepository;
+import com.electro.persistence.repositries.OrderRepository;
+import com.electro.persistence.repositries.ProductRepository;
+import com.electro.presentation.dto.*;
 import com.electro.persistence.repositries.CustomerRepository;
 import com.electro.presentation.dto.LoginDTO;
 import com.electro.presentation.dto.SignUpDTO;
@@ -9,6 +16,8 @@ import com.electro.presentation.dto.UpdateProfileDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -96,4 +105,89 @@ public class CustomerService {
             customer.setCreditLimit(updateProfileDTO.getCreditLimit());
         }
     }
+    public static List<CustomerDTO> getAllCustomers(){
+        return Database.doInTransaction(em -> {
+            List<CustomerDTO> customerDTOS = new ArrayList<>();
+            CustomerRepository customerRepositry = new CustomerRepository(em);
+            List<Customer> customers = customerRepositry.getAll();
+            for (Customer customer : customers) {
+                CustomerDTO customerDTO = new CustomerDTO();
+                mapCustomerToCustomerDTO(customerDTO ,  customer);
+                customerDTOS.add(customerDTO);
+            }
+            return customerDTOS;
+        });
+    }
+    public static void mapCustomerToCustomerDTO(CustomerDTO customerDTO , Customer customer) {
+        customerDTO.setId(customer.getId());
+        customerDTO.setCustomerName(customer.getCustomerName());
+        customerDTO.setEmail(customer.getEmail());
+        customerDTO.setJob(customer.getJob());
+        customerDTO.setCountry(customer.getCountry());
+        customerDTO.setCity(customer.getCity());
+        customerDTO.setStreetNo(customer.getStreetNo());
+        customerDTO.setStreetName(customer.getStreetName());
+        customerDTO.setCreditLimit(customer.getCreditLimit());
+        customerDTO.setBirthday(customer.getBirthday());
+    }
+    public static CustomerDTO getCustomerById(Integer customerID){
+        return Database.doInTransaction(em -> {
+           CustomerRepository customerRepositry = new CustomerRepository(em);
+           Customer customer = customerRepositry.get(customerID).get();
+              CustomerDTO customerDTO = new CustomerDTO();
+                mapCustomerToCustomerDTO(customerDTO ,  customer);
+                return customerDTO;
+        });
+    }
+    public static List<OrderDTO> getCustomerOrders(Integer customerID){
+        return Database.doInTransaction(em -> {
+            List<OrderDTO> orderDTOS = new ArrayList<>();
+            CustomerRepository customerRepositry = new CustomerRepository(em);
+            Customer customer = customerRepositry.get(customerID).get();
+            for (Order order : customer.getOrders()) {
+                OrderDTO orderDTO = new OrderDTO();
+                orderDTO.setId(order.getId());
+                orderDTO.setCustomer(order.getCustomer());
+                orderDTO.setOrderedAt(order.getOrderedAt());
+                orderDTO.setOrderItems(order.getOrderItems());
+                orderDTOS.add(orderDTO);
+            }
+            return orderDTOS;
+        });
+    }
+    public static List<OrderItemDTO> getOrderItemsForOrder(Integer orderID){
+        return Database.doInTransaction(em -> {
+            List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
+            OrderRepository orderRepository = new OrderRepository(em);
+            Order order = orderRepository.get(orderID).get();
+            for (OrderItem orderItem : order.getOrderItems()) {
+                OrderItemDTO orderItemDTO = new OrderItemDTO();
+                orderItemDTO.setId(orderItem.getId());
+                orderItemDTO.setOrder(orderItem.getOrder());
+                orderItemDTO.setProduct(orderItem.getProduct());
+                orderItemDTO.setQuantity(orderItem.getQuantity());
+                orderItemDTO.setAmount(orderItem.getAmount());
+                orderItemDTOS.add(orderItemDTO);
+            }
+            return orderItemDTOS;
+        });
+    }
+    public static List<Customer> getPageOfCustomers(String page) {
+        try {
+            int pageNumber = Integer.parseInt(page);
+            return Database.doInTransaction(em -> {
+                CustomerRepository customerRepository = new CustomerRepository(em);
+                return customerRepository.getPageOfCustomer(pageNumber);
+            });
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+    public static long getPagesCount() {
+        return Database.doInTransaction(em -> {
+            CustomerRepository customerRepository = new CustomerRepository(em);
+            return customerRepository.getPagesCount();
+        });
+    }
+
 }

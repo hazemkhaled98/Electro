@@ -1,29 +1,22 @@
-package com.electro.persistence.entities;
+package com.electro.presentation.dto;
 
+import com.electro.persistence.entities.Order;
+import com.electro.persistence.entities.Product;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "order_items")
-public class OrderItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_item_id", nullable = false)
+public class OrderItemDTO {
+
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
+
     private Order order;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "amount", nullable = false, precision = 15, scale = 2)
     private BigDecimal amount;
 
     public Integer getId() {
@@ -65,5 +58,4 @@ public class OrderItem {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
 }

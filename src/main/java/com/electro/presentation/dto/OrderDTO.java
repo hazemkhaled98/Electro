@@ -1,29 +1,19 @@
-package com.electro.persistence.entities;
+package com.electro.presentation.dto;
 
+import com.electro.persistence.entities.Customer;
+import com.electro.persistence.entities.OrderItem;
 import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id", nullable = false)
+public class OrderDTO {
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "ordered_at", nullable = false)
     private Instant orderedAt;
-
-    @OneToMany(mappedBy = "order" , fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new LinkedHashSet<>();
-
     public Integer getId() {
         return id;
     }
@@ -55,5 +45,4 @@ public class Order {
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-
 }

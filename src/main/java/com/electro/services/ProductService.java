@@ -6,6 +6,8 @@ import com.electro.persistence.repositries.ProductRepository;
 import com.electro.presentation.dto.CreatedProductDTO;
 import com.electro.services.enums.FileType;
 import com.electro.services.util.ImagesPathUtil;
+import com.electro.presentation.dto.CreatedProductDTO;
+import com.electro.services.enums.FileType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,7 +77,6 @@ public class ProductService {
             return Optional.empty();
         }
     }
-
 
 
     public static Optional<Product> addProduct(CreatedProductDTO createdProductDTO) {
