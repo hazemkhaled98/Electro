@@ -96,4 +96,17 @@ public class CustomerService {
             customer.setCreditLimit(updateProfileDTO.getCreditLimit());
         }
     }
+
+    public static Optional<Customer> getCustomer(String checkedEmail) {
+        return Database.doInTransaction(em -> {
+            try {
+                CustomerRepository customerRepository = new CustomerRepository(em);
+                return customerRepository.getCustomerByEmail(checkedEmail);
+
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                return Optional.empty();
+            }
+        });
+    }
 }

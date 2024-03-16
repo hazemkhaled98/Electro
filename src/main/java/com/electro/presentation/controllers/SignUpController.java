@@ -41,10 +41,6 @@ public class SignUpController extends HttpServlet {
             req.getSession(true).setAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString(), customer.get());
             resp.sendRedirect("/home");
         }
-        else {
-            req.setAttribute(RequestAttribute.ERROR.toString(), "E-mail is already registered!");
-            req.setAttribute(String.valueOf(RequestAttribute.ENTERED_USER), signUpDTO);
-            req.getRequestDispatcher("/jsp/signup.jsp").forward(req, resp);
-        }
+
     }
 }
