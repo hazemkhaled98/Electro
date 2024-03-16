@@ -73,8 +73,8 @@
 		<div id="passwordMatch" class="alert alert-danger" style="display: none; font-size: 16px;">
 			<p class="center">Passwords do not match.</p>
 		</div>
-		<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.ERROR ? 'block' : 'none'}; font-size: 16px;">
-			<p class="center">${requestScope.ERROR}</p>
+		<div id="errorMessage" class="alert alert-danger" style="display: none; font-size: 16px;">
+			<p class="center">E-mail is already registered!</p>
 		</div>
 			<!-- row -->
 		<form action="" method="post" class="row" id="sc-edprofile">
@@ -88,11 +88,12 @@
 				<label for="email">E-mail:</label><br>
 				<input type="email" placeholder="Email Address" name="email" id="email" required
 					   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-					   value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.email : ''}" /><br>
+					   value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.email : ''}"
+					   onblur="checkEmail();"/><br>
 				<label for="password">Password:</label><br>
 				<input type="password" id="password" placeholder="min length is 8 and only alphanumeric characters" name="password" required pattern="[a-zA-Z0-9]{8,}" minlength="8"><br>
 				<label for="confirmPassword">Confirm Password:</label><br>
-				<input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required /><br>
+				<input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required onblur="checkPasswordMatch()" /><br>
 				<!-- Similarly populate other input fields -->
 				<label for="birthdate">Birthdate:</label><br>
 				<input type="date" placeholder="Birthdate" name="birthdate" id="birthdate" required
@@ -114,6 +115,51 @@
 				<input type="text" placeholder="Street Name" name="street_name" id="street_name" required
 					value="${not empty requestScope.ENTERED_USER ? requestScope.ENTERED_USER.streetName : ''}"/><br>
 				<input type="submit" value="SignUp" />
+
+				<script>
+					var req = null;
+
+					function checkEmail() {
+						req = new XMLHttpRequest();
+						req.open("post", "/checkEmail", true);
+						req.onreadystatechange = handleStateChange;
+						req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+						req.send("email=" + encodeURIComponent(document.getElementById("email").value));
+					}
+
+					function handleStateChange() {
+						if (req.readyState === 4 && req.status === 200) {
+							var message = req.responseText;
+							if (message !== "") {
+								document.getElementById("errorMessage").style.display = "block";
+								// Call the function to hide the error message after 3 seconds
+								hideMessage('errorMessage');
+							}
+						}
+					}
+
+					// Function to hide message after 3 seconds
+					function hideMessage(messageId) {
+						setTimeout(function () {
+							document.getElementById(messageId).style.display = 'none';
+						}, 3000); // 3 seconds delay
+					}
+
+					function checkPasswordMatch() {
+						var password = document.getElementById("password").value;
+						var confirmPassword = document.getElementById("confirmPassword").value;
+						var passwordMatchMessage = document.getElementById("passwordMatch");
+
+						if (password !== confirmPassword) {
+							passwordMatchMessage.style.display = "block";
+							// Call the function to hide the error message after 3 seconds
+							hideMessage('passwordMatch');
+						} else {
+							passwordMatchMessage.style.display = "none";
+						}
+					}
+
+				</script>
 
 			</div>
 		</form>
