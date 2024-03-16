@@ -34,4 +34,9 @@ public class ProductRepository extends Repository<Product> {
     }
 
 
+    public List<Product> getByCategory(String category) {
+        TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p WHERE p.category = :category", Product.class);
+        query.setParameter("category", category);
+        return query.getResultList();
+    }
 }

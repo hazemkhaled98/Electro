@@ -7,5 +7,6 @@ public enum RequestAttribute {
     SUCCESS,
     PRODUCT ,
     PAGES_COUNT,
-    PAGE_NUMBER
+    PAGE_NUMBER,
+    PRODUCTS
 }

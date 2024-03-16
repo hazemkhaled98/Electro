@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 
-@WebServlet(name = "LoginController", value = "/login/*")
+@WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
 
     @Override

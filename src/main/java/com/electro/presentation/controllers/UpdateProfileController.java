@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@WebServlet(name = "UpdateProfileController", value = "/update/*")
+@WebServlet(name = "UpdateProfileController", value = "/update")
 public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

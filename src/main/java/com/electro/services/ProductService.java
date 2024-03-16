@@ -109,6 +109,20 @@ public class ProductService {
             }
         });
     }
+
+    public static List<Product> getAllProducts() {
+        return Database.doInTransaction(em -> {
+            ProductRepository productRepository = new ProductRepository(em);
+            return productRepository.getAll();
+        });
+    }
+
+    public static List<Product> getProductsByCategory(String category) {
+        return Database.doInTransaction(em -> {
+            ProductRepository productRepository = new ProductRepository(em);
+            return productRepository.getByCategory(category);
+        });
+    }
 }
 
 

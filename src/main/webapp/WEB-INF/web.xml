@@ -5,19 +5,6 @@
          version="5.0">
 
 
-<!--    <error-page>-->
-<!--        <location>/jsp/error.html</location>-->
-<!--    </error-page>-->
 
 
-
-
-    <servlet>
-        <servlet-name>AdminAddProductController</servlet-name>
-        <servlet-class>com.electro.presentation.controllers.AdminAddProductController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminAddProductController</servlet-name>
-        <url-pattern>/admin/add-product</url-pattern>
-    </servlet-mapping>
 </web-app>

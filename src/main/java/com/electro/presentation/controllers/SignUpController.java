@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.Optional;
 
-@WebServlet(name = "SignUpController", value = "/signup/*")
+@WebServlet(name = "SignUpController", value = "/signup")
 public class SignUpController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
