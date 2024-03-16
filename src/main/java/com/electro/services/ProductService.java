@@ -123,6 +123,13 @@ public class ProductService {
             return productRepository.getByCategory(category);
         });
     }
+
+    public static Optional<Product> getProductByName(String name) {
+        return Database.doInTransaction(em -> {
+            ProductRepository productRepository = new ProductRepository(em);
+            return productRepository.getByName(name);
+        });
+    }
 }
 
 

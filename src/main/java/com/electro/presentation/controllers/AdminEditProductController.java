@@ -3,6 +3,7 @@ package com.electro.presentation.controllers;
 import com.electro.persistence.entities.Product;
 import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
+import com.electro.presentation.util.ProductDtoMapper;
 import com.electro.services.ProductService;
 import com.electro.services.enums.FileType;
 import com.electro.services.util.ImagesPathUtil;
@@ -30,15 +31,7 @@ public class AdminEditProductController extends HttpServlet {
         String productId = req.getParameter("productId");
         Optional<Product> product = ProductService.getProductById(productId);
         if(product.isPresent()){
-            DisplayedProductDTO displayedProductDTO = DisplayedProductDTO.builder()
-                    .name(product.get().getProductName())
-                    .description(product.get().getProductDescription())
-                    .price(product.get().getProductPrice())
-                    .quantity(product.get().getStockQuantity())
-                    .category(product.get().getCategory())
-                    .mimeType(ImagesPathUtil.getMimeType(product.get().getProductPic()))
-                    .productPic(ImagesPathUtil.encodeFileToBase64(product.get().getProductPic()))
-                    .build();
+            DisplayedProductDTO displayedProductDTO = ProductDtoMapper.productToDto(product.get());
             req.setAttribute(RequestAttribute.PRODUCT.toString(), displayedProductDTO);
             req.setAttribute("productId", productId);
             req.getRequestDispatcher("/jsp/editProduct.jsp").forward(req, resp);

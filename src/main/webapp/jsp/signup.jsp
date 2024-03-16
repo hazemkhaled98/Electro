@@ -56,7 +56,7 @@
 				<div class="col-md-12">
 					<h3 class="breadcrumb-header">SignUp</h3>
 					<ul class="breadcrumb-tree">
-						<li><a href="#">Home</a></li>
+						<li><a href="/home?category=all">Home</a></li>
 						<li class="active">SignUp</li>
 					</ul>
 				</div>

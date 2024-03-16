@@ -4,6 +4,7 @@ package com.electro.presentation.controllers;
 import com.electro.persistence.entities.Product;
 import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
+import com.electro.presentation.util.ProductDtoMapper;
 import com.electro.services.ProductService;
 import com.electro.services.util.ImagesPathUtil;
 import jakarta.servlet.ServletException;
@@ -42,16 +43,8 @@ public class HomeController extends HttpServlet {
     private List<DisplayedProductDTO> mapProductToDto(List<Product> products) throws IOException {
         List<DisplayedProductDTO> displayedProducts = new ArrayList<>();
         for (Product product : products) {
-            DisplayedProductDTO displayedProduct = DisplayedProductDTO.builder()
-                    .name(product.getProductName())
-                    .category(product.getCategory())
-                    .price(product.getProductPrice())
-                    .quantity(product.getStockQuantity())
-                    .description(product.getProductDescription())
-                    .mimeType(ImagesPathUtil.getMimeType(product.getProductPic()))
-                    .productPic(ImagesPathUtil.encodeFileToBase64(product.getProductPic()))
-                    .build();
-            displayedProducts.add(displayedProduct);
+            DisplayedProductDTO displayedProductDTO = ProductDtoMapper.productToDto(product);
+            displayedProducts.add(displayedProductDTO);
         }
         return displayedProducts;
     }

@@ -33,7 +33,7 @@ public class ProductsPageController extends HttpServlet {
         out.flush();
     }
 
-    private String productToJson( Product product ) {
+    private String productToJson(Product product) {
         JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder();
         jsonObjectBuilder.add( "id",product.getId() )
                 .add( "name", product.getProductName() )

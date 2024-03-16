@@ -6,6 +6,7 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepository extends Repository<Product> {
 
@@ -38,5 +39,11 @@ public class ProductRepository extends Repository<Product> {
         TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p WHERE p.category = :category", Product.class);
         query.setParameter("category", category);
         return query.getResultList();
+    }
+
+    public Optional<Product> getByName(String name) {
+        TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p WHERE p.productName = :name", Product.class);
+        query.setParameter("name", name);
+        return Optional.ofNullable(query.getSingleResult());
     }
 }

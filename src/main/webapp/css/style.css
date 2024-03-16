@@ -701,6 +701,7 @@ textarea.input {
     margin-left: 0px;
   }
   .main-nav>li>a {
+    font-size: medium;
     padding: 15px;
     color: #FFF;
   }

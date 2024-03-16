@@ -36,7 +36,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="/home" class="logo">
+								<a href="/home?category=all" class="logo">
 									<img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 								</a>
 							</div>
@@ -50,8 +50,8 @@
 									<select class="input-select">
 										<option value="0">All Categories</option>
 										<option value="1">Laptops</option>
-										<option value="1">Smartphones</option>
-										<option value="1">Cameras</option>
+										<option value="2">Smartphones</option>
+										<option value="3">Cameras</option>
 									</select>
 									<input class="input" placeholder="Search here">
 									<button class="search-btn">Search</button>
@@ -131,7 +131,7 @@
 			<!-- container -->
 			<div class="container">
 				<!-- responsive-nav -->
-				<div id="responsive-nav" class="">
+				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="/home">Home</a></li>
