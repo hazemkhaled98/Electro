@@ -77,24 +77,38 @@
 				<div class="sc-container">
 					<label for="name">Name:</label><br>
 					<input type="text" placeholder="Name should contain letters and digits only"
-						name="name"  pattern="[A-Za-z][A-Za-z0-9]*" id="name"/>
+						name="name"  pattern="[A-Za-z][A-Za-z0-9]*" id="name"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.customerName : ''}"/>
+
 					<label for="job">Job:</label><br>
-					<input type="text" placeholder="Job" name="job"  pattern="[A-Za-z]+" id="job"/>
+					<input type="text" placeholder="Job" name="job"  required pattern="[A-Za-z\s]+" id="job"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.job : ''}"/>
+
 					<label for="country">Country:</label><br>
 					<input type="text" placeholder="Country" name="country"
-						pattern="[A-Za-z]+" id="country"/>
+						pattern="[A-Za-z]+" id="country"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.country : ''}"/>
+
 					<label for="city">City:</label><br>
 					<input type="text" placeholder="City" name="city"
-						pattern="[A-Za-z]+" id="city"/>
+						pattern="[A-Za-z]+" id="city"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.city : ''}"/>
+
 					<label for="streetNo">Street No:</label><br>
 					<input type="text" placeholder="Street No." name="streetNo"
-						pattern="[0-9]+[A-Za-z]?" id="streetNo"/>
+						   required id="streetNo"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.streetNo : ''}"/>
+
 					<label for="streetName">Street Name:</label><br>
 					<input type="text" placeholder="Street Name" name="streetName"
-						pattern="[A-Za-z]+" id="streetName"/>
+						required id="streetName"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.streetName : ''}"/>
+
 					<label for="creditLimit">Credit Limit:</label><br>
-					<input type="number" placeholder="Credit limit" name="creditLimit" id="creditLimit"/>
-					<input type="submit" value="Update Profile" />
+					<input type="number" placeholder="Credit limit" name="creditLimit" id="creditLimit"
+						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.creditLimit : ''}"/>
+
+					<input type="submit" value="Update Profile"/>
 				</div>
 			</form>
 			<!-- /row -->
