@@ -10,9 +10,29 @@
     <title>Electro | Manage Products</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/NavBar.css">
 </head>
 
 <body class="d-flex flex-column h-100">
+
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav" class="">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav nav-row">
+                <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/add-product">Add product</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+
 
 <section id="productTable" class="mt-5">
 

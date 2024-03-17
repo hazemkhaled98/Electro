@@ -1,0 +1,62 @@
+#profile {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+#profile h2 {
+    text-align: center;
+
+}
+.info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* Add this line */
+
+}
+.info dt {
+    margin-right: 50px; /* Adjust the value as needed */
+}
+.info dd{
+    justify-content: flex-start;
+}
+#orderArea{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+#order{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+#order h2 {
+    text-align: center;
+}
+#customerArea{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+#cust{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+#cust h2 {
+    text-align: center;
+}

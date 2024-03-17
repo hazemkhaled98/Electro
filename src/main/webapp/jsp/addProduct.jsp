@@ -9,9 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Electro | Add Product</title>
+    <link rel="stylesheet" href="../css/NavBar.css">
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav" class="">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav nav-row">
+                <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/add-product">Add product</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+
+
 <h2 class="text-center text-2xl font-weight-bold text-gray-900 mb-5">Add Product</h2>
 <section id="product">
 
