@@ -147,6 +147,13 @@
 						<li><a href="/home">Home</a></li>
 						<li><a href="/login">Account</a></li>
 						<li><a href="/checkout">Checkout</a></li>
+						<%
+							if (session != null && session.getAttribute("LOGGED_IN_CUSTOMER") != null) {
+						%>
+						<li><a href="/logout">Logout</a></li>
+						<%
+							}
+						%>
 					</ul>
 					<!-- /NAV -->
 				</div>
