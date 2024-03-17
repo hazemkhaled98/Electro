@@ -5,19 +5,12 @@
          version="5.0">
 
 
-<!--    <error-page>-->
-<!--        <location>/jsp/error.html</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/notFound.jsp</location>
+    </error-page>
 
-
-
-
-    <servlet>
-        <servlet-name>AdminAddProductController</servlet-name>
-        <servlet-class>com.electro.presentation.controllers.AdminAddProductController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminAddProductController</servlet-name>
-        <url-pattern>/admin/add-product</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <location>/jsp/errorPage.jsp</location>
+    </error-page>
 </web-app>
