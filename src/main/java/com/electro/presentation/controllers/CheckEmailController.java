@@ -23,7 +23,7 @@ public class CheckEmailController extends HttpServlet {
         String checkedEmail = req.getParameter("email");
 
         Optional<Customer> customer = CustomerService.getCustomer(checkedEmail);
-        if (customer.isEmpty()){
+        if (customer.isPresent()){
 
             out.print("E-mail is already registered!");
         }

@@ -77,7 +77,7 @@
 			<p class="center">E-mail is already registered!</p>
 		</div>
 			<!-- row -->
-		<form action="" method="post" class="row" id="sc-edprofile">
+		<form action="" method="post" class="row" id="sc-edprofile" onsubmit="return validateForm()">
 			<h1>SignUp</h1>
 			<div class="sc-container">
 				<!-- Populate all input fields with SignUpDTO data -->
@@ -110,10 +110,23 @@
 				<script>
 					var req = null;
 
-					function checkEmail() {
+					function checkEmail(callback) {
 						req = new XMLHttpRequest();
 						req.open("post", "/checkEmail", true);
-						req.onreadystatechange = handleStateChange;
+						req.onreadystatechange = function() {
+							if (req.readyState === 4 && req.status === 200) {
+								var message = req.responseText;
+								if (message !== "") {
+									document.getElementById("errorMessage").style.display = "block";
+									hideMessage('errorMessage');
+									// Callback with false to indicate email exists
+									callback(false);
+								} else {
+									// Callback with true to indicate email does not exist
+									callback(true);
+								}
+							}
+						};
 						req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 						req.send("email=" + encodeURIComponent(document.getElementById("email").value));
 					}
@@ -123,7 +136,6 @@
 							var message = req.responseText;
 							if (message !== "") {
 								document.getElementById("errorMessage").style.display = "block";
-								// Call the function to hide the error message after 3 seconds
 								hideMessage('errorMessage');
 							}
 						}
@@ -143,14 +155,40 @@
 
 						if (password !== confirmPassword) {
 							passwordMatchMessage.style.display = "block";
-							// Call the function to hide the error message after 3 seconds
 							hideMessage('passwordMatch');
 						} else {
 							passwordMatchMessage.style.display = "none";
 						}
 					}
 
+					function validateForm() {
+						var password = document.getElementById("password").value;
+						var confirmPassword = document.getElementById("confirmPassword").value;
+						var passwordMatchMessage = document.getElementById("passwordMatch");
+
+						// Check if passwords match
+						if (password !== confirmPassword) {
+							passwordMatchMessage.style.display = "block";
+							hideMessage('passwordMatch');
+							return false; // Prevent form submission
+						}
+
+						// Call checkEmail to verify if email exists
+						checkEmail(function(emailExists) {
+							if (!emailExists) {
+								// Email already exists, prevent form submission
+								return false;
+							} else {
+								// Email does not exist, allow form submission
+								document.getElementById("sc-edprofile").submit();
+							}
+						});
+
+						// Always return false here to prevent default form submission
+						return false;
+					}
 				</script>
+
 
 			</div>
 		</form>
