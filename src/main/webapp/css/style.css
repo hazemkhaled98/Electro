@@ -1347,7 +1347,7 @@ textarea.input {
 /*-- Store Pagination --*/
 
 .store-pagination {
-  float: right;
+  margin: auto auto;
 }
 
 .store-pagination li {
