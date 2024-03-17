@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Page Not Found</title>
+    <title>Error Page</title>
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -43,10 +44,17 @@
     </style>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+    <jsp:include page="header.jsp"/>
 <div class="error-div">
-    <h1>404 - Page Not Found</h1>
+    <c:choose>
+        <c:when test="${not empty requestScope.ERROR}">
+            <h1>${requestScope.ERROR}</h1>
+        </c:when>
+        <c:otherwise>
+            <h1>An error has occurred. Please contact the admin and try again later</h1>
+        </c:otherwise>
+    </c:choose>
 </div>
-    <jsp:include page="footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

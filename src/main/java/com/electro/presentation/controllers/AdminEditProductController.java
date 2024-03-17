@@ -36,8 +36,8 @@ public class AdminEditProductController extends HttpServlet {
             req.setAttribute("productId", productId);
             req.getRequestDispatcher("/jsp/editProduct.jsp").forward(req, resp);
         } else {
-            // TODO FORWARD TO ERROR PAGE
-            resp.sendRedirect("/admin/products");
+            req.setAttribute(RequestAttribute.ERROR.toString(), "Product is not present");
+            req.getRequestDispatcher("/admin/products").forward(req, resp);
         }
     }
 

@@ -35,7 +35,8 @@ public class HomeController extends HttpServlet {
             case "smartphone" -> products = ProductService.getProductsByCategory("smartphone");
             case "camera" -> products = ProductService.getProductsByCategory("camera");
             default -> {
-                // TODO FORWARD TO ERROR PAGE
+                req.setAttribute(RequestAttribute.ERROR.toString(), "Invalid category. Go back to the homepage");
+                req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
             }
         }
         List<DisplayedProductDTO> displayedProducts = mapProductToDto(products);
