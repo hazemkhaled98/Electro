@@ -118,7 +118,14 @@
                         </div>
                     </div>
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        <c:choose>
+                            <c:when test="${product.quantity == 0}">
+                                <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
+                            </c:when>
+                            <c:otherwise>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
