@@ -1,10 +1,12 @@
 package com.electro.persistence;
 
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import javax.sql.DataSource;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -49,8 +51,8 @@ public class Database {
     }
 
     public static void close() {
-        AbandonedConnectionCleanupThread.checkedShutdown();
         emf.close();
+        AbandonedConnectionCleanupThread.checkedShutdown();
         System.out.println("Database resources cleaned up");
     }
 }
