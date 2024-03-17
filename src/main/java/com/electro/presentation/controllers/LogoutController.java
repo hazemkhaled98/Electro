@@ -19,6 +19,6 @@ public class LogoutController extends HttpServlet {
             session.invalidate();
         }
 
-        resp.sendRedirect(req.getRequestURI());
+        resp.sendRedirect("/home");
     }
 }
