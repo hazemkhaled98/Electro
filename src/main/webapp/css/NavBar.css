@@ -1,0 +1,14 @@
+.nav-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.nav-row li{
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}

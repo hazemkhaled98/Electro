@@ -36,7 +36,7 @@ public class CustomerPageController extends HttpServlet {
     private String customerToJson( Customer customer ) {
         JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder();
         jsonObjectBuilder.add( "id",customer.getId() )
-                .add( "name", customer.getCustomerName() )
+                .add( "customerName", customer.getCustomerName() )
                 .add( "birthday" , String.valueOf(customer.getBirthday()))
                 .add( "password", customer.getPassword())
                 .add( "job" ,customer.getJob())

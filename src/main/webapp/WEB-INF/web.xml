@@ -10,7 +10,28 @@
         <location>/jsp/notFound.jsp</location>
     </error-page>
 
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Electro Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>electro</role-name>
+        </auth-constraint>
+    </security-constraint>
+
     <error-page>
         <location>/jsp/errorPage.jsp</location>
     </error-page>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>Electro Area</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>electro</role-name>
+    </security-role>
+
+
 </web-app>
