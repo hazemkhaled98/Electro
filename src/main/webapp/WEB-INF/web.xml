@@ -5,9 +5,11 @@
          version="5.0">
 
 
-<!--    <error-page>-->
-<!--        <location>/jsp/error.html</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/notFound.jsp</location>
+    </error-page>
+
 
     <security-constraint>
         <web-resource-collection>
@@ -19,6 +21,9 @@
         </auth-constraint>
     </security-constraint>
 
+    <error-page>
+        <location>/jsp/errorPage.jsp</location>
+    </error-page>
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Electro Area</realm-name>
@@ -27,12 +32,6 @@
     <security-role>
         <role-name>electro</role-name>
     </security-role>
-    <servlet>
-        <servlet-name>AdminAddProductController</servlet-name>
-        <servlet-class>com.electro.presentation.controllers.AdminAddProductController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminAddProductController</servlet-name>
-        <url-pattern>/admin/add-product</url-pattern>
-    </servlet-mapping>
+
+
 </web-app>
