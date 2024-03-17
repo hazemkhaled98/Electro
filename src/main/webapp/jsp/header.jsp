@@ -15,12 +15,12 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +201-012-456-789</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> electro@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> Cairo, Egypt</a></li>
+						<li><i class="fa fa-phone"></i>+201-012-456-789</li>
+						<li><i class="fa fa-envelope-o"></i> electro@email.com</li>
+						<li><i class="fa fa-map-marker"></i> Cairo, Egypt</li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+						<li><i class="fa fa-dollar"></i>USD</li>
 						<li><a href="/login"><i class="fa fa-user-o"></i> My Account</a></li>
 					</ul>
 				</div>
@@ -96,8 +96,8 @@
 											</div>
 										</div>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small><span>3</span> Item(s) in the cart</small>
+											<h5>Total: $2940.00</h5>
 										</div>
 										<div class="cart-btns">
 <%--											<a href="#">View Cart</a>--%>
