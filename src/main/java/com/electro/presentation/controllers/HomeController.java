@@ -25,6 +25,9 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String category = req.getParameter("category");
+        if (category == null) {
+            category = "all";
+        }
         List<Product> products = new ArrayList<>();
         switch (category) {
             case "all" -> products = ProductService.getAllProducts();

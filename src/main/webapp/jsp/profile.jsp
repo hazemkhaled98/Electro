@@ -53,7 +53,7 @@
 				<div class="col-md-12">
 					<h3 class="breadcrumb-header">Update Profile</h3>
 					<ul class="breadcrumb-tree">
-						<li><a href="#">Home</a></li>
+						<li><a href="/home">Home</a></li>
 						<li class="active">Edit Profile</li>
 					</ul>
 				</div>
@@ -106,7 +106,7 @@
 						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.streetName : ''}"/>
 
 					<label for="creditLimit">Credit Limit:</label><br>
-					<input type="number" placeholder="Credit limit" name="creditLimit" id="creditLimit"
+					<input type="number" placeholder="Credit limit" name="creditLimit" id="creditLimit" min="0"
 						   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.creditLimit : ''}"/>
 
 					<input type="submit" value="Update Profile"/>
