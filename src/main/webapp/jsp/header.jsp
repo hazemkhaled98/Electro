@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,6 +23,15 @@
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
 						<li><a href="/login"><i class="fa fa-user-o"></i> My Account</a></li>
+						<%
+							HttpSession session = request.getSession(false);
+							if (session != null && session.getAttribute("LOGGED_IN_CUSTOMER") != null) {
+						%>
+						<li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+						<%
+							}
+						%>
+
 					</ul>
 				</div>
 			</div>
