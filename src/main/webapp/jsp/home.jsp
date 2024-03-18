@@ -11,12 +11,16 @@
 
     <title>Electro</title>
 
+
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/slick.css"/>
@@ -114,26 +118,26 @@
                     <div class="checkbox-filter">
 
                         <div class="input-checkbox">
-                            <input type="checkbox" id="category-1">
-                            <label for="category-1">
+                            <input type="checkbox" id="laptop">
+                            <label for="laptop">
                                 <span></span>
-                                Laptops
+                                Laptop
                             </label>
                         </div>
 
                         <div class="input-checkbox">
-                            <input type="checkbox" id="category-2">
-                            <label for="category-2">
+                            <input type="checkbox" id="smartphone">
+                            <label for="smartphone">
                                 <span></span>
-                                Smartphones
+                                Smartphone
                             </label>
                         </div>
 
                         <div class="input-checkbox">
-                            <input type="checkbox" id="category-3">
-                            <label for="category-3">
+                            <input type="checkbox" id="camera">
+                            <label for="camera">
                                 <span></span>
-                                Cameras
+                                Camera
                             </label>
                         </div>
 
@@ -168,7 +172,7 @@
                 <%--    Store--%>
                 <section>
                     <!-- store products -->
-                    <div class="row">
+                    <div id="product-container" class="row">
                         <!-- product -->
                         <c:choose>
                             <c:when test="${not empty requestScope.PRODUCTS}">
@@ -181,7 +185,7 @@
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">${product.category}</p>
-                                                <h3 class="product-name"><a href="#">${product.name}</a></h3>
+                                                <h3 class="product-name">${product.name}</h3>
                                                 <h4 class="product-price">$${product.price}</h4>
                                                 <div class="product-btns">
                                                     <button class="quick-view"><a href="/product?name=${product.name}" class="fa fa-eye"></a><span class="tooltipp">quick view</span></button>
@@ -237,7 +241,7 @@
 
 
 
-
+<button class="btn btn-danger back-to-top" id="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
 
 
@@ -249,6 +253,7 @@
 <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/nouislider.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/home.js"></script>
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>

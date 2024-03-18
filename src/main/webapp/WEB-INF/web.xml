@@ -5,14 +5,14 @@
          version="5.0">
 
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/notFound.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/jsp/notFound.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <location>/jsp/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <location>/jsp/error.jsp</location>-->
+<!--    </error-page>-->
 
     <security-role>
         <role-name>electro</role-name>
