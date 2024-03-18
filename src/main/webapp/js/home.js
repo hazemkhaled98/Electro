@@ -1,13 +1,14 @@
+const products = Array.from(document.querySelectorAll('.product'));
+
 function filterProducts() {
     const selectedCategories = Array.from(document.querySelectorAll('.input-checkbox input[type=checkbox]:checked')).map(checkbox => checkbox.id);
 
     const minPrice = parseInt(document.getElementById('price-min').value) || 0;
     const maxPrice = parseInt(document.getElementById('price-max').value) || Number.MAX_VALUE;
 
-
     const productContainer = document.getElementById('product-container');
 
-    const products = Array.from(document.querySelectorAll('.product'));
+    productContainer.innerHTML = '';
 
     products.forEach(product => {
         const category = product.querySelector('.product-category').innerText.trim().toLowerCase();
@@ -16,11 +17,9 @@ function filterProducts() {
         const categoryFilterPassed = selectedCategories.length === 0 || selectedCategories.includes(category);
         const priceFilterPassed = price >= minPrice && price <= maxPrice;
 
-        product.classList.add('hidden');
 
         if (categoryFilterPassed && priceFilterPassed) {
             productContainer.appendChild(product);
-            product.classList.remove('hidden');
         }
     });
 }
