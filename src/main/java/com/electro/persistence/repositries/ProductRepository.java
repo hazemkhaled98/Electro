@@ -46,4 +46,17 @@ public class ProductRepository extends Repository<Product> {
         query.setParameter("name", name);
         return Optional.ofNullable(query.getSingleResult());
     }
+
+    public List<Product> getByNameAndCategory(String name, String category) {
+        TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p WHERE p.productName Like :name AND p.category = :category", Product.class);
+        query.setParameter("name", name + "%");
+        query.setParameter("category", category);
+        return query.getResultList();
+    }
+
+    public List<Product> getAllProductsByName(String name) {
+        TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p WHERE p.productName LIKE :name", Product.class);
+        query.setParameter("name", name + "%");
+        return query.getResultList();
+    }
 }

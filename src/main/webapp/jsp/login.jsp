@@ -77,7 +77,7 @@
 						<div class="sc-container">
 							<label for="email">E-mail:</label><br>
 							<input type="email" id="email" placeholder="Email Address" name="email" required
-								   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+								   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
 							<label for="password">Password:</label>
 							<input type="password" id="password" placeholder="min length is 8 and only alphanumeric characters" name="password" required pattern="[a-zA-Z0-9]{8,}" minlength="8">
 							<input type="submit" value="Login" />

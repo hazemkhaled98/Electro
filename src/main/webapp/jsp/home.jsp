@@ -170,35 +170,44 @@
                     <!-- store products -->
                     <div class="row">
                         <!-- product -->
-                        <c:forEach var="product" items="${requestScope.PRODUCTS}">
-                            <div class="col-md-4 col-xs-6">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
-                                        <div class="product-label"></div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">${product.category}</p>
-                                        <h3 class="product-name"><a href="#">${product.name}</a></h3>
-                                        <h4 class="product-price">$${product.price}</h4>
-                                        <div class="product-btns">
-                                            <button class="quick-view"><a href="/product?name=${product.name}" class="fa fa-eye"></a><span class="tooltipp">quick view</span></button>
+                        <c:choose>
+                            <c:when test="${not empty requestScope.PRODUCTS}">
+                                <c:forEach var="product" items="${requestScope.PRODUCTS}">
+                                    <div class="col-md-4 col-xs-6">
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
+                                                <div class="product-label"></div>
+                                            </div>
+                                            <div class="product-body">
+                                                <p class="product-category">${product.category}</p>
+                                                <h3 class="product-name"><a href="#">${product.name}</a></h3>
+                                                <h4 class="product-price">$${product.price}</h4>
+                                                <div class="product-btns">
+                                                    <button class="quick-view"><a href="/product?name=${product.name}" class="fa fa-eye"></a><span class="tooltipp">quick view</span></button>
+                                                </div>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <c:choose>
+                                                    <c:when test="${product.quantity == 0}">
+                                                        <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <c:choose>
-                                            <c:when test="${product.quantity == 0}">
-                                                <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
+                                    <div class="clearfix visible-sm visible-xs"></div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div style="text-align: center">
+                                    <h1 style="color: #ac1027;">No Products Matched</h1>
                                 </div>
-                            </div>
-                            <div class="clearfix visible-sm visible-xs"></div>
-                        </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                         <!-- /product -->
 
                     </div>

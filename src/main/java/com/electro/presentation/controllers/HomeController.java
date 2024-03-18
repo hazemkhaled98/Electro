@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -39,6 +40,29 @@ public class HomeController extends HttpServlet {
                 req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
             }
         }
+        sendProducts(products, req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        String category = req.getParameter("category");
+
+        List<Product> products = new ArrayList<>();
+        switch (category) {
+            case "all" -> products = ProductService.getAllProductsByName(name);
+            case "laptop" -> products = ProductService.getProductsByNameAndCategory(name, "laptop");
+            case "smartphone" -> products = ProductService.getProductsByNameAndCategory(name, "smartphone");
+            case "camera" -> products = ProductService.getProductsByNameAndCategory(name , "camera");
+            default -> {
+                req.setAttribute(RequestAttribute.ERROR.toString(), "Invalid category. Go back to the homepage");
+                req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
+            }
+        }
+        sendProducts(products, req, resp);
+    }
+
+    private void sendProducts(List<Product> products, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<DisplayedProductDTO> displayedProducts = mapProductToDto(products);
         req.setAttribute(RequestAttribute.PRODUCTS.toString(), displayedProducts);
         req.getRequestDispatcher("/jsp/home.jsp").forward(req, resp);
