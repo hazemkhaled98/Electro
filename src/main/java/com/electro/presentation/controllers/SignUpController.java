@@ -34,6 +34,7 @@ public class SignUpController extends HttpServlet {
                 .streetNo(req.getParameter("street_no"))
                 .streetName(req.getParameter("street_name"))
                 .password(req.getParameter("password"))
+                .creditLimit(req.getParameter("creditLimit"))
                 .build();
 
         Optional<Customer> customer = CustomerService.signup(signUpDTO);

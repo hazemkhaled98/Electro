@@ -105,6 +105,8 @@
 				<input type="text" placeholder="Street No." name="street_no"  id="street_no" required /><br>
 				<label for="street_name">Street Name:</label><br>
 				<input type="text" placeholder="Street Name" name="street_name" id="street_name" required /><br>
+				<label for="creditLimit">Credit Limit:</label><br>
+				<input type="text" placeholder="Credit limit" name="creditLimit" id="creditLimit" required /><br>
 				<input type="submit" value="SignUp" />
 
 				<script>

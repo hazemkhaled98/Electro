@@ -156,4 +156,9 @@ public class Customer {
         this.orders = orders;
     }
 
+    public void createCart(){
+        this.cart = new Cart();
+        this.cart.setCustomer(this);
+    }
+
 }

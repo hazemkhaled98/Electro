@@ -21,4 +21,5 @@ public class SignUpDTO implements Serializable {
     private String city;
     private String streetNo;
     private String streetName;
+    private String creditLimit;
 }
