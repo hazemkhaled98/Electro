@@ -1347,7 +1347,9 @@ textarea.input {
 /*-- Store Pagination --*/
 
 .store-pagination {
-  margin: auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .store-pagination li {
@@ -1381,6 +1383,7 @@ textarea.input {
 
 .store-pagination li a {
   display: block;
+  cursor: pointer;
 }
 
 .store-qty {

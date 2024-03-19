@@ -221,9 +221,10 @@
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
                     <ul class="store-pagination">
-                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <li id="previous-btn"><a><i class="fa fa-angle-left"></i></a></li>
+                        <li id="next-btn"><a><i class="fa fa-angle-right"></i></a></li>
                     </ul>
+                    <span hidden id="pageNumber">1</span>
                 </div>
                 <!-- /store bottom filter -->
             </div>

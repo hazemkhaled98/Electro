@@ -1,4 +1,13 @@
+const productContainer = document.getElementById('product-container');
 const products = Array.from(document.querySelectorAll('.product'));
+let validProducts = [];
+
+const productsPerPage = 6;
+const pageNumber = document.getElementById('pageNumber');
+
+const previous = document.getElementById("previous-btn");
+const next = document.getElementById("next-btn");
+
 
 function filterProducts() {
     const selectedCategories = Array.from(document.querySelectorAll('.input-checkbox input[type=checkbox]:checked')).map(checkbox => checkbox.id);
@@ -6,9 +15,7 @@ function filterProducts() {
     const minPrice = parseInt(document.getElementById('price-min').value) || 0;
     const maxPrice = parseInt(document.getElementById('price-max').value) || Number.MAX_VALUE;
 
-    const productContainer = document.getElementById('product-container');
-
-    productContainer.innerHTML = '';
+    validProducts = [];
 
     products.forEach(product => {
         const category = product.querySelector('.product-category').innerText.trim().toLowerCase();
@@ -19,9 +26,44 @@ function filterProducts() {
 
 
         if (categoryFilterPassed && priceFilterPassed) {
-            productContainer.appendChild(product);
+            validProducts.push(product);
         }
     });
+
+    pageNumber.innerHTML = "1";
+
+    loadProductsPage(1);
+
+
+}
+
+function loadProductsPage(page) {
+    productContainer.innerHTML = '';
+
+
+    let start = (page - 1) * productsPerPage;
+    let end = Math.min(start + productsPerPage, validProducts.length);
+    for(let i = start; i < end; i++) {
+        productContainer.appendChild(validProducts[i]);
+    }
+
+    pageNumber.innerHTML = page;
+
+    if (page === 1) {
+        previous.style.display = 'none';
+    }
+    else {
+        previous.style.display = 'block';
+    }
+
+    const totalPages= Math.ceil(validProducts.length / productsPerPage);
+
+    if (page === totalPages) {
+        next.style.display = 'none';
+    }
+    else {
+        next.style.display = 'block';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -29,6 +71,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('input[type=checkbox], input[type=number]').forEach(input => {
         input.addEventListener('change', filterProducts);
+    });
+
+    next.addEventListener('click', function() {
+        let currentPage = parseInt(pageNumber.innerHTML);
+        loadProductsPage(currentPage + 1);
+    });
+
+    previous.addEventListener('click', function() {
+        let currentPage = parseInt(pageNumber.innerHTML);
+        loadProductsPage(currentPage - 1);
     });
 });
 
