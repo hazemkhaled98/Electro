@@ -1,6 +1,6 @@
 const productContainer = document.getElementById('product-container');
 const products = Array.from(document.querySelectorAll('.product'));
-let validProducts = [];
+let filteredProducts = [];
 
 const productsPerPage = 6;
 const pageNumber = document.getElementById('pageNumber');
@@ -15,7 +15,7 @@ function filterProducts() {
     const minPrice = parseInt(document.getElementById('price-min').value) || 0;
     const maxPrice = parseInt(document.getElementById('price-max').value) || Number.MAX_VALUE;
 
-    validProducts = [];
+    filteredProducts = [];
 
     products.forEach(product => {
         const category = product.querySelector('.product-category').innerText.trim().toLowerCase();
@@ -26,11 +26,9 @@ function filterProducts() {
 
 
         if (categoryFilterPassed && priceFilterPassed) {
-            validProducts.push(product);
+            filteredProducts.push(product);
         }
     });
-
-    pageNumber.innerHTML = "1";
 
     loadProductsPage(1);
 
@@ -42,9 +40,9 @@ function loadProductsPage(page) {
 
 
     let start = (page - 1) * productsPerPage;
-    let end = Math.min(start + productsPerPage, validProducts.length);
+    let end = Math.min(start + productsPerPage, filteredProducts.length);
     for(let i = start; i < end; i++) {
-        productContainer.appendChild(validProducts[i]);
+        productContainer.appendChild(filteredProducts[i]);
     }
 
     pageNumber.innerHTML = page;
@@ -56,7 +54,7 @@ function loadProductsPage(page) {
         previous.style.display = 'block';
     }
 
-    const totalPages= Math.ceil(validProducts.length / productsPerPage);
+    const totalPages= Math.ceil(filteredProducts.length / productsPerPage);
 
     if (page === totalPages) {
         next.style.display = 'none';
