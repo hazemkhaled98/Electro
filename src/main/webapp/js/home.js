@@ -64,6 +64,13 @@ function loadProductsPage(page) {
     }
 }
 
+function scrollToTop(pos) {
+    window.scrollTo({
+        top: pos,
+        behavior: 'smooth'
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     filterProducts();
 
@@ -74,11 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
     next.addEventListener('click', function() {
         let currentPage = parseInt(pageNumber.innerHTML);
         loadProductsPage(currentPage + 1);
+        scrollToTop(450);
     });
 
     previous.addEventListener('click', function() {
         let currentPage = parseInt(pageNumber.innerHTML);
         loadProductsPage(currentPage - 1);
+        scrollToTop(450);
     });
 });
 
@@ -93,8 +102,5 @@ document.addEventListener('scroll', function () {
 });
 
 document.querySelector('.back-to-top').addEventListener('click', function () {
-    window.scrollTo({
-        top: 400,
-        behavior: 'smooth'
-    });
+    scrollToTop(50);
 });
