@@ -27,7 +27,8 @@ public class ProductController extends HttpServlet {
             req.setAttribute(RequestAttribute.PRODUCT.toString(), displayedProductDTO);
             req.getRequestDispatcher("/jsp/product.jsp").forward(req, resp);
         } else {
-            // TODO FORWARD TO ERROR PAGE
+            req.setAttribute(RequestAttribute.ERROR.toString(), "Product not found");
+            req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
         }
     }
 }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -11,12 +11,16 @@
 
     <title>Electro</title>
 
+
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/slick.css"/>
@@ -133,11 +137,135 @@
             <div class="clearfix visible-sm visible-xs"></div>
         </c:forEach>
         <!-- /product -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Categories</h3>
+                    <div class="checkbox-filter">
 
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="laptop">
+                            <label for="laptop">
+                                <span></span>
+                                Laptop
+                            </label>
+                        </div>
+
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="smartphone">
+                            <label for="smartphone">
+                                <span></span>
+                                Smartphone
+                            </label>
+                        </div>
+
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="camera">
+                            <label for="camera">
+                                <span></span>
+                                Camera
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /aside Widget -->
+
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Price</h3>
+                    <div class="price-filter">
+                        <div id="price-slider"></div>
+                        <div class="input-number price-min">
+                            <input id="price-min" type="number">
+                            <span class="qty-up">+</span>
+                            <span class="qty-down">-</span>
+                        </div>
+                        <span>-</span>
+                        <div class="input-number price-max">
+                            <input id="price-max" type="number">
+                            <span class="qty-up">+</span>
+                            <span class="qty-down">-</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /aside Widget -->
+            </div>
+            <!-- /ASIDE -->
+
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <%--    Store--%>
+                <section>
+                    <!-- store products -->
+                    <div id="product-container" class="row">
+                        <!-- product -->
+                        <c:choose>
+                            <c:when test="${not empty requestScope.PRODUCTS}">
+                                <c:forEach var="product" items="${requestScope.PRODUCTS}">
+                                    <div class="col-md-4 col-xs-6">
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
+                                                <div class="product-label"></div>
+                                            </div>
+                                            <div class="product-body">
+                                                <p class="product-category">${product.category}</p>
+                                                <h3 class="product-name">${product.name}</h3>
+                                                <h4 class="product-price">$${product.price}</h4>
+                                                <div class="product-btns">
+                                                    <button class="quick-view"><a href="/product?name=${product.name}" class="fa fa-eye"></a><span class="tooltipp">quick view</span></button>
+                                                </div>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <c:choose>
+                                                    <c:when test="${product.quantity == 0}">
+                                                        <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix visible-sm visible-xs"></div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div style="text-align: center">
+                                    <h1 style="color: #ac1027;">No Products Matched</h1>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                        <!-- /product -->
+
+                    </div>
+                    <!-- /store products -->
+                </section>
+                <%--    /Store--%>
+                <!-- store bottom filter -->
+                <div class="store-filter clearfix">
+                    <ul class="store-pagination">
+                        <li id="previous-btn"><a><i class="fa fa-angle-left"></i></a></li>
+                        <li id="next-btn"><a><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                    <span hidden id="pageNumber">1</span>
+                </div>
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
     </div>
-    <!-- /store products -->
-</section>
-
+    <!-- /container -->
+</div>
 <!-- /SECTION -->
 
 
@@ -146,7 +274,7 @@
 
 
 
-
+<button class="btn btn-danger back-to-top" id="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
 
 
@@ -158,6 +286,7 @@
 <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/nouislider.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/home.js"></script>
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
 

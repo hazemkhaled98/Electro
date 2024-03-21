@@ -11,9 +11,12 @@
 <!--    </error-page>-->
 
 <!--    <error-page>-->
-<!--        <location>/jsp/errorPage.jsp</location>-->
+<!--        <location>/jsp/error.jsp</location>-->
 <!--    </error-page>-->
 
+    <security-role>
+        <role-name>electro</role-name>
+    </security-role>
 
 
     <security-constraint>
@@ -30,9 +33,24 @@
         <realm-name>Electro Area</realm-name>
     </login-config>
 
-    <security-role>
-        <role-name>electro</role-name>
-    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Restricted Methods</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected JSP Files</web-resource-name>
+            <url-pattern>/jsp/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
 
 
 </web-app>

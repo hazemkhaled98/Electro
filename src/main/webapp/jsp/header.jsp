@@ -58,14 +58,14 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Laptops</option>
-										<option value="2">Smartphones</option>
-										<option value="3">Cameras</option>
+								<form method="post" action="/home">
+									<select class="input-select" name="category">
+										<option value="all">All Categories</option>
+										<option value="laptop">Laptops</option>
+										<option value="smartphone">Smartphones</option>
+										<option value="camera">Cameras</option>
 									</select>
-									<input class="input" placeholder="Search here">
+									<input class="input" placeholder="Search here" name="name">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -158,6 +158,13 @@
 						<li><a href="/home">Home</a></li>
 						<li><a href="/login">Account</a></li>
 						<li><a href="/checkout">Checkout</a></li>
+						<%
+							if (session != null && session.getAttribute("LOGGED_IN_CUSTOMER") != null) {
+						%>
+						<li><a href="/logout">Logout</a></li>
+						<%
+							}
+						%>
 					</ul>
 					<!-- /NAV -->
 				</div>

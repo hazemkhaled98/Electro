@@ -130,6 +130,20 @@ public class ProductService {
             return productRepository.getByName(name);
         });
     }
+
+    public static List<Product> getProductsByNameAndCategory(String name, String category) {
+        return Database.doInTransaction(em -> {
+            ProductRepository productRepository = new ProductRepository(em);
+            return productRepository.getByNameAndCategory(name, category);
+        });
+    }
+
+    public static List<Product> getAllProductsByName(String name) {
+        return Database.doInTransaction(em -> {
+            ProductRepository productRepository = new ProductRepository(em);
+            return productRepository.getAllProductsByName(name);
+        });
+    }
 }
 
 

@@ -17,7 +17,6 @@
 
     </properties>
 
-<!--   TODO ADD CONNECTION POOL DEPENDENCY-->
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
