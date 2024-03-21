@@ -4,6 +4,7 @@ function checkout(event){
     let successMessage = document.querySelector("#successMessage");
     let errorMessageTxt = document.querySelector("#errorMessageTxt");
     let successMessageTxt = document.querySelector("#successMessageTxt");
+    let submitButton = document.querySelector("#submit-button");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/checkout", true);
     xhr.onreadystatechange = function(){
@@ -14,9 +15,10 @@ function checkout(event){
                 successMessage.style.display = "block";
                 errorMessage.style.display = "none";
                 successMessageTxt.textContent = xhr.responseText;
+                submitButton.disabled = true;
                 setTimeout(() => {
                     window.location.href = "/home";
-                }, 5000);
+                }, 3000);
             }
             else {
                 errorMessage.style.display = "block";

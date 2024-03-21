@@ -66,7 +66,7 @@ public class OrderService {
         return total;
     }
 
-    private synchronized static void updateCreditLimit(EntityManager em, Customer customer, double total) {
+    private static void updateCreditLimit(EntityManager em, Customer customer, double total) {
         double customerCreditLimit = customer.getCreditLimit().doubleValue();
         if(customerCreditLimit < total){
             throw new RuntimeException("Insufficient credit limit");

@@ -101,7 +101,7 @@
 									</div>
 								</div>
 								<input value="${requestScope.TOTAL}" name="total"  hidden/>
-								<input type="submit" value="Place Order" class="primary-btn order-submit"/>
+								<input id="submit-button" type="submit" value="Place Order" class="primary-btn order-submit"/>
 							</form>
 							<div  id="errorMessage" class="alert alert-danger" style="display: none; font-size: 16px; margin: 20px;">
 								<p id="errorMessageTxt" class="center"></p>

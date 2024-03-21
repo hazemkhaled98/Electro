@@ -17,7 +17,6 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @Version
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
 
