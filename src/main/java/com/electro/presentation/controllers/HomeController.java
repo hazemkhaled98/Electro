@@ -47,7 +47,6 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String category = req.getParameter("category");
-
         List<Product> products = new ArrayList<>();
         switch (category) {
             case "all" -> products = ProductService.getAllProductsByName(name);

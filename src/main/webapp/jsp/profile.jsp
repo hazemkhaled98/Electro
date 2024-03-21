@@ -1,5 +1,5 @@
-	<%@ page contentType="text/html;charset=UTF-8" language="java"   %>
-	<%@ page import="com.electro.persistence.entities.Customer" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"   session="false" %>
+<%@ page import="com.electro.persistence.entities.Customer" %>
 	<!DOCTYPE html>
 	<html lang="en">
 

@@ -8,5 +8,7 @@ public enum RequestAttribute {
     PRODUCT ,
     PAGES_COUNT,
     PAGE_NUMBER,
-    PRODUCTS
+    PRODUCTS,
+    CART_ITEMS,
+    TOTAL
 }

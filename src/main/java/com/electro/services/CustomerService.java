@@ -203,4 +203,11 @@ public class CustomerService {
             }
         });
     }
+
+    public static double getCreditLimit(int id) {
+        return Database.doInTransaction(em -> {
+            CustomerRepository customerRepository = new CustomerRepository(em);
+            return customerRepository.getCreditLimit(id).doubleValue();
+        });
+    }
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,4 +48,9 @@ public class CustomerRepository extends Repository<Customer> {
         return (countResult / MAX_RESULTS) + finalPage;
     }
 
+    public BigDecimal getCreditLimit(int id) {
+        TypedQuery<BigDecimal> query = entityManager.createQuery("SELECT c.creditLimit FROM Customer c WHERE c.id = :id", BigDecimal.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
 }

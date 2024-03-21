@@ -19,5 +19,4 @@ public class OrderRepository extends Repository<Order> {
                 .getResultList();
         return orders.stream().map(Optional::ofNullable).collect(Collectors.toList());
     }
-
 }

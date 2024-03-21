@@ -2226,3 +2226,12 @@ textarea.input {
   justify-content: center;
   align-items: center;
 }
+
+.error-div {
+  text-align: center;
+  margin-top: 100px;
+  height: 15vh;
+}
+.error-div h1 {
+  color: #ac1027;
+}

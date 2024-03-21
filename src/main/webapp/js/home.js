@@ -72,6 +72,8 @@ function scrollToTop(pos) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    hideMessage("message");
+
     filterProducts();
 
     document.querySelectorAll('input[type=checkbox], input[type=number]').forEach(input => {
@@ -104,3 +106,9 @@ document.addEventListener('scroll', function () {
 document.querySelector('.back-to-top').addEventListener('click', function () {
     scrollToTop(50);
 });
+
+function hideMessage(message) {
+    setTimeout(function () {
+        document.getElementById(message).style.display = 'none';
+    }, 3000);
+}
