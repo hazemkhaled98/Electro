@@ -76,14 +76,14 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="loadCartData()">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty" id="qty"></div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
-											<div class="product-widget">
+										<%--	<div class="product-widget">
 												<div class="product-img">
 													<img src="../img/product01.png" alt="">
 												</div>
@@ -103,11 +103,11 @@
 													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+											</div>--%>
 										</div>
 										<div class="cart-summary">
-											<small><span>3</span> Item(s) in the cart</small>
-											<h5>Total: $2940.00</h5>
+											<%--<small><span>3</span> Item(s) in the cart</small>
+											<h5>Total: $2940.00</h5>--%>
 										</div>
 										<div class="cart-btns">
 <%--											<a href="#">View Cart</a>--%>
@@ -161,6 +161,7 @@
 			</div>
 			<!-- /container -->
 		</nav>
+		<script src="${pageContext.request.contextPath}/js/CartJS.js"></script>
 
 	</body>
 </html>
