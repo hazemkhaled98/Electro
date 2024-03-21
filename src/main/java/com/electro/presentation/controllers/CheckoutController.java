@@ -66,11 +66,12 @@ public class CheckoutController  extends HttpServlet {
             OrderService.completeOrder(customer);
             resp.setStatus(200);
             writer.print("Order placed successfully");
-            System.err.println("Order is Done!!!!");
-        } catch (Exception e){
+        } catch (RuntimeException e){
             resp.setStatus(409);
             writer.print(e.getMessage());
-            System.err.println("Order is Canceled!!!!");
+        } catch (Exception e){
+            resp.setStatus(409);
+            writer.print("An error has occurred while completing your order. Please try again or contact the admin");
         }
     }
 }
