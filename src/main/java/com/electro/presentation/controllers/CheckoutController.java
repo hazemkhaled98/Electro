@@ -60,12 +60,10 @@ public class CheckoutController  extends HttpServlet {
             req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
             return;
         }
-        System.out.println(req.getParameter("total"));
-        double total = Double.parseDouble(req.getParameter("total"));
         Customer customer = (Customer) session.getAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString());
         PrintWriter writer = resp.getWriter();
         try{
-            OrderService.completeOrder(customer, total);
+            OrderService.completeOrder(customer);
             resp.setStatus(200);
             writer.print("Order placed successfully");
             System.err.println("Order is Done!!!!");

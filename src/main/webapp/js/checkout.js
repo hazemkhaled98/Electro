@@ -29,11 +29,10 @@ function checkout(event){
         }
     };
     xhr.onerror = function(){
-        errorMessage.textContent = "An error occurred while processing your request.";
+        errorMessage.textContent = "An error occurred while processing your order";
         errorMessage.style.display = "block";
     };
-    let total = document.querySelector("#total").textContent;
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhr.send("total=" + encodeURIComponent(total));
+    xhr.send();
 }
 
