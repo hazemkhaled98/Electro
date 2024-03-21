@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -123,7 +123,8 @@
                                 <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
                             </c:when>
                             <c:otherwise>
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+<%--                                <input type="hidden" id="productName" name="productId" value="${product.name}">--%>
+                                <button class="add-to-cart-btn" onclick="addToCart('${product.name}')"><i class="fa fa-shopping-cart"></i> add to cart</button>
                             </c:otherwise>
                         </c:choose>
                     </div>
@@ -158,6 +159,7 @@
 <script src="${pageContext.request.contextPath}/js/nouislider.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
 
 </body>
 </html>

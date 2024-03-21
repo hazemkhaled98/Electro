@@ -23,7 +23,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        if(session == null){
+        if(session == null || session.getAttribute("LOGGED_IN_CUSTOMER") == null){
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
         } else {
             resp.sendRedirect("/update");
@@ -39,17 +39,7 @@ public class LoginController extends HttpServlet {
                 .build();
         Optional<Customer> customer = CustomerService.login(loginDTO);
         if(customer.isPresent()){
-//            CustomerDTO customerDTO = new CustomerDTO();
-//            customerDTO.setCustomerName(customer.get().getCustomerName());
-//            customerDTO.setId(customer.get().getId());
-//            customerDTO.setBirthday(customer.get().getBirthday());
-//            customerDTO.setCity(customer.get().getCity());
-//            customerDTO.setCountry(customer.get().getCountry());
-//            customerDTO.setCreditLimit(customer.get().getCreditLimit());
-//            customerDTO.setEmail(customer.get().getEmail());
-//            customerDTO.setJob(customer.get().getJob());
-//            customerDTO.setStreetNo(customer.get().getStreetNo());
-//            customerDTO.setStreetName(customer.get().getStreetName());
+
             req.getSession(true).setAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString(),customer.get());
             resp.sendRedirect("/home");
         }
