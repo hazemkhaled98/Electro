@@ -22,4 +22,6 @@ public class CartItemProductDTO {
     private String mimeType;
     private BigDecimal productPrice;
     private String category;
+
+
 }

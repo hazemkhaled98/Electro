@@ -36,9 +36,10 @@ function handleResponse() {
     if (req.readyState === 4 && req.status === 200) {
         var jsonResponse = JSON.parse(req.responseText);
         if (jsonResponse.message === "success") {
-            var cartQtyElement = document.getElementById("cartQty");
+            updateCartQuantity(jsonResponse.cartItemsCount);
+            /*var cartQtyElement = document.getElementById("cartQty");
             cartQtyElement.innerText = jsonResponse.cartItemsCount;
-
+*/
             var successMessage = document.getElementById('addToCartSuccess');
             successMessage.style.display = 'block';
             hideMessage('addToCartSuccess');

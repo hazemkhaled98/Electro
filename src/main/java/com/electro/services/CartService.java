@@ -1,6 +1,7 @@
 package com.electro.services;
 
 import com.electro.persistence.Database;
+import com.electro.persistence.entities.Cart;
 import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Customer;
 import com.electro.persistence.entities.Product;
@@ -11,6 +12,8 @@ import com.electro.presentation.dto.CartItemDTO;
 import com.electro.presentation.dto.CartItemProductDTO;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.util.ImagesPathUtil;
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
 
@@ -34,7 +37,7 @@ public class CartService {
             return Database.doInTransaction(em -> {
                 CartItemRepository cartItemRepository = new CartItemRepository(em);
                 ProductRepository productRepository = new ProductRepository(em);
-
+                int id = 0;
                 Optional<Product> product= productRepository.getByName(productName);
 
                 if (product.isPresent()) {
@@ -46,11 +49,11 @@ public class CartService {
                     }
 
                     if(customer != null) {
-                        addCartItemToDatabase(quantity, cartItemRepository, customer, product);
+                        id = addCartItemToDatabase(quantity, cartItemRepository, customer, product);
                     }
 
                     try {
-                        addCartItemToSession(quantity, product, finalCartItems);
+                        addCartItemToSession(quantity, product, finalCartItems , id);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -128,8 +131,8 @@ public class CartService {
 
 
 
-    private static void addCartItemToDatabase(int quantity, CartItemRepository cartItemRepository, Customer customer, Optional<Product> product) {
-
+    private static int addCartItemToDatabase(int quantity, CartItemRepository cartItemRepository, Customer customer, Optional<Product> product) {
+        int id = 0;
         Optional<CartItem> existingCartItem = cartItemRepository.getExistingCartItemForCustomer(product.get(),customer);
 
         if(existingCartItem.isPresent()){
@@ -143,12 +146,13 @@ public class CartService {
             cartItemEntity.setQuantity(quantity);
             cartItemEntity.setAmount(BigDecimal.valueOf(20.0));
             cartItemRepository.create(cartItemEntity);
-
+            id = cartItemEntity.getId();
             customer.getCart().getCartItems().add(cartItemEntity);
         }
+        return id;
     }
 
-    private static void addCartItemToSession(int quantity, Optional<Product> product, List<CartItemDTO> cartItems) throws IOException {
+    private static void addCartItemToSession(int quantity, Optional<Product> product, List<CartItemDTO> cartItems , int id) throws IOException {
 //        System.out.println(quantity+" :in session function");//TODO
         for(CartItemDTO cI :cartItems){
             if(cI.getItemProductDTO().getProductName().equals(product.get().getProductName())){
@@ -159,7 +163,7 @@ public class CartService {
         }
         CartItemProductDTO itemProductDTO = mapProductToCartItemProductDTO(product.get());
         CartItemDTO cartItem = CartItemDTO.builder()
-
+                .CartItemId(id)
                 .itemProductDTO(itemProductDTO)
                 .quantity(quantity)
                 .build();
@@ -195,4 +199,64 @@ public class CartService {
 
         return  product;
     }
+    //------------------------------------------------------------------------
+
+    public List<String> getCartItems(Customer customer) throws IOException {
+        Cart cart = customer.getCart();
+        Set<CartItem> cartItems = cart.getCartItems();
+        List<String> cartItemsJson = new ArrayList<>();
+        int i = 0;
+        for (CartItem cartItem : cartItems) {
+            cartItemsJson.add(productToJson(cartItem.getProduct(), cartItem.getQuantity(),i, cartItem.getId()));
+            i++;
+        }
+        return cartItemsJson;
+    }
+    //new code after moataz
+    public List<CartItemDTO> newgetCartItems(Customer customer) {
+        Cart cart = customer.getCart();
+        Set<CartItem> cartItems = cart.getCartItems();
+        List<CartItemDTO> cartItemsDTO = new ArrayList<>();
+        for (CartItem cartItem : cartItems) {
+            CartItemDTO cartItemDTO = CartItemDTO.builder().build();
+            cartItemDTO.setCartItemId(cartItem.getId());
+            cartItemDTO.setQuantity(cartItem.getQuantity());
+            CartItemProductDTO itemProductDTO = newMapProductToCartItemProductDTO(cartItem.getProduct());
+            cartItemDTO.setItemProductDTO(itemProductDTO);
+            cartItemsDTO.add(cartItemDTO);
+        }
+        return cartItemsDTO;
+    }
+
+    private String productToJson(Product product , int quantity , int order,int id) throws IOException {
+        JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder();
+        jsonObjectBuilder.add("name", product.getProductName())
+                .add("id", id)
+                .add("price", product.getProductPrice())
+                .add("quantity", quantity)
+                .add("mimeType" , ImagesPathUtil.getMimeType(product.getProductPic()))
+                .add("image", ImagesPathUtil.encodeFileToBase64(product.getProductPic()))
+                .add("order", order);
+        return jsonObjectBuilder.build().toString();
+    }
+    public void removeItemFromCart(int id){
+        Database.doInTransaction(em -> {
+            CartItemRepository cartItemRepository = new CartItemRepository(em);
+            cartItemRepository.deleteById(id);
+            return null;
+        });
+    }
+    // new  code after moataz
+    public CartItemProductDTO newMapProductToCartItemProductDTO(Product product) {
+        CartItemProductDTO itemProductDTO = CartItemProductDTO.builder().build();
+        itemProductDTO.setId(product.getId());
+        itemProductDTO.setProductName(product.getProductName());
+        itemProductDTO.setStockQuantity(product.getStockQuantity());
+        itemProductDTO.setProductDescription(product.getProductDescription());
+        itemProductDTO.setProductPic(product.getProductPic());
+        itemProductDTO.setProductPrice(product.getProductPrice());
+        itemProductDTO.setCategory(product.getCategory());
+        return itemProductDTO;
+    }
+
 }

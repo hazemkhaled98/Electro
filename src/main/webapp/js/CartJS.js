@@ -23,19 +23,40 @@ function updatePage() {
                 uniqueItems++;
                 totalPrice += item.price * item.quantity;
                 totalQuantity += item.quantity;
-                cartListDiv.innerHTML += `
+                let productWidget = document.createElement('div');
+                productWidget.classList.add('product-widget');
+                productWidget.innerHTML = `
+                    <div class="product-img">
+                        <img src="data:${item.mimeType};base64,${item.image}" alt="">
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-name"><a>${item.name}</a></h3>
+                        <h4 class="product-price"><span class="qty">${item.quantity}x</span>$${item.price}</h4>
+                        <input type="hidden" value="${item.order}">
+                    </div>
+                    <button class="delete"><i class="fa fa-close"></i></button>
+                `;
+                /* cartListDiv.innerHTML += `
                 <div class="product-widget">
                     <div class="product-img">
                     <img src="data:${item.mimeType};base64,${item.image}" alt="">
                     </div>
                     <div class="product-body">
-                        <h3 class="product-name"><a href="#">${item.name}</a></h3>
+                        <h3 class="product-name"><a>${item.name}</a></h3>
                         <h4 class="product-price"><span class="qty">${item.quantity}x</span>$${item.price}</h4>
+                        <input type="hidden" value="${item.order}">
                     </div>
                     <button class="delete"><i class="fa fa-close"></i></button>
                 </div>
-            `;
+            `;*/
+                let deleteButton = productWidget.querySelector('.delete');
+                deleteButton.addEventListener('click', function() {
+                    removeItem(item.id);
+                });
+                cartListDiv.appendChild(productWidget);
+
             });
+            console.log(uniqueItems)
             cartQty.innerHTML = uniqueItems;
             // Update the cart summary
             cartSummaryDiv.innerHTML = `
@@ -55,6 +76,26 @@ function createXMLHttpRequest() {
     else if (window.XMLHttpRequest)
         req = new XMLHttpRequest();
 }
-
+function removeItem(id) {
+    createXMLHttpRequest();
+    req.open("POST", "/cart", true);
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.onreadystatechange = deleteItem;
+    req.send("id=" + id);
+}
+function deleteItem() {
+    if (req.readyState === 4 && req.status === 200) {
+        loadCartData();
+    }
+}
+function updateCartQuantity(quantity) {
+    console.log("gowa el update cart quantity" + quantity)
+    let cartQty = document.querySelector(".qty");
+    cartQty.innerHTML = quantity;
+    if (quantity > 0)
+    cartQty.style.display = "block";
+    else
+    cartQty.style.display = "none";
+}
 // Call loadCartData when the page loads
 window.onload = loadCartData;

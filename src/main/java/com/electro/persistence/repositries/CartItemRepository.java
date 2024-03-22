@@ -1,21 +1,20 @@
 package com.electro.persistence.repositries;
 
+import com.electro.persistence.entities.Cart;
 import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Customer;
 import com.electro.persistence.entities.Product;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.util.Optional;
 
-public class CartItemRepository extends Repository<CartItem> {
+public class CartItemRepository extends Repository<CartItem>{
     public CartItemRepository(EntityManager entityManager) {
         super(entityManager);
-        setType(CartItem.class);
+        super.setType(CartItem.class);
     }
-
     public Optional<CartItem> getExistingCartItemForCustomer(Product product, Customer customer) {
         if (product == null || customer == null || customer.getCart() == null) {
             return Optional.empty();
@@ -45,6 +44,5 @@ public class CartItemRepository extends Repository<CartItem> {
         Long totalQuantity = (Long) query.getSingleResult();
         return totalQuantity != null ? totalQuantity : 0;
     }
-
 
 }
