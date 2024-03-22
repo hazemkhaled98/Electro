@@ -3,7 +3,7 @@ package com.electro.presentation.controllers;
 
 import com.electro.persistence.entities.Cart;
 import com.electro.persistence.entities.Customer;
-import com.electro.presentation.dto.CartItemDto;
+import com.electro.presentation.dto.OrderCartItemDto;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.CartService;
@@ -31,7 +31,7 @@ public class CheckoutController extends HttpServlet {
             return;
         }
         Customer customer = (Customer) session.getAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString());
-        List<CartItemDto> cartItems = null;
+        List<OrderCartItemDto> cartItems = null;
         if(customer != null){
             cartItems = CartService.getCartItems(customer);
         }
