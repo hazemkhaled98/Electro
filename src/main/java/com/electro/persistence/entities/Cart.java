@@ -17,7 +17,7 @@ public class Cart {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart",fetch = FetchType.EAGER)
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -44,6 +44,12 @@ public class Cart {
         this.cartItems = cartItems;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", cartItems=" + cartItems +
+                '}';
+    }
 }

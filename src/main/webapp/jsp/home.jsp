@@ -101,42 +101,10 @@
 </div>
 <!-- /SECTION -->
 
+
+
+
 <!-- SECTION -->
-<section class="section col-md-12">
-    <!-- store products -->
-    <div class="row">
-        <!-- product -->
-        <c:forEach var="product" items="${requestScope.PRODUCTS}">
-            <div class="col-md-4 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
-                        <div class="product-label"></div>
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">${product.category}</p>
-                        <h3 class="product-name"><a href="#">${product.name}</a></h3>
-                        <h4 class="product-price">$${product.price}</h4>
-                        <div class="product-btns">
-                            <button class="quick-view"><a href="/product?name=${product.name}" class="fa fa-eye"></a><span class="tooltipp">quick view</span></button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <c:choose>
-                            <c:when test="${product.quantity == 0}">
-                                <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </c:when>
-                            <c:otherwise>
-<%--                                <input type="hidden" id="productName" name="productId" value="${product.name}">--%>
-                                <button class="add-to-cart-btn" onclick="addToCart('${product.name}')"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-sm visible-xs"></div>
-        </c:forEach>
-        <!-- /product -->
 <div class="section">
     <!-- container -->
     <div class="container">
@@ -201,16 +169,27 @@
 
             <!-- STORE -->
             <div id="store" class="col-md-9">
+
+                <div id="addToCartError" class="alert alert-danger" style="display: none; font-size: 16px;">
+                    <p class="center"><strong>You Can't Add This Product To The Cart</strong></p>
+                </div>
+
+                <div id="addToCartSuccess" class="alert alert-success" style="display: none; font-size: 16px;">
+                    <p class="center"><strong>The Product Is Added To The Cart Successfully</strong></p>
+                </div>
+
                 <%--    Store--%>
                 <section>
                     <!-- store products -->
                     <div id="product-container" class="row">
+
                         <!-- product -->
                         <c:choose>
                             <c:when test="${not empty requestScope.PRODUCTS}">
                                 <c:forEach var="product" items="${requestScope.PRODUCTS}">
                                     <div class="col-md-4 col-xs-6">
                                         <div class="product">
+
                                             <div class="product-img">
                                                 <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
                                                 <div class="product-label"></div>
@@ -229,7 +208,8 @@
                                                         <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                        <input type="hidden" id="quantityNum" value="1">
+                                                        <button class="add-to-cart-btn" onclick="addToCart('${product.name}')"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>

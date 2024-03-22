@@ -1,5 +1,4 @@
 
-// Function to hide message after 3 seconds
 function hideMessage(messageId) {
     setTimeout(function() {
         document.getElementById(messageId).style.display = 'none';
@@ -45,6 +44,11 @@ function handleResponse() {
 
             // Scroll to the success message
             successMessage.scrollIntoView({ behavior: 'smooth' });
+
+            // Wait for four seconds before reloading the page
+            setTimeout(function() {
+                location.reload();
+            }, 2500); // 4 seconds delay
         } else if (jsonResponse.message === "error") {
             var errorMessage = document.getElementById('addToCartError');
             errorMessage.style.display = 'block';
@@ -55,3 +59,4 @@ function handleResponse() {
         }
     }
 }
+

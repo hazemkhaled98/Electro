@@ -77,7 +77,7 @@
 							int cartSize = 0; // Default value
 							if (session2 != null && session2.getAttribute("CART_ITEMS") != null) {
 								List<CartItemDTO> cartItems = (List<CartItemDTO>) session2.getAttribute("CART_ITEMS");
-								cartSize = cartItems.size(); // Set cartSize to the size of the cart items
+								cartSize = cartItems.size();
 							}
 						%>
 

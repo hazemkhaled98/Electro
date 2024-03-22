@@ -1,15 +1,9 @@
 package com.electro.services;
 
 import com.electro.persistence.Database;
-import com.electro.persistence.entities.Customer;
-import com.electro.persistence.entities.Order;
-import com.electro.persistence.entities.OrderItem;
-import com.electro.persistence.entities.Product;
-import com.electro.persistence.repositries.OrderItemRepository;
-import com.electro.persistence.repositries.OrderRepository;
-import com.electro.persistence.repositries.ProductRepository;
+import com.electro.persistence.entities.*;
+import com.electro.persistence.repositries.*;
 import com.electro.presentation.dto.*;
-import com.electro.persistence.repositries.CustomerRepository;
 import com.electro.presentation.dto.LoginDTO;
 import com.electro.presentation.dto.SignUpDTO;
 import com.electro.presentation.dto.UpdateProfileDTO;
@@ -51,7 +45,9 @@ public class CustomerService {
         return Database.doInTransaction(em -> {
             try {
                 CustomerRepository customerRepositry = new CustomerRepository(em);
+                CartRepository cartRepository = new CartRepository(em);
                 Customer newCustomer = new Customer();
+                Cart newCart= new Cart();
                 newCustomer.setCustomerName(signUpDTO.getName());
                 newCustomer.setEmail(signUpDTO.getEmail().toLowerCase());
                 newCustomer.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
@@ -62,6 +58,10 @@ public class CustomerService {
                 newCustomer.setStreetName(signUpDTO.getStreetName());
                 newCustomer.setBirthday(signUpDTO.getBirthdate());
                 customerRepositry.create(newCustomer);
+
+                newCart.setCustomer(newCustomer);
+                cartRepository.create(newCart);
+                newCustomer.setCart(newCart);
                 return Optional.of(newCustomer);
             } catch (Exception e) {
                 System.err.println(e.getMessage());

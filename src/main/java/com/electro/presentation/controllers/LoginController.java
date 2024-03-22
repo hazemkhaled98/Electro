@@ -5,6 +5,7 @@ import com.electro.presentation.dto.CustomerDTO;
 import com.electro.presentation.dto.LoginDTO;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.presentation.enums.SessionAttribute;
+import com.electro.services.CartService;
 import com.electro.services.CustomerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,8 +40,10 @@ public class LoginController extends HttpServlet {
                 .build();
         Optional<Customer> customer = CustomerService.login(loginDTO);
         if(customer.isPresent()){
+            HttpSession session = req.getSession(true);
+            session.setAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString(), customer.get());
+            CartService.mergeCart(session, customer.get());
 
-            req.getSession(true).setAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString(),customer.get());
             resp.sendRedirect("/home");
         }
         else {

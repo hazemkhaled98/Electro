@@ -1,5 +1,6 @@
 package com.electro.presentation.controllers;
 
+import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Product;
 import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
@@ -23,12 +24,24 @@ public class ProductController extends HttpServlet {
         String name = req.getParameter("name");
         Optional<Product> product = ProductService.getProductByName(name);
         if(product.isPresent()){
+            Integer numberOfTheRemainingCartItems=getTheNumberOfTheRemainingCartItems(product);
+
             DisplayedProductDTO displayedProductDTO = ProductDtoMapper.productToDto(product.get());
+            displayedProductDTO.setQuantity(numberOfTheRemainingCartItems);
+
             req.setAttribute(RequestAttribute.PRODUCT.toString(), displayedProductDTO);
             req.getRequestDispatcher("/jsp/product.jsp").forward(req, resp);
         } else {
             req.setAttribute(RequestAttribute.ERROR.toString(), "Product not found");
             req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
         }
+    }
+
+    private static Integer getTheNumberOfTheRemainingCartItems(Optional<Product> product) {
+        Integer totalQuantityOfProductInCartItems=0;
+        for(CartItem cartItem: product.get().getCartItems()){
+            totalQuantityOfProductInCartItems+=cartItem.getQuantity();
+        }
+        return product.get().getStockQuantity()-totalQuantityOfProductInCartItems;
     }
 }
