@@ -24,10 +24,7 @@ public class ProductController extends HttpServlet {
         String name = req.getParameter("name");
         Optional<Product> product = ProductService.getProductByName(name);
         if(product.isPresent()){
-            Integer numberOfTheRemainingCartItems=getTheNumberOfTheRemainingCartItems(product);
-
             DisplayedProductDTO displayedProductDTO = ProductDtoMapper.productToDto(product.get());
-            displayedProductDTO.setQuantity(numberOfTheRemainingCartItems);
 
             req.setAttribute(RequestAttribute.PRODUCT.toString(), displayedProductDTO);
             req.getRequestDispatcher("/jsp/product.jsp").forward(req, resp);
@@ -37,11 +34,4 @@ public class ProductController extends HttpServlet {
         }
     }
 
-    private static Integer getTheNumberOfTheRemainingCartItems(Optional<Product> product) {
-        Integer totalQuantityOfProductInCartItems=0;
-        for(CartItem cartItem: product.get().getCartItems()){
-            totalQuantityOfProductInCartItems+=cartItem.getQuantity();
-        }
-        return product.get().getStockQuantity()-totalQuantityOfProductInCartItems;
-    }
 }

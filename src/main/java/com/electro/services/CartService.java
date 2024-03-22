@@ -20,7 +20,7 @@ import java.util.*;
 
 public class CartService {
     public static Boolean addToCart(HttpSession session, String productName, int quantity) throws IllegalArgumentException {
-//        System.out.println("first :"+quantity);//TODO
+
         try {
             Customer customer = (Customer) session.getAttribute("LOGGED_IN_CUSTOMER");
             List<CartItemDTO>  cartItems = (List<CartItemDTO>) session.getAttribute(SessionAttribute.CART_ITEMS.name());
@@ -31,6 +31,7 @@ public class CartService {
             }
 
             List<CartItemDTO> finalCartItems = cartItems;
+
             return Database.doInTransaction(em -> {
                 CartItemRepository cartItemRepository = new CartItemRepository(em);
                 ProductRepository productRepository = new ProductRepository(em);
@@ -38,10 +39,10 @@ public class CartService {
                 Optional<Product> product= productRepository.getByName(productName);
 
                 if (product.isPresent()) {
-                    Long totalQuantityOfProductInCartItems=cartItemRepository.getTotalQuantityOfProduct(product.get());
+                    int remainingQuantityOfCartItem = getRemainingQuantityOfCartItem(productName,
+                                                        cartItemRepository, product, customer, finalCartItems);
 
-                    if(product.get().getStockQuantity()-totalQuantityOfProductInCartItems < quantity) {
-//                        System.out.println("minus: "+(product.get().getStockQuantity()-totalQuantityOfProductInCartItems));
+                    if(remainingQuantityOfCartItem < quantity) {
                         return false;
                     }
 
@@ -67,6 +68,26 @@ public class CartService {
 
     }
 
+    private static int getRemainingQuantityOfCartItem(String productName, CartItemRepository cartItemRepository, Optional<Product> product, Customer customer, List<CartItemDTO> finalCartItems) {
+        Optional<CartItem> existingCartItemEntity = cartItemRepository.getExistingCartItemForCustomer(product.get(), customer);
+
+        int quantityOfExistingCartItemEntity=0;
+        if(existingCartItemEntity.isPresent()){
+            quantityOfExistingCartItemEntity = existingCartItemEntity.get().getQuantity();
+        }
+        int quantityOfCartItemInSession=0;
+        if(customer == null) {
+            for (CartItemDTO cartItemDTO : finalCartItems) {
+                if (cartItemDTO.getItemProductDTO().getProductName().equals(productName)) {
+                    quantityOfCartItemInSession = cartItemDTO.getQuantity();
+                    break;
+                }
+            }
+        }
+
+        return product.get().getStockQuantity()-(quantityOfExistingCartItemEntity+quantityOfCartItemInSession);
+    }
+
     public static void mergeCart(HttpSession session, Customer customer){
         try {
             List<CartItemDTO> cartItemsDTO = (List<CartItemDTO>) session.getAttribute(SessionAttribute.CART_ITEMS.name());
@@ -80,8 +101,14 @@ public class CartService {
                     for (CartItemDTO cartItemDTO : cartItemsDTO) {
                         boolean existsInCustomerCart = false;
                         for (CartItem cartItemEntity : customerCartItems) {
-                            if (cartItemDTO.getItemProductDTO().getId().equals(cartItemEntity.getProduct().getId())) {
-                                cartItemEntity.setQuantity(cartItemEntity.getQuantity()+cartItemDTO.getQuantity());
+                            if (cartItemDTO.getItemProductDTO().getProductName().equals(cartItemEntity.getProduct().getProductName())) {
+
+                                if((cartItemEntity.getQuantity() + cartItemDTO.getQuantity()) > cartItemEntity.getProduct().getStockQuantity()) {
+                                    cartItemEntity.setQuantity(cartItemEntity.getProduct().getStockQuantity());
+                                }
+                                else {
+                                    cartItemEntity.setQuantity(cartItemEntity.getQuantity() + cartItemDTO.getQuantity());
+                                }
                                 cartItemRepository.update(cartItemEntity);
                                 existsInCustomerCart = true;
                                 break;
@@ -149,11 +176,10 @@ public class CartService {
     }
 
     private static void addCartItemToSession(int quantity, Optional<Product> product, List<CartItemDTO> cartItems) throws IOException {
-//        System.out.println(quantity+" :in session function");//TODO
+
         for(CartItemDTO cI :cartItems){
             if(cI.getItemProductDTO().getProductName().equals(product.get().getProductName())){
                 cI.setQuantity(cI.getQuantity()+quantity);
-//                System.out.println(cI.getQuantity()+"the quatitiy finial"); //TODO
                 return;
             }
         }
