@@ -13,11 +13,8 @@ import java.util.List;
 
 @Builder
 @Getter
-@Setter
 @ToString
 public class DisplayedProductDTO {
-
-    private DisplayedProductDTO(){}
 
     private String name;
     private String description;
