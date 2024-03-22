@@ -46,7 +46,7 @@ public class Customer {
     @Column(name = "street_name", nullable = false)
     private String streetName;
 
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "customer",fetch = FetchType.EAGER)
     private Cart cart;
 
     @OneToMany(mappedBy = "customer")

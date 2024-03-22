@@ -32,7 +32,7 @@ public class Product {
     @Column(name = "category", nullable = false)
     private String category;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER)
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "product")

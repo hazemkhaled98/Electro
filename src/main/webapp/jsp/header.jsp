@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="com.electro.presentation.dto.CartItemDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -69,6 +71,15 @@
 							</div>
 						</div>
 						<!-- /SEARCH BAR -->
+
+						<%
+							HttpSession session2 = request.getSession(false);
+							int cartSize = 0; // Default value
+							if (session2 != null && session2.getAttribute("CART_ITEMS") != null) {
+								List<CartItemDTO> cartItems = (List<CartItemDTO>) session2.getAttribute("CART_ITEMS");
+								cartSize = cartItems.size();
+							}
+						%>
 
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">

@@ -150,18 +150,19 @@
 	var priceSlider = document.getElementById('price-slider');
 	if (priceSlider) {
 		noUiSlider.create(priceSlider, {
-			start: [1, 999],
+			start: [1, 2000],
 			connect: true,
 			step: 1,
 			range: {
 				'min': 1,
-				'max': 999
+				'max': 2000
 			}
 		});
 
 		priceSlider.noUiSlider.on('update', function( values, handle ) {
 			var value = values[handle];
-			handle ? priceInputMax.value = value : priceInputMin.value = value
+			handle ? priceInputMax.value = value : priceInputMin.value = value;
+			filterProducts();
 		});
 	}
 
