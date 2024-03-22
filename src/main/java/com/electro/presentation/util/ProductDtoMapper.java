@@ -16,6 +16,7 @@ public class ProductDtoMapper {
                 .name(product.getProductName())
                 .category(product.getCategory())
                 .price(product.getProductPrice())
+                .quantity(product.getStockQuantity())
                 .description(product.getProductDescription())
                 .mimeType(ImagesPathUtil.getMimeType(product.getProductPic()))
                 .productPic(ImagesPathUtil.encodeFileToBase64(product.getProductPic()))

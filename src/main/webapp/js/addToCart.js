@@ -36,16 +36,18 @@ function handleResponse() {
     if (req.readyState === 4 && req.status === 200) {
         var jsonResponse = JSON.parse(req.responseText);
         if (jsonResponse.message === "success") {
-            updateCartQuantity(jsonResponse.cartItemsCount);
-            /*var cartQtyElement = document.getElementById("cartQty");
-            cartQtyElement.innerText = jsonResponse.cartItemsCount;
-*/
             var successMessage = document.getElementById('addToCartSuccess');
             successMessage.style.display = 'block';
             hideMessage('addToCartSuccess');
 
             // Scroll to the success message
             successMessage.scrollIntoView({ behavior: 'smooth' });
+
+            updateCartQuantity(jsonResponse.cartItemsCount);
+            /*var cartQtyElement = document.getElementById("cartQty");
+            cartQtyElement.innerText = jsonResponse.cartItemsCount;
+*/
+
         } else if (jsonResponse.message === "error") {
             var errorMessage = document.getElementById('addToCartError');
             errorMessage.style.display = 'block';
