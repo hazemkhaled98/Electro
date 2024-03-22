@@ -7,7 +7,6 @@ import com.electro.presentation.dto.CartItemDto;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.CartService;
-import com.electro.services.CustomerService;
 import com.electro.services.OrderService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +17,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.List;
 
 @WebServlet(name = "CheckoutController", value = "/checkout")
@@ -38,7 +36,7 @@ public class CheckoutController extends HttpServlet {
             cartItems = CartService.getCartItems(customer);
         }
         else {
-            Cart cart = (Cart) session.getAttribute(SessionAttribute.CART.toString());
+            Cart cart = (Cart) session.getAttribute(SessionAttribute.CART_ITEMS.toString());
             if(cart == null){
                 req.setAttribute(RequestAttribute.ERROR.toString(), "There is no cart!. Go back to homepage and start adding items to your cart.");
                 req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
