@@ -18,11 +18,11 @@ public class CartItemDto {
     private int quantity;
     private double price;
 
-    public static List<CartItemDto> from(Set<CartItem> cartItems) {
-        return cartItems.stream().map(CartItemDto::from).toList();
+    public static List<CartItemDto> of(Set<CartItem> cartItems) {
+        return cartItems.stream().map(CartItemDto::of).toList();
     }
 
-    public static CartItemDto from(CartItem cartItem) {
+    public static CartItemDto of(CartItem cartItem) {
         return CartItemDto.builder()
                 .name(cartItem.getProduct().getProductName())
                 .quantity(cartItem.getQuantity())

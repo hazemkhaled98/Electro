@@ -22,7 +22,7 @@ import java.io.Writer;
 import java.util.List;
 
 @WebServlet(name = "CheckoutController", value = "/checkout")
-public class CheckoutController  extends HttpServlet {
+public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

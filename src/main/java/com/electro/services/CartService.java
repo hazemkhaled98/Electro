@@ -5,7 +5,6 @@ import com.electro.persistence.entities.Cart;
 import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Customer;
 import com.electro.persistence.repositries.CartRepository;
-import com.electro.persistence.repositries.CustomerRepository;
 import com.electro.presentation.dto.CartItemDto;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class CartService {
             CartRepository cartRepository = new CartRepository(em);
             Cart cart = cartRepository.update(customer.getCart());
             Set<CartItem> cartItems = cart.getCartItems();
-            return CartItemDto.from(cartItems);
+            return CartItemDto.of(cartItems);
         });
     }
 
@@ -30,7 +29,7 @@ public class CartService {
             CartRepository cartRepository = new CartRepository(em);
             Cart cart = cartRepository.update(c);
             Set<CartItem> cartItems = cart.getCartItems();
-            return CartItemDto.from(cartItems);
+            return CartItemDto.of(cartItems);
         });
     }
 

@@ -4,9 +4,7 @@ package com.electro.presentation.controllers;
 import com.electro.persistence.entities.Product;
 import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
-import com.electro.presentation.util.ProductDtoMapper;
 import com.electro.services.ProductService;
-import com.electro.services.util.ImagesPathUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -62,17 +59,8 @@ public class HomeController extends HttpServlet {
     }
 
     private void sendProducts(List<Product> products, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<DisplayedProductDTO> displayedProducts = mapProductToDto(products);
+        List<DisplayedProductDTO> displayedProducts = DisplayedProductDTO.of(products);
         req.setAttribute(RequestAttribute.PRODUCTS.toString(), displayedProducts);
         req.getRequestDispatcher("/jsp/home.jsp").forward(req, resp);
-    }
-
-    private List<DisplayedProductDTO> mapProductToDto(List<Product> products) throws IOException {
-        List<DisplayedProductDTO> displayedProducts = new ArrayList<>();
-        for (Product product : products) {
-            DisplayedProductDTO displayedProductDTO = ProductDtoMapper.productToDto(product);
-            displayedProducts.add(displayedProductDTO);
-        }
-        return displayedProducts;
     }
 }
