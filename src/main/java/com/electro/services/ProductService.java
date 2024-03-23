@@ -4,10 +4,6 @@ import com.electro.persistence.Database;
 import com.electro.persistence.entities.Product;
 import com.electro.persistence.repositries.ProductRepository;
 import com.electro.presentation.dto.CreatedProductDTO;
-import com.electro.services.enums.FileType;
-import com.electro.services.util.ImagesPathUtil;
-import com.electro.presentation.dto.CreatedProductDTO;
-import com.electro.services.enums.FileType;
 import com.electro.services.util.S3ImageUploader;
 
 import java.io.IOException;

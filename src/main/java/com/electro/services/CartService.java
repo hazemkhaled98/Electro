@@ -13,7 +13,6 @@ import com.electro.presentation.dto.CartItemDTO;
 import com.electro.presentation.dto.CartItemProductDTO;
 import com.electro.presentation.dto.OrderCartItemDto;
 import com.electro.presentation.enums.SessionAttribute;
-import com.electro.services.util.ImagesPathUtil;
 import jakarta.json.Json;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.persistence.EntityManager;
@@ -207,8 +206,6 @@ public class CartService {
                 .id(product.getId())
                 .productDescription(product.getProductDescription())
                 .productPic(product.getProductPic())
-                .Base64Image(ImagesPathUtil.encodeFileToBase64(product.getProductPic()))
-                .mimeType(ImagesPathUtil.getMimeType(product.getProductPic()))
                 .productPrice(product.getProductPrice())
                 .stockQuantity(product.getStockQuantity())
                 .productName(product.getProductName())
@@ -263,8 +260,7 @@ public class CartService {
                 .add("id", id)
                 .add("price", product.getProductPrice())
                 .add("quantity", quantity)
-                .add("mimeType" , ImagesPathUtil.getMimeType(product.getProductPic()))
-                .add("image", ImagesPathUtil.encodeFileToBase64(product.getProductPic()))
+                .add("image", product.getProductPic())
                 .add("order", order);
         return jsonObjectBuilder.build().toString();
     }

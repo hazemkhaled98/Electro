@@ -18,8 +18,6 @@ public class CartItemProductDTO {
     private Integer stockQuantity;
     private String productDescription;
     private String productPic;
-    private String Base64Image; // this is what will be displayed
-    private String mimeType;
     private BigDecimal productPrice;
     private String category;
 

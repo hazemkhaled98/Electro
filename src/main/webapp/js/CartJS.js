@@ -27,7 +27,7 @@ function updatePage() {
                 productWidget.classList.add('product-widget');
                 productWidget.innerHTML = `
                     <div class="product-img">
-                        <img src="data:${item.mimeType};base64,${item.image}" alt="">
+                        <img src="${item.image}" alt="image">
                     </div>
                     <div class="product-body">
                         <h3 class="product-name"><a>${item.name}</a></h3>

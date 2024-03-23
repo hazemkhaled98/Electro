@@ -8,7 +8,6 @@ import com.electro.presentation.dto.CartItemDTO;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.CartService;
 //import com.electro.services.CartServices;
-import com.electro.services.util.ImagesPathUtil;
 import jakarta.json.Json;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.servlet.ServletException;
@@ -45,8 +44,7 @@ public class CartController  extends HttpServlet {
                             .add("id", cartItemDTO.getCartItemId())
                             .add("price", cartItemDTO.getItemProductDTO().getProductPrice())
                             .add("quantity", cartItemDTO.getQuantity())
-                            .add("mimeType" , ImagesPathUtil.getMimeType(cartItemDTO.getItemProductDTO().getProductPic()))
-                            .add("image", ImagesPathUtil.encodeFileToBase64(cartItemDTO.getItemProductDTO().getProductPic()))
+                            .add("image", cartItemDTO.getItemProductDTO().getProductPic())
                             .add("order", cartItemDTO.getCartItemId());
                     cartItemSession.add(jsonObjectBuilder.build().toString());
                 }
@@ -71,8 +69,7 @@ public class CartController  extends HttpServlet {
                             .add("id", cartItemDTO.getCartItemId())
                             .add("price", cartItemDTO.getItemProductDTO().getProductPrice())
                             .add("quantity", cartItemDTO.getQuantity())
-                            .add("mimeType" , ImagesPathUtil.getMimeType(cartItemDTO.getItemProductDTO().getProductPic()))
-                            .add("image", ImagesPathUtil.encodeFileToBase64(cartItemDTO.getItemProductDTO().getProductPic()))
+                            .add("image", cartItemDTO.getItemProductDTO().getProductPic())
                             .add("order", cartItemDTO.getCartItemId());
                     cartItemsJson.add(jsonObjectBuilder.build().toString());
                 }

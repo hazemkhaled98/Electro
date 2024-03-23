@@ -1,7 +1,6 @@
 package com.electro.presentation.dto;
 
 import com.electro.persistence.entities.Product;
-import com.electro.services.util.ImagesPathUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
