@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class CartService {
+
     public static Boolean addToCart(HttpSession session, String productName, int quantity) throws IllegalArgumentException {
 
         try {
@@ -287,10 +288,6 @@ public class CartService {
         return itemProductDTO;
     }
 
-
-
-    private CartService() {
-    }
 
     public static List<OrderCartItemDto> getCartItemsForOrder(Customer customer){
         return Database.doInTransaction(em -> {
