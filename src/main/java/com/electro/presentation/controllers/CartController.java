@@ -45,7 +45,8 @@ public class CartController  extends HttpServlet {
                             .add("price", cartItemDTO.getItemProductDTO().getProductPrice())
                             .add("quantity", cartItemDTO.getQuantity())
                             .add("image", cartItemDTO.getItemProductDTO().getProductPic())
-                            .add("order", cartItemDTO.getCartItemId());
+                            .add("order", cartItemDTO.getCartItemId())
+                            .add("amount",cartItemDTO.getAmount());
                     cartItemSession.add(jsonObjectBuilder.build().toString());
                 }
                 out.print(cartItemSession);
@@ -70,7 +71,8 @@ public class CartController  extends HttpServlet {
                             .add("price", cartItemDTO.getItemProductDTO().getProductPrice())
                             .add("quantity", cartItemDTO.getQuantity())
                             .add("image", cartItemDTO.getItemProductDTO().getProductPic())
-                            .add("order", cartItemDTO.getCartItemId());
+                            .add("order", cartItemDTO.getCartItemId())
+                            .add("amount",cartItemDTO.getAmount());
                     cartItemsJson.add(jsonObjectBuilder.build().toString());
                 }
                 req.getSession(true).setAttribute(SessionAttribute.CART_ITEMS.toString(),cartItemsDTO);

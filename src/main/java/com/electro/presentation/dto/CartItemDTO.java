@@ -19,5 +19,7 @@ public class CartItemDTO {
     private CartItemProductDTO itemProductDTO;
     private Integer quantity;
 
+    private BigDecimal amount;
+
 
 }

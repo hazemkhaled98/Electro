@@ -108,12 +108,18 @@ public class CartService {
                         for (CartItem cartItemEntity : customerCartItems) {
                             if (cartItemDTO.getItemProductDTO().getProductName().equals(cartItemEntity.getProduct().getProductName())) {
 
+                                int cartItemEntityQuantity;
                                 if((cartItemEntity.getQuantity() + cartItemDTO.getQuantity()) > cartItemEntity.getProduct().getStockQuantity()) {
-                                    cartItemEntity.setQuantity(cartItemEntity.getProduct().getStockQuantity());
+                                    cartItemEntityQuantity=cartItemEntity.getProduct().getStockQuantity();
+                                    cartItemEntity.setQuantity(cartItemEntityQuantity);
                                 }
                                 else {
-                                    cartItemEntity.setQuantity(cartItemEntity.getQuantity() + cartItemDTO.getQuantity());
+                                    cartItemEntityQuantity= cartItemEntity.getQuantity() + cartItemDTO.getQuantity();
+                                    cartItemEntity.setQuantity(cartItemEntityQuantity);
                                 }
+
+                                cartItemEntity.setAmount(cartItemEntity.getProduct().getProductPrice().multiply(BigDecimal.valueOf(cartItemEntityQuantity)));
+
                                 cartItemRepository.update(cartItemEntity);
                                 existsInCustomerCart = true;
                                 break;
@@ -126,7 +132,7 @@ public class CartService {
                             cartItemEntity.setCart(customer.getCart());
                             cartItemEntity.setProduct(product);
                             cartItemEntity.setQuantity(cartItemDTO.getQuantity());
-                            cartItemEntity.setAmount(BigDecimal.valueOf(20.0));
+                            cartItemEntity.setAmount(cartItemDTO.getAmount());
                             cartItemRepository.create(cartItemEntity);
 
                             customer.getCart().getCartItems().add(cartItemEntity);
@@ -144,6 +150,7 @@ public class CartService {
                         CartItemDTO cartItem = CartItemDTO.builder()
                                 .CartItemId(cartItemEntity.getId())
                                 .itemProductDTO(itemProductDTO)
+                                .amount(cartItemEntity.getAmount())
                                 .quantity(cartItemEntity.getQuantity())
                                 .build();
                         cartItemsDTO.add(cartItem);
@@ -166,6 +173,7 @@ public class CartService {
 
         if(existingCartItem.isPresent()){
             existingCartItem.get().setQuantity(existingCartItem.get().getQuantity()+quantity);
+            existingCartItem.get().setAmount(existingCartItem.get().getAmount().add(existingCartItem.get().getProduct().getProductPrice().multiply(BigDecimal.valueOf(quantity))));
             cartItemRepository.update(existingCartItem.get());
         }
         else {
@@ -173,7 +181,7 @@ public class CartService {
             cartItemEntity.setCart(customer.getCart());
             cartItemEntity.setProduct(product.get());
             cartItemEntity.setQuantity(quantity);
-            cartItemEntity.setAmount(BigDecimal.valueOf(20.0));
+            cartItemEntity.setAmount(product.get().getProductPrice());
             cartItemRepository.create(cartItemEntity);
             id = cartItemEntity.getId();
             customer.getCart().getCartItems().add(cartItemEntity);
@@ -186,6 +194,7 @@ public class CartService {
         for(CartItemDTO cI :cartItems){
             if(cI.getItemProductDTO().getProductName().equals(product.get().getProductName())){
                 cI.setQuantity(cI.getQuantity()+quantity);
+                cI.setAmount(cI.getAmount().add(cI.getItemProductDTO().getProductPrice().multiply(BigDecimal.valueOf(quantity))));
                 return;
             }
         }
@@ -193,6 +202,7 @@ public class CartService {
         CartItemDTO cartItem = CartItemDTO.builder()
                 .CartItemId(id)
                 .itemProductDTO(itemProductDTO)
+                .amount(itemProductDTO.getProductPrice())
                 .quantity(quantity)
                 .build();
         cartItems.add(cartItem);

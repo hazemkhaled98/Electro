@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.util.List;
 
 
-@WebServlet(name = "AdminController", urlPatterns = "/addToCart")
+@WebServlet(name = "AddToCartController", urlPatterns = "/addToCart")
+
 public class AddToCartController extends HttpServlet {
 
     @Override

@@ -1,24 +1,28 @@
-
 // Function to hide message after 3 seconds
 function hideMessage(messageId) {
     setTimeout(function() {
-        document.getElementById(messageId).style.display = 'none';
+        var messageElement = document.getElementById(messageId);
+        if (messageElement) {
+            messageElement.style.display = 'none';
+        }
     }, 3000); // 3 seconds delay
 }
 
-// Check if error message is initially displayed
-if (document.getElementById('addToCartError').style.display === 'block') {
-    // Call the function to hide error message after 3 seconds
-    hideMessage('addToCartError');
-}
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if error message is initially displayed
+    var errorElement = document.getElementById('addToCartError');
+    if (errorElement && errorElement.style.display === 'block') {
+        // Call the function to hide error message after 3 seconds
+        hideMessage('addToCartError');
+    }
 
-// Check if success message is initially displayed
-if (document.getElementById('addToCartSuccess').style.display === 'block') {
-    // Call the function to hide success message after 3 seconds
-    hideMessage('addToCartSuccess');
-}
-
-
+    // Check if success message is initially displayed
+    var successElement = document.getElementById('addToCartSuccess');
+    if (successElement && successElement.style.display === 'block') {
+        // Call the function to hide success message after 3 seconds
+        hideMessage('addToCartSuccess');
+    }
+});
 
 var req = null;
 
@@ -36,25 +40,27 @@ function handleResponse() {
     if (req.readyState === 4 && req.status === 200) {
         var jsonResponse = JSON.parse(req.responseText);
         if (jsonResponse.message === "success") {
+            console.log("success");
             var successMessage = document.getElementById('addToCartSuccess');
-            successMessage.style.display = 'block';
-            hideMessage('addToCartSuccess');
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                hideMessage('addToCartSuccess');
 
-            // Scroll to the success message
-            successMessage.scrollIntoView({ behavior: 'smooth' });
+                // Scroll to the success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
 
-            updateCartQuantity(jsonResponse.cartItemsCount);
-            /*var cartQtyElement = document.getElementById("cartQty");
-            cartQtyElement.innerText = jsonResponse.cartItemsCount;
-*/
-
+                updateCartQuantity(jsonResponse.cartItemsCount);
+            }
         } else if (jsonResponse.message === "error") {
+            console.log("fail");
             var errorMessage = document.getElementById('addToCartError');
-            errorMessage.style.display = 'block';
-            hideMessage('addToCartError');
+            if (errorMessage) {
+                errorMessage.style.display = 'block';
+                hideMessage('addToCartError');
 
-            // Scroll to the error message
-            errorMessage.scrollIntoView({ behavior: 'smooth' });
+                // Scroll to the error message
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     }
 }
