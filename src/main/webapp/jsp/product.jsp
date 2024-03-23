@@ -80,7 +80,7 @@
 				<div class="col-md-7">
 					<div id="product-main-img">
 						<div class="product-preview">
-							<img src="data:${requestScope.PRODUCT.mimeType};base64,${requestScope.PRODUCT.productPic}" alt="productImage">
+							<img src="${requestScope.PRODUCT.productPic}" alt="productImage">
 						</div>
 					</div>
 				</div>
