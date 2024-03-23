@@ -33,7 +33,7 @@ public class CheckoutController extends HttpServlet {
         Customer customer = (Customer) session.getAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString());
         List<OrderCartItemDto> cartItems = null;
         if(customer != null){
-            cartItems = CartService.getCartItems(customer);
+            cartItems = CartService.getCartItemsForOrder(customer);
         }
         else {
             Cart cart = (Cart) session.getAttribute(SessionAttribute.CART_ITEMS.toString());
@@ -42,7 +42,7 @@ public class CheckoutController extends HttpServlet {
                 req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
                 return;
             }
-            cartItems = CartService.getCartItems(cart);
+            cartItems = CartService.getCartItemsForOrder(cart);
         }
         double total = CartService.getTotalPrice(cartItems);
         req.setAttribute(RequestAttribute.CART_ITEMS.toString(), cartItems);

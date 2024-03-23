@@ -6,10 +6,12 @@ import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Customer;
 import com.electro.persistence.entities.Product;
 import com.electro.persistence.repositries.CartItemRepository;
+import com.electro.persistence.repositries.CartRepository;
 import com.electro.persistence.repositries.CustomerRepository;
 import com.electro.persistence.repositries.ProductRepository;
 import com.electro.presentation.dto.CartItemDTO;
 import com.electro.presentation.dto.CartItemProductDTO;
+import com.electro.presentation.dto.OrderCartItemDto;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.util.ImagesPathUtil;
 import jakarta.json.Json;
@@ -285,18 +287,12 @@ public class CartService {
         return itemProductDTO;
     }
 
-import com.electro.persistence.repositries.CartRepository;
-import com.electro.presentation.dto.OrderCartItemDto;
 
-import java.util.List;
-import java.util.Set;
-
-public class CartService {
 
     private CartService() {
     }
 
-    public static List<OrderCartItemDto> getCartItems(Customer customer){
+    public static List<OrderCartItemDto> getCartItemsForOrder(Customer customer){
         return Database.doInTransaction(em -> {
             CartRepository cartRepository = new CartRepository(em);
             Cart cart = cartRepository.update(customer.getCart());
@@ -305,7 +301,7 @@ public class CartService {
         });
     }
 
-    public static List<OrderCartItemDto> getCartItems(Cart c){
+    public static List<OrderCartItemDto> getCartItemsForOrder(Cart c){
         return Database.doInTransaction(em -> {
             CartRepository cartRepository = new CartRepository(em);
             Cart cart = cartRepository.update(c);
