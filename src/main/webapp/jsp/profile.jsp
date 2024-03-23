@@ -114,24 +114,7 @@
 					</div>
 
 				</form>
-<%--				<%--%>
-<%--					HttpSession session = request.getSession(false);--%>
-<%--					Customer loggedInCustomer = (Customer) session.getAttribute("LOGGED_IN_CUSTOMER");--%>
-<%--					if (loggedInCustomer != null) {--%>
-<%--				%>--%>
-<%--				<h2>Logged In Customer Details:</h2>--%>
-<%--				<p>Name: <%= loggedInCustomer.getCustomerName() %></p>--%>
-<%--				<p>Email: <%= loggedInCustomer.getEmail() %></p>--%>
-<%--				<p>Job: <%= loggedInCustomer.getJob() %></p>--%>
-<%--				<p>Country: <%= loggedInCustomer.getCountry() %></p>--%>
-<%--				<!-- Add more details as needed -->--%>
-<%--				<%--%>
-<%--				} else {--%>
-<%--				%>--%>
-<%--				<p>No customer logged in.</p>--%>
-<%--				<%--%>
-<%--					}--%>
-<%--				%>--%>
+
 				<!-- /row -->
 			</div>
 			<!-- /container -->

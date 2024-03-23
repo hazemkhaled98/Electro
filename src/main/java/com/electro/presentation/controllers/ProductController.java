@@ -1,5 +1,6 @@
 package com.electro.presentation.controllers;
 
+import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Product;
 import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
@@ -30,4 +31,5 @@ public class ProductController extends HttpServlet {
             req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
         }
     }
+
 }

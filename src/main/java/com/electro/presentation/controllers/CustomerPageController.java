@@ -24,13 +24,22 @@ public class CustomerPageController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("inside do get of customer page");
         List<Customer> customers = CustomerService.getPageOfCustomers(req.getParameter("pg"));
+        System.out.println("customers size: gowa el doGET " + customers.size());
         List<String> customersJson = new ArrayList<>();
-        for(Customer customer : customers){
-            customersJson.add(customerToJson(customer));
+        try{
+            for(Customer customer : customers){
+                customersJson.add(customerToJson(customer));
+            }
+            PrintWriter out = resp.getWriter();
+            System.out.println("customersJson: " + customersJson.size());
+            out.print(customersJson);
+            out.flush();
         }
-        PrintWriter out = resp.getWriter();
-        out.print(customersJson);
-        out.flush();
+        catch (Exception e) {
+            System.out.println("error in customer page controller");
+            e.printStackTrace();
+        }
+
     }
 
     private String customerToJson( Customer customer ) {

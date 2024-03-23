@@ -46,7 +46,7 @@ public class Customer {
     @Column(name = "street_name", nullable = false)
     private String streetName;
 
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "customer",fetch = FetchType.EAGER)
     private Cart cart;
 
     @OneToMany(mappedBy = "customer")
@@ -154,6 +154,11 @@ public class Customer {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public void createCart(){
+        this.cart = new Cart();
+        this.cart.setCustomer(this);
     }
 
 }

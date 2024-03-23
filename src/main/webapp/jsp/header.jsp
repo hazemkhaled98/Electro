@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="com.electro.presentation.dto.CartItemDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -70,20 +72,29 @@
 						</div>
 						<!-- /SEARCH BAR -->
 
+						<%
+							HttpSession session2 = request.getSession(false);
+							int cartSize = 0; // Default value
+							if (session2 != null && session2.getAttribute("CART_ITEMS") != null) {
+								List<CartItemDTO> cartItems = (List<CartItemDTO>) session2.getAttribute("CART_ITEMS");
+								cartSize = cartItems.size();
+							}
+						%>
+
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="loadCartData()">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty" id="qty"></div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
-											<div class="product-widget">
+										<%--	<div class="product-widget">
 												<div class="product-img">
 													<img src="../img/product01.png" alt="">
 												</div>
@@ -103,11 +114,11 @@
 													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+											</div>--%>
 										</div>
 										<div class="cart-summary">
-											<small><span>3</span> Item(s) in the cart</small>
-											<h5>Total: $2940.00</h5>
+											<%--<small><span>3</span> Item(s) in the cart</small>
+											<h5>Total: $2940.00</h5>--%>
 										</div>
 										<div class="cart-btns">
 <%--											<a href="#">View Cart</a>--%>
@@ -161,6 +172,7 @@
 			</div>
 			<!-- /container -->
 		</nav>
+		<script src="${pageContext.request.contextPath}/js/CartJS.js"></script>
 
 	</body>
 </html>

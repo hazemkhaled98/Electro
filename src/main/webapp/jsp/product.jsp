@@ -62,6 +62,14 @@
 		</div>
 		<!-- /BREADCRUMB -->
 
+	<div id="addToCartError" class="alert alert-danger" style="display: none; font-size: 16px;">
+		<p class="center"><strong>You Can't Add This Product To The Cart</strong></p>
+	</div>
+
+	<div id="addToCartSuccess" class="alert alert-success" style="display: none; font-size: 16px;">
+		<p class="center"><strong>The Product Is Added To The Cart Successfully</strong></p>
+	</div>
+
 		<!-- SECTION -->
 	<div class="section">
 		<!-- container -->
@@ -99,9 +107,9 @@
 							<div class="qty-label">
 								Qty
 								<div class="input-number">
-									<input type="number" value="1">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
+									<input type="number" id="quantityNum" value="1" max="${requestScope.PRODUCT.quantity}" min="1">
+<%--									<span class="qty-up">+</span>--%>
+<%--									<span class="qty-down">-</span>--%>
 								</div>
 							</div>
 							<c:choose>
@@ -109,7 +117,7 @@
 									<button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
 								</c:when>
 								<c:otherwise>
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									<button class="add-to-cart-btn" onclick="addToCart('${requestScope.PRODUCT.name}')"><i class="fa fa-shopping-cart"></i> add to cart</button>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -141,6 +149,7 @@
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
+		<script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
 
 	</body>
 </html>

@@ -168,16 +168,27 @@
 
             <!-- STORE -->
             <div id="store" class="col-md-9">
+
+                <div id="addToCartError" class="alert alert-danger" style="display: none; font-size: 16px;">
+                    <p class="center"><strong>You Can't Add This Product To The Cart</strong></p>
+                </div>
+
+                <div id="addToCartSuccess" class="alert alert-success" style="display: none; font-size: 16px;">
+                    <p class="center"><strong>The Product Is Added To The Cart Successfully</strong></p>
+                </div>
+
                 <%--    Store--%>
                 <section>
                     <!-- store products -->
                     <div id="product-container" class="row">
+
                         <!-- product -->
                         <c:choose>
                             <c:when test="${not empty requestScope.PRODUCTS}">
                                 <c:forEach var="product" items="${requestScope.PRODUCTS}">
                                     <div class="col-md-4 col-xs-6">
                                         <div class="product">
+
                                             <div class="product-img">
                                                 <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
                                                 <div class="product-label"></div>
@@ -196,7 +207,8 @@
                                                         <button class="add-to-cart-btn" disabled><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                        <input type="hidden" id="quantityNum" value="1">
+                                                        <button class="add-to-cart-btn" onclick="addToCart('${product.name}')"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
@@ -255,6 +267,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/home.js"></script>
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
 
 </body>
 </html>
