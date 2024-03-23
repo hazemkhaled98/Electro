@@ -190,7 +190,7 @@
                                         <div class="product">
 
                                             <div class="product-img">
-                                                <img src="data:${product.mimeType};base64,${product.productPic}" alt="productImage">
+                                                <img src="${product.productPic}" alt="productImage">
                                                 <div class="product-label"></div>
                                             </div>
                                             <div class="product-body">

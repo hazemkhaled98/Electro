@@ -4,8 +4,7 @@ import com.electro.persistence.entities.Product;
 import com.electro.presentation.dto.DisplayedProductDTO;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.services.ProductService;
-import com.electro.services.enums.FileType;
-import com.electro.services.util.ImagesPathUtil;
+import com.electro.services.util.S3ImageUploader;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -65,9 +64,7 @@ public class AdminEditProductController extends HttpServlet {
             product.setProductPrice(BigDecimal.valueOf(price));
             product.setCategory(category);
             if(filePart != null && filePart.getSize() > 0){
-                String productPicPath = ImagesPathUtil.storeFileFromPart(filePart,
-                        productId, FileType.PRODUCT_PIC);
-                product.setProductPic(productPicPath);
+                product.setProductPic(S3ImageUploader.uploadImageToS3(filePart));
             }
             Optional<Product> updatedProduct = ProductService.updateProduct(product);
 

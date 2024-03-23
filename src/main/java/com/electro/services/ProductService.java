@@ -8,6 +8,7 @@ import com.electro.services.enums.FileType;
 import com.electro.services.util.ImagesPathUtil;
 import com.electro.presentation.dto.CreatedProductDTO;
 import com.electro.services.enums.FileType;
+import com.electro.services.util.S3ImageUploader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,17 +91,18 @@ public class ProductService {
                 newProduct.setStockQuantity(createdProductDTO.getQuantity());
                 newProduct.setProductPrice(createdProductDTO.getPrice());
                 newProduct.setCategory(createdProductDTO.getCategory());
+                newProduct.setProductPic(S3ImageUploader.uploadImageToS3(createdProductDTO.getFilePart()));
                 productRepository.create(newProduct);
 
-                // store the product picture path to database
-                String productPicPath;
-                try {
-                    productPicPath = ImagesPathUtil.storeFileFromPart(createdProductDTO.getFilePart(),
-                            String.valueOf(newProduct.getId()), FileType.PRODUCT_PIC);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                newProduct.setProductPic(productPicPath);
+//                // store the product picture path to database
+//                String productPicPath;
+//                try {
+//                    productPicPath = ImagesPathUtil.storeFileFromPart(createdProductDTO.getFilePart(),
+//                            String.valueOf(newProduct.getId()), FileType.PRODUCT_PIC);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                newProduct.setProductPic(productPicPath);
 
                 return Optional.of(newProduct);
             } catch (Exception e) {

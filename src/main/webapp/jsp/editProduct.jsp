@@ -30,7 +30,7 @@
                     <input type="hidden" value="${requestScope.productId}" id="idEdit" name="idEdit">
                     <div class="form-group">
                         <div style="text-align: center">
-                            <img id="imageOfProductEdit" src="data:${requestScope.PRODUCT.mimeType};base64,${requestScope.PRODUCT.productPic}" alt="productImage">
+                            <img id="imageOfProductEdit" src="${requestScope.PRODUCT.productPic}" alt="productImage">
                         </div>
                         <div style="text-align: center">
                             <label id="uploadImageButtonEdit" class="btn btn-light">

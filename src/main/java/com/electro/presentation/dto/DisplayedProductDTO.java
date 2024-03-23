@@ -22,7 +22,6 @@ public class DisplayedProductDTO {
     private BigDecimal price;
     private String category;
     private String productPic;
-    private String mimeType;
 
 
     public static List<DisplayedProductDTO> of(List<Product> products) {
@@ -32,19 +31,14 @@ public class DisplayedProductDTO {
     }
 
     public static DisplayedProductDTO of(Product product){
-        try {
-            return DisplayedProductDTO.builder()
-                    .name(product.getProductName())
-                    .description(product.getProductDescription())
-                    .quantity(product.getStockQuantity())
-                    .price(product.getProductPrice())
-                    .category(product.getCategory())
-                    .productPic(product.getProductPic())
-                    .productPic(ImagesPathUtil.encodeFileToBase64(product.getProductPic()))
-                    .mimeType(ImagesPathUtil.getMimeType(product.getProductPic()))
-                    .build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return DisplayedProductDTO.builder()
+                .name(product.getProductName())
+                .description(product.getProductDescription())
+                .quantity(product.getStockQuantity())
+                .price(product.getProductPrice())
+                .category(product.getCategory())
+                .productPic(product.getProductPic())
+                .productPic(product.getProductPic())
+                .build();
     }
 }
