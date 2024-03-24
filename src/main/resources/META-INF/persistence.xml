@@ -12,7 +12,7 @@
             <property name="hibernate.hikari.dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource" />
             <property name="hibernate.hikari.dataSource.url" value="jdbc:mysql://localhost:3306/electro_db" />
             <property name="hibernate.hikari.dataSource.user" value="electro" />
-            <property name="hibernate.hikari.dataSource.password" value="123" />
+            <property name="hibernate.hikari.dataSource.password" value="Electro_123" />
             <property name="hibernate.hikari.maximumPoolSize" value="5" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
