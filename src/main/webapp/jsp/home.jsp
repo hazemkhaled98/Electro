@@ -170,11 +170,11 @@
             <div id="store" class="col-md-9">
 
                 <div id="addToCartError" class="alert alert-danger" style="display: none; font-size: 16px;">
-                    <p class="center"><strong>You Can't Add This Product To The Cart</strong></p>
+                    <p class="center">An Error occurred while adding the item to the cart</p>
                 </div>
 
                 <div id="addToCartSuccess" class="alert alert-success" style="display: none; font-size: 16px;">
-                    <p class="center"><strong>The Product Is Added To The Cart Successfully</strong></p>
+                    <p class="center">The Product Is Added To The Cart Successfully</p>
                 </div>
 
                 <%--    Store--%>
