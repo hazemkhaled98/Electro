@@ -104,11 +104,11 @@
         </nav>
 
                 <!--   Cards Section  -->
-                <section id="Cards" class="flex justify-center f-full">
-                    <div class="container py-16 px-4">
-                        <div class="row f-full">
+                <section id="Cards" class="flex justify-center h-full">
+                    <div class="container">
+                        <div class="row h-full">
                             <div class="col-lg-4 mb-4">
-                                <div class="card f-full">
+                                <div class="card h-full">
                                     <img src="${pageContext.request.contextPath}/img/customer.png" class="card-img-top"
                                          alt="go to customers"/>
                                     <div class="card-body">
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-4">
-                                <div class="card f-full">
+                                <div class="card h-full">
                                     <img src="${pageContext.request.contextPath}/img/product.png" class="card-img-top"
                                          alt="go to products"/>
                                     <div class="card-body">
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-4">
-                                <div class="card f-full">
+                                <div class="card h-full">
                                     <img src="${pageContext.request.contextPath}/img/addproduct.png" class="card-img-top"
                                          alt="add product"/>
                                     <div class="card-body">

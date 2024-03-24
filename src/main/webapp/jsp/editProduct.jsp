@@ -107,13 +107,13 @@
     <div class="container mt-5">
 
 
-        <div class="row">
-            <div class="col">
+        <div class="row h-full">
+            <div class="col h-full">
                 <h2 class="text-lg font-medium" style="text-align: center">Product Information</h2>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col">
+        <div class="row mt-3 h-full">
+            <div class="col h-full">
                 <form id="productEditForm" action="${pageContext.request.contextPath}/admin/products/edit" enctype="multipart/form-data" method="POST">
                     <input type="hidden" value="${requestScope.productId}" id="idEdit" name="idEdit">
                     <div class="form-group">

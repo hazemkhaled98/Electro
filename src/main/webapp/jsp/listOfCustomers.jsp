@@ -128,54 +128,53 @@
     <!-- /container -->
 </nav>
 
-
-<section id="customerTable" class="mt-5 ">
-    <div class="container px-4">
-        <div class="text-center">
-            <h1 class="text-xl font-weight-bold text-gray-900">Customers</h1>
-        </div>
-        <div class="flex flex-col mt-8">
-            <div class="overflow-auto shadow-lg" id="tableParent">
-                <table class="table table-striped">
-                    <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Birthday</th>
-                        <th scope="col">Job</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Credit Limit</th>
-                        <th scope="col">City</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Street No.</th>
-                        <th scope="col">Street Name</th>
-                        <th scope="col">View Customer</th>
-
-                    </tr>
-                    </thead>
-                    <tbody class="bg-white" id="tbody">
-                    <%--<jsp:useBean id="CustomerDTO" scope="request" type="java.util.List"/>
-                    <c:forEach items="${CustomerDTO}" var="customer">
+    <section id="customerTable" class="mt-5 h-full d-flex flex-column justify-content-center align-items-center">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="text-xl font-weight-bold text-gray-900">Customers</h1>
+            </div>
+            <div class="flex flex-col mt-8">
+                <div class="table-responsive" id="tableParent">
+                    <table class="table table-bordered">
+                        <thead class="bg-gray-50">
                         <tr>
-                            <td>${customer.id}</td>
-                            <td>${customer.customerName}</td>
-                            <td>${customer.birthday}</td>
-                            <td>${customer.job}</td>
-                            <td>${customer.email}</td>
-                            <td>${customer.creditLimit}</td>
-                            <td>${customer.city}</td>
-                            <td>${customer.country}</td>
-                            <td>${customer.streetNo}</td>
-                            <td>${customer.streetName}</td>
-                            <td><button class="view-customer" onclick="window.location.href='/customerDetails?customerID=${customer.id}'">View</button></td>                        </tr>
-                    </c:forEach>--%>
-                    </tbody>
-                </table>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Birthday</th>
+                            <th scope="col">Job</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Credit Limit</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Street No.</th>
+                            <th scope="col">Street Name</th>
+                            <th scope="col">View Customer</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white" id="tbody">
+                        <%--<jsp:useBean id="CustomerDTO" scope="request" type="java.util.List"/>
+                        <c:forEach items="${CustomerDTO}" var="customer">
+                            <tr>
+                                <td>${customer.id}</td>
+                                <td>${customer.customerName}</td>
+                                <td>${customer.birthday}</td>
+                                <td>${customer.job}</td>
+                                <td>${customer.email}</td>
+                                <td>${customer.creditLimit}</td>
+                                <td>${customer.city}</td>
+                                <td>${customer.country}</td>
+                                <td>${customer.streetNo}</td>
+                                <td>${customer.streetName}</td>
+                                <td><button class="view-customer" onclick="window.location.href='/customerDetails?customerID=${customer.id}'">View</button></td>                        </tr>
+                        </c:forEach>--%>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
 <section id="pagination">
     <input type="hidden" value="${requestScope.PAGE_NUMBER}" id="pageNumber">

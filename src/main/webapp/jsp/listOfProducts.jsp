@@ -123,12 +123,12 @@
 </nav>
 
 
-<section id="productTable" class="mt-5">
+<section id="productTable" class="mt-5 h-full d-flex flex-column justify-content-center align-items-center">
 
-<%--    <div class="container">--%>
+    <div class="container">
 
-        <div class="row">
-            <div class="col">
+        <div class="row h-full">
+            <div class="col h-full">
                 <h1 class="text-center text-xl font-weight-bold text-gray-900">Products</h1>
             </div>
         </div>
@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-<%--    </div>--%>
+    </div>
 
 </section>
 

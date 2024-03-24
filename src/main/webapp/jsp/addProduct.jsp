@@ -104,7 +104,7 @@
 </nav>
 
 
-<section id="product">
+<section id="product h-full">
 
     <div class="container mt-3">
 
@@ -118,7 +118,7 @@
         </div>
 
 
-        <div class="card">
+        <div class="card h-full">
             <div class="card-body">
                 <h3 class="card-title">Product Information</h3>
                 <form id="productAddForm" action="${pageContext.request.contextPath}/admin/add-product" enctype="multipart/form-data" method="POST">
