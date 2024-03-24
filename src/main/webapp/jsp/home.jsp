@@ -60,7 +60,7 @@
                     </div>
                     <div class="shop-body">
                         <h3>Laptops<br>Collection</h3>
-                        <a href="/home?category=laptop" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+<%--                        <a href="/home?category=laptop" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>--%>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="shop-body">
                         <h3>Smartphones<br>Collection</h3>
-                        <a href="/home?category=smartphone" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+<%--                        <a href="/home?category=smartphone" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>--%>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="shop-body">
                         <h3>Cameras<br>Collection</h3>
-                        <a href="/home?category=camera" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+<%--                        <a href="/home?category=camera" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>--%>
                     </div>
                 </div>
             </div>
