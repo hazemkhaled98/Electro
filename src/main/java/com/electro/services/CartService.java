@@ -6,16 +6,13 @@ import com.electro.persistence.entities.CartItem;
 import com.electro.persistence.entities.Customer;
 import com.electro.persistence.entities.Product;
 import com.electro.persistence.repositries.CartItemRepository;
-import com.electro.persistence.repositries.CartRepository;
 import com.electro.persistence.repositries.CustomerRepository;
 import com.electro.persistence.repositries.ProductRepository;
 import com.electro.presentation.dto.CartItemDTO;
 import com.electro.presentation.dto.CartItemProductDTO;
-import com.electro.presentation.dto.OrderCartItemDto;
 import com.electro.presentation.enums.SessionAttribute;
 import jakarta.json.Json;
 import jakarta.json.JsonObjectBuilder;
-import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
@@ -293,24 +290,6 @@ public class CartService {
         return itemProductDTO;
     }
 
-
-    public static List<OrderCartItemDto> getCartItemsForOrder(Customer customer){
-        return Database.doInTransaction(em -> {
-            CartRepository cartRepository = new CartRepository(em);
-            Cart cart = cartRepository.update(customer.getCart());
-            Set<CartItem> cartItems = cart.getCartItems();
-            return OrderCartItemDto.of(cartItems);
-        });
-    }
-
-    public static List<OrderCartItemDto> getCartItemsForOrder(Cart c){
-        return Database.doInTransaction(em -> {
-            CartRepository cartRepository = new CartRepository(em);
-            Cart cart = cartRepository.update(c);
-            Set<CartItem> cartItems = cart.getCartItems();
-            return OrderCartItemDto.of(cartItems);
-        });
-    }
 
     public static double getTotalPrice(List<CartItemDTO> cartItemsDTO){
         return cartItemsDTO.stream().map(CartItemDTO::getAmount).mapToDouble(BigDecimal::doubleValue).sum();

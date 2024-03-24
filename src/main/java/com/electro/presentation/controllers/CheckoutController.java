@@ -1,10 +1,9 @@
 package com.electro.presentation.controllers;
 
 
-import com.electro.persistence.entities.Cart;
+
 import com.electro.persistence.entities.Customer;
 import com.electro.presentation.dto.CartItemDTO;
-import com.electro.presentation.dto.OrderCartItemDto;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.CartService;
