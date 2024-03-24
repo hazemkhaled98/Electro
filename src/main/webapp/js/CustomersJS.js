@@ -60,7 +60,7 @@ function handleStateChange() {
     <td class="px-2 py-2 text-sm text-gray-500 whitespace-nowrap">${customer.streetNo}</td>
     <td class="px-2 py-2 text-sm text-gray-500 whitespace-nowrap">${customer.streetName}</td>
     <td  class="px-2 py-2 text-sm text-gray-500 whitespace-nowrap">
-    <button class="view-customer" onclick="window.location.href='/customerDetails?customerID=${customer.id}'">
+    <button class="view-customer btn btn-primary px-4 py-2 rounded-pill text-sm font-weight-medium" onclick="window.location.href='/customerDetails?customerID=${customer.id}'">
     View
     </button></td>
     </tr>

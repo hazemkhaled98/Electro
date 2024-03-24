@@ -22,14 +22,14 @@
 .info dd{
     justify-content: flex-start;
 }
-#orderArea{
+/*#orderArea{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     background-color: #f5f5f5;
-}
+}*/
 #order{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -41,14 +41,14 @@
 #order h2 {
     text-align: center;
 }
-#customerArea{
+/*#customerArea{
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     background-color: #f5f5f5;
-}
+}*/
 #cust{
     margin-top: 20px;
     margin-bottom: 20px;
