@@ -90,8 +90,8 @@
 									<div class="order-products">
 										<c:forEach items="${requestScope.CART_ITEMS}" var="item">
 											<div class="order-col">
-												<div>${item.quantity}x ${item.name}</div>
-												<div>$${item.price}</div>
+												<div>${item.quantity}x ${item.itemProductDTO.productName}</div>
+												<div>$${item.amount}</div>
 											</div>
 										</c:forEach>
 									</div>
@@ -100,7 +100,6 @@
 										<div><strong class="order-total">$<span id="total">${requestScope.TOTAL}</span></strong></div>
 									</div>
 								</div>
-								<input value="${requestScope.TOTAL}" name="total"  hidden/>
 								<input id="submit-button" type="submit" value="Place Order" class="primary-btn order-submit"/>
 							</form>
 							<div  id="errorMessage" class="alert alert-danger" style="display: none; font-size: 16px; margin: 20px;">

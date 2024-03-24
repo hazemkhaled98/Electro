@@ -16,6 +16,7 @@ function checkout(event){
                 errorMessage.style.display = "none";
                 successMessageTxt.textContent = xhr.responseText;
                 submitButton.disabled = true;
+                loadCartData();
                 setTimeout(() => {
                     window.location.href = "/home";
                 }, 3000);

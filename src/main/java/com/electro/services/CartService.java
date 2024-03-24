@@ -281,7 +281,6 @@ public class CartService {
             return null;
         });
     }
-    // new  code after moataz
     public CartItemProductDTO newMapProductToCartItemProductDTO(Product product) {
         CartItemProductDTO itemProductDTO = CartItemProductDTO.builder().build();
         itemProductDTO.setId(product.getId());
@@ -313,7 +312,7 @@ public class CartService {
         });
     }
 
-    public static double getTotalPrice(List<OrderCartItemDto> orderCartItemDto){
-        return orderCartItemDto.stream().mapToDouble(OrderCartItemDto::getPrice).sum();
+    public static double getTotalPrice(List<CartItemDTO> cartItemsDTO){
+        return cartItemsDTO.stream().map(CartItemDTO::getAmount).mapToDouble(BigDecimal::doubleValue).sum();
     }
 }

@@ -3,6 +3,7 @@ package com.electro.presentation.controllers;
 
 import com.electro.persistence.entities.Cart;
 import com.electro.persistence.entities.Customer;
+import com.electro.presentation.dto.CartItemDTO;
 import com.electro.presentation.dto.OrderCartItemDto;
 import com.electro.presentation.enums.RequestAttribute;
 import com.electro.presentation.enums.SessionAttribute;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "CheckoutController", value = "/checkout")
@@ -31,19 +33,12 @@ public class CheckoutController extends HttpServlet {
             return;
         }
         Customer customer = (Customer) session.getAttribute(SessionAttribute.LOGGED_IN_CUSTOMER.toString());
-        List<OrderCartItemDto> cartItems = null;
-        if(customer != null){
-            cartItems = CartService.getCartItemsForOrder(customer);
+        if(customer == null){
+            req.setAttribute(RequestAttribute.ERROR.toString(), "Log in first then go to checkout");
+            req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
+            return;
         }
-        else {
-            Cart cart = (Cart) session.getAttribute(SessionAttribute.CART_ITEMS.toString());
-            if(cart == null){
-                req.setAttribute(RequestAttribute.ERROR.toString(), "There is no cart!. Go back to homepage and start adding items to your cart.");
-                req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
-                return;
-            }
-            cartItems = CartService.getCartItemsForOrder(cart);
-        }
+        List<CartItemDTO> cartItems = (List<CartItemDTO>) session.getAttribute(SessionAttribute.CART_ITEMS.toString());
         double total = CartService.getTotalPrice(cartItems);
         req.setAttribute(RequestAttribute.CART_ITEMS.toString(), cartItems);
         req.setAttribute(RequestAttribute.TOTAL.toString(), total);
@@ -63,6 +58,7 @@ public class CheckoutController extends HttpServlet {
         try{
             OrderService.completeOrder(customer);
             resp.setStatus(200);
+            session.setAttribute(SessionAttribute.CART_ITEMS.toString(), new ArrayList<CartItemDTO>());
             writer.print("Order placed successfully");
         } catch (RuntimeException e){
             resp.setStatus(409);
