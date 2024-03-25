@@ -414,6 +414,7 @@ textarea.input {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #1E1F29;
+  color: #FFF;
 }
 
 .header-links li {
@@ -589,8 +590,7 @@ textarea.input {
 }
 
 .cart-dropdown .cart-btns>a {
-  display: inline-block;
-  width: calc(50% - 0px);
+  display: block;
   padding: 12px;
   background-color: #D10024;
   color: #FFF;
@@ -664,7 +664,6 @@ textarea.input {
 	responsive nav
 \*----------------------------*/
 
-@media only screen and (max-width: 991px) {
   .header-ctn .menu-toggle {
     display: inline-block;
   }
@@ -703,10 +702,11 @@ textarea.input {
     margin-left: 0px;
   }
   .main-nav>li>a {
+    font-size: medium;
     padding: 15px;
     color: #FFF;
   }
-}
+
 
 /*=========================================================
 	04 -> CATEGORY SHOP
@@ -759,9 +759,10 @@ textarea.input {
 }
 
 .shop:hover .shop-img>img {
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
+  transform: rotate(5deg);
+  transition: transform 0.5s;
 }
 
 .shop .shop-body {
@@ -774,6 +775,12 @@ textarea.input {
 
 .shop .shop-body h3 {
   color: #FFF;
+  font-size: x-large;
+}
+
+.shop .shop-body a {
+  color: #FFF;
+  font-size: large;
 }
 
 .shop .shop-body .cta-btn {
@@ -1340,7 +1347,9 @@ textarea.input {
 /*-- Store Pagination --*/
 
 .store-pagination {
-  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .store-pagination li {
@@ -1374,6 +1383,7 @@ textarea.input {
 
 .store-pagination li a {
   display: block;
+  cursor: pointer;
 }
 
 .store-qty {
@@ -2006,19 +2016,17 @@ textarea.input {
   color: #B9BABC;
 }
 
-#bottom-footer {
-  background: #1E1F29;
-}
 
 .footer {
   margin: 30px 0px;
 }
 
-.footer .footer-title {
+#footer-title {
   color: #FFF;
   text-transform: uppercase;
   font-size: 18px;
   margin: 0px 0px 30px;
+  text-align: center;
 }
 
 .footer-links li+li {
@@ -2187,4 +2195,43 @@ textarea.input {
     float: none;
     margin-top: 10px;
   }
+}
+
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+
+#product-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  display: block;
+  flex: 0 0 calc(33.333% - 20px);
+  margin: 10px;
+  transition: all 0.3s ease;
+}
+
+.product.hidden {
+  display: none;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-div {
+  text-align: center;
+  margin-top: 100px;
+  height: 15vh;
+}
+.error-div h1 {
+  color: #ac1027;
 }
