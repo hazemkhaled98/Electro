@@ -2217,6 +2217,31 @@ textarea.input {
   transition: all 0.3s ease;
 }
 
+/* For screens smaller than 576px (e.g., mobile phones) */
+@media (max-width: 575.98px) {
+  .product {
+    flex-basis: calc(100% - 20px);
+    margin: 10px;
+  }
+}
+
+/* For screens between 576px and 991.98px (e.g., tablets) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .product {
+    flex-basis: calc(50% - 20px);
+    margin: 10px;
+  }
+}
+
+/* For screens larger than 992px (e.g., laptops and desktops) */
+@media (min-width: 992px) {
+  .product {
+    flex-basis: calc(33.333% - 20px);
+    margin: 10px;
+  }
+}
+
+
 .product.hidden {
   display: none;
 }
