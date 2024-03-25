@@ -19,7 +19,7 @@ public class ParametersFilter implements Filter {
         for (var parameter : parameters.keySet()) {
             var value = req.getParameter(parameter);
             if(value == null || value.isBlank()){
-                req.setAttribute(RequestAttribute.ERROR.toString(), "Invalid parameters. Go back to the homepage");
+                req.setAttribute(RequestAttribute.ERROR.toString(), "Bad Request. Go back to the homepage");
                 req.getRequestDispatcher("/jsp/error.jsp").forward(req, resp);
                 return;
             }
