@@ -8,12 +8,14 @@ import com.electro.presentation.enums.RequestAttribute;
 import com.electro.presentation.enums.SessionAttribute;
 import com.electro.services.CartService;
 import com.electro.services.OrderService;
+import com.electro.services.util.EmailUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.commons.mail.EmailException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -58,6 +60,11 @@ public class CheckoutController extends HttpServlet {
             OrderService.completeOrder(customer);
             resp.setStatus(200);
             session.setAttribute(SessionAttribute.CART_ITEMS.toString(), new ArrayList<CartItemDTO>());
+            try{
+                EmailUtil.sendOrderConfirmation(customer.getEmail());
+            } catch (EmailException e){
+                e.printStackTrace();
+            }
             writer.print("Order placed successfully");
         } catch (RuntimeException e){
             resp.setStatus(409);
