@@ -268,6 +268,7 @@
 <script src="${pageContext.request.contextPath}/js/home.js"></script>
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
+<script src="${pageContext.request.contextPath}/js/newsletter.js"></script>
 
 </body>
 </html>

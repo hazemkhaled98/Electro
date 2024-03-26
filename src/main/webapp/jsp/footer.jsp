@@ -26,6 +26,13 @@
 				</div>
 				<!-- /row -->
 			</div>
+			<div id="error" class="alert alert-danger" style="display: none; font-size: 16px;">
+				<p class="center"></p>
+			</div>
+
+			<div id="success" class="alert alert-success" style="display: none; font-size: 16px;">
+				<p class="center"></p>
+			</div>
 			<!-- /container -->
 		</div>
 		<!-- /NEWSLETTER -->
