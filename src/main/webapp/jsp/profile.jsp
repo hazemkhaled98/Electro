@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"   session="false" %>
 <%@ page import="com.electro.persistence.entities.Customer" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 	<!DOCTYPE html>
 	<html lang="en">
 
@@ -73,52 +73,57 @@
 				<div id="errorMessage" class="alert alert-danger" style="display: ${not empty requestScope.ERROR ? 'block' : 'none'}; font-size: 16px;">
 					<p class="center">${requestScope.ERROR}</p>
 				</div>
+
+				<%
+					HttpSession session = request.getSession();
+				%>
 				<!-- row -->
 				<form action="/update" method="post" class="row" id="sc-edprofile">
 					<h1>Edit Profile</h1>
 					<div class="sc-container">
 						<label for="name">Name:</label><br>
 						<input type="text" placeholder="Name should contain letters and digits only"
-							name="name"  pattern="[A-Za-z][A-Za-z0-9]*" id="name"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.customerName : ''}"/>
+							   name="name" pattern="[A-Za-z][A-Za-z0-9]*" id="name"
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getCustomerName() : "" %>"/>
 
 						<label for="job">Job:</label><br>
-						<input type="text" placeholder="Job" name="job"  required pattern="[A-Za-z\s]+" id="job"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.job : ''}"/>
+						<input type="text" placeholder="Job" name="job" required pattern="[A-Za-z\s]+" id="job"
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getJob() : "" %>"/>
 
 						<label for="country">Country:</label><br>
 						<input type="text" placeholder="Country" name="country"
-							pattern="[A-Za-z]+" id="country"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.country : ''}"/>
+							   pattern="[A-Za-z]+" id="country"
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getCountry() : "" %>"/>
 
 						<label for="city">City:</label><br>
 						<input type="text" placeholder="City" name="city"
-							pattern="[A-Za-z]+" id="city"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.city : ''}"/>
+							   pattern="[A-Za-z]+" id="city"
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getCity() : "" %>"/>
 
 						<label for="streetNo">Street No:</label><br>
 						<input type="text" placeholder="Street No." name="streetNo"
 							   required id="streetNo"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.streetNo : ''}"/>
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getStreetNo() : "" %>"/>
 
 						<label for="streetName">Street Name:</label><br>
 						<input type="text" placeholder="Street Name" name="streetName"
-							required id="streetName"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.streetName : ''}"/>
+							   required id="streetName"
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getStreetName() : "" %>"/>
 
 						<label for="creditLimit">Credit Limit:</label><br>
 						<input type="number" placeholder="Credit limit" name="creditLimit" id="creditLimit" min="0"
-							   value="${not empty sessionScope.LOGGED_IN_CUSTOMER ? sessionScope.LOGGED_IN_CUSTOMER.creditLimit : ''}"/>
+							   value="<%= (session.getAttribute("LOGGED_IN_CUSTOMER") != null) ? ((Customer) session.getAttribute("LOGGED_IN_CUSTOMER")).getCreditLimit() : "" %>"/>
 
 						<input type="submit" value="Update Profile"/>
 					</div>
-
 				</form>
 
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
+
+
 		<!-- /SECTION -->
 
 		<!-- NEWSLETTER -->
