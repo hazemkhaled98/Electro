@@ -121,6 +121,7 @@
 								if (message !== "") {
 									document.getElementById("errorMessage").style.display = "block";
 									hideMessage('errorMessage');
+									document.getElementById("errorMessage").scrollIntoView({ behavior: 'smooth' });
 									// Callback with false to indicate email exists
 									callback(false);
 								} else {
@@ -139,6 +140,7 @@
 							if (message !== "") {
 								document.getElementById("errorMessage").style.display = "block";
 								hideMessage('errorMessage');
+								document.getElementById("errorMessage").scrollIntoView({ behavior: 'smooth' });
 							}
 						}
 					}
@@ -151,13 +153,14 @@
 					}
 
 					function checkPasswordMatch() {
-						var password = document.getElementById("password").value;
-						var confirmPassword = document.getElementById("confirmPassword").value;
-						var passwordMatchMessage = document.getElementById("passwordMatch");
+						let password = document.getElementById("password").value;
+						let confirmPassword = document.getElementById("confirmPassword").value;
+						let passwordMatchMessage = document.getElementById("passwordMatch");
 
 						if (password !== confirmPassword) {
 							passwordMatchMessage.style.display = "block";
 							hideMessage('passwordMatch');
+							passwordMatchMessage.scrollIntoView({ behavior: 'smooth' });
 						} else {
 							passwordMatchMessage.style.display = "none";
 						}
@@ -172,6 +175,7 @@
 						if (password !== confirmPassword) {
 							passwordMatchMessage.style.display = "block";
 							hideMessage('passwordMatch');
+							document.getElementById("passwordMatch").scrollIntoView({ behavior: 'smooth' });
 							return false; // Prevent form submission
 						}
 
